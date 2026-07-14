@@ -1,10 +1,12 @@
 import ApplicationPage from "./ApplicationPage";
+import handrailHeroWalkway from "../../imports/handrail-hero-walkway.png";
+import handrailCableRopeRails from "../../imports/handrail-cable-rope-rails.webp";
 
 export default function Handrail() {
   return (
     <ApplicationPage
       pageTitle="We Handrail"
-      heroImage="https://images.unsplash.com/photo-1563300467-5a9220d63233?w=900&h=700&fit=crop&auto=format"
+      heroImage={handrailHeroWalkway}
       heroIntro="One of the most common netting applications Nets Unlimited supplies is handrail nets. Handrails are an OSHA requirement for any drop of more than 8 inches, and also necessary to help keep people on the right path. We build beautiful, decorative handrails that offer an aesthetic component to a critical safety feature."
       subsections={[
         {
@@ -25,7 +27,7 @@ export default function Handrail() {
         {
           title: "Cable and Rope Rails",
           body: "Whether you need to provide a gentle reminder to guests about where they should not be, or you just need to organize a line of patrons, simple rope and cable can provide another excellent option for handrails, queue line management, and kick rails.",
-          image: "https://images.unsplash.com/photo-1563300467-5a9220d63233?w=800&h=600&fit=crop&auto=format",
+          image: handrailCableRopeRails,
         },
       ]}
       ctaText="See our Handrail Gallery"

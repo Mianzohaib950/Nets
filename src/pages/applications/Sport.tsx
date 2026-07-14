@@ -1,4 +1,5 @@
 import ApplicationPage from "./ApplicationPage";
+import sportBaseballNetting from "../../imports/sport-baseball-netting.png";
 
 export default function Sport() {
   return (
@@ -15,7 +16,7 @@ export default function Sport() {
         {
           title: "Baseball Netting",
           body: "Whether you need a single batting cage for an indoor experience or multiple cages for an entertainment center we can help you build what you need or replace existing damaged or worn out nets. Nets Unlimited also provides barrier netting for ballparks and park departments around sport complexes.",
-          image: "https://images.unsplash.com/photo-1778941120800-6ecd662bbc36?w=800&h=600&fit=crop&auto=format",
+          image: sportBaseballNetting,
         },
         {
           title: "Sport Court Containment / Barrier Netting",

@@ -3,31 +3,40 @@ import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
 import { motion, useInView, AnimatePresence } from "motion/react";
 import { AnimateIn } from "../components/shared/AnimateIn";
+import zooNetEnclosure from "../imports/zoo-net-enclosure.webp";
+import waterparkRopeNetting from "../imports/waterpark-rope-netting.webp";
+import childrenPlayRopeBridge from "../imports/children-play-rope-bridge.webp";
+import handrailThemedNetting from "../imports/handrail-themed-netting.png";
+import secondaryProtectionNetting from "../imports/secondary-protection-netting.webp";
+import bridgeTunnelNetting from "../imports/bridge-tunnel-netting.webp";
+import ropeCableHardware from "../imports/rope-cable-hardware.webp";
+import themingDecorPoolNetting from "../imports/theming-decor-pool-netting.webp";
+import themingDecorRopePlay from "../imports/theming-decor-rope-play.webp";
 
 const HERO_IMAGES = [
   {
-    src: "https://images.unsplash.com/photo-1780608775906-f7315afc979e?w=1400&h=900&fit=crop&auto=format",
-    alt: "Geodesic rope netting structure",
+    src: themingDecorRopePlay,
+    alt: "Themed rope and net play structure",
   },
   {
-    src: "https://images.unsplash.com/photo-1554992985-8ab04fbe59b8?w=1400&h=900&fit=crop&auto=format",
-    alt: "Rope footbridge in forest",
+    src: zooNetEnclosure,
+    alt: "Zoo net enclosure",
   },
   {
-    src: "https://images.unsplash.com/photo-1714466614031-b128463b8767?w=1400&h=900&fit=crop&auto=format",
-    alt: "Zoo animal exhibit",
+    src: waterparkRopeNetting,
+    alt: "Waterpark rope netting barrier",
   },
   {
-    src: "https://images.unsplash.com/photo-1642717841683-c0323214617c?w=1400&h=900&fit=crop&auto=format",
-    alt: "Waterpark slides",
+    src: childrenPlayRopeBridge,
+    alt: "Children's rope bridge play structure",
   },
   {
-    src: "https://images.unsplash.com/photo-1779881259467-ee4b804f8c6a?w=1400&h=900&fit=crop&auto=format",
-    alt: "Child climbing rope net",
+    src: bridgeTunnelNetting,
+    alt: "Bridge with netted handrails",
   },
   {
-    src: "https://images.unsplash.com/photo-1778941120800-6ecd662bbc36?w=1400&h=900&fit=crop&auto=format",
-    alt: "Construction safety netting",
+    src: secondaryProtectionNetting,
+    alt: "Secondary protection netting corridor",
   },
 ];
 
@@ -75,64 +84,56 @@ const whatWeDo = [
     title: "Zoos & Aquariums",
     sub: "Animal Exhibits & Enrichment",
     desc: "Custom netting solutions for immersive animal exhibits that are visually unobtrusive, safe, and secure. From new construction to refurbishment and enrichment elements.",
-    image:
-      "https://images.unsplash.com/photo-1714466614031-b128463b8767?w=800&h=600&fit=crop&auto=format",
+    image: zooNetEnclosure,
     to: "/applications/zoo",
   },
   {
     title: "Waterparks & Themeparks",
     sub: "New Construction & Dry Play",
     desc: "Barriers, queue lines, handrails, slide covers, wave pool barriers, and dry play attractions that keep guests safe and engaged.",
-    image:
-      "https://images.unsplash.com/photo-1642717841683-c0323214617c?w=800&h=600&fit=crop&auto=format",
+    image: waterparkRopeNetting,
     to: "/applications/waterpark",
   },
   {
     title: "Children's Play",
     sub: "Tunnels, Climbs & Spiderweb Nets",
     desc: "Interactive play elements that develop motor skills, coordination, and promote lifelong learning — all while increasing guest satisfaction and time on site.",
-    image:
-      "https://images.unsplash.com/photo-1779881259467-ee4b804f8c6a?w=800&h=600&fit=crop&auto=format",
+    image: childrenPlayRopeBridge,
     to: "/applications/play",
   },
   {
     title: "Handrails",
     sub: "Synthetic & Stainless Steel",
     desc: "Beautiful, decorative handrails that meet OSHA requirements — hand-woven stainless steel, machine knotted netting, or rope handrails in any configuration.",
-    image:
-      "https://images.unsplash.com/photo-1563300467-5a9220d63233?w=800&h=600&fit=crop&auto=format",
+    image: handrailThemedNetting,
     to: "/applications/handrail",
   },
   {
     title: "Secondary Protection",
     sub: "Fall, Debris & Blast Protection",
     desc: "Safety netting systems for construction, public areas, and high-threat settings. Customized to lower insurance costs and protect guests and workers.",
-    image:
-      "https://images.unsplash.com/photo-1778941120800-6ecd662bbc36?w=800&h=600&fit=crop&auto=format",
+    image: secondaryProtectionNetting,
     to: "/applications/protect",
   },
   {
     title: "Bridges & Tunnels",
     sub: "Stationary, Suspension & V Bridges",
     desc: "Hundreds of bridges built for zoos, theme parks, golf courses, and more. Beautiful, fun, and functional in any configuration.",
-    image:
-      "https://images.unsplash.com/photo-1554992985-8ab04fbe59b8?w=800&h=600&fit=crop&auto=format",
+    image: bridgeTunnelNetting,
     to: "/applications/bridge",
   },
   {
     title: "Rope, Cable & Hardware",
     sub: "Supporting Materials",
     desc: "Our signature NU-Line rope, stainless steel cable, and supporting hardware — available in any material the customer requires, all fabricated to the highest standards.",
-    image:
-      "https://images.unsplash.com/photo-1706149855185-528284ee6eeb?w=800&h=600&fit=crop&auto=format",
+    image: ropeCableHardware,
     to: "/applications/zoo",
   },
   {
     title: "Theming & Decor",
     sub: "Design Elements",
     desc: "Rope and netting as an architectural element. Stainless steel for modern aesthetics; rope for jungle, desert, or nautical themes.",
-    image:
-      "https://images.unsplash.com/photo-1779612547670-6b9eb9cf61ca?w=800&h=600&fit=crop&auto=format",
+    image: themingDecorPoolNetting,
     to: "/applications/decorate",
   },
 ];
