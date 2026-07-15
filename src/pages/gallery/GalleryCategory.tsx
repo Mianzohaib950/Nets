@@ -261,7 +261,7 @@ export default function GalleryCategory() {
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [filter, setFilter] = useState("All");
-  const initialDisplayCount = 8;
+  const initialDisplayCount = 9;
   const [displayCount, setDisplayCount] = useState(initialDisplayCount);
 
   const items = data.items;

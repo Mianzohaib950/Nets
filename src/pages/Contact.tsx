@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, X } from "lucide-react";
 import { AnimateIn } from "../components/shared/AnimateIn";
 
 interface FormData {
@@ -10,7 +11,13 @@ interface FormData {
   phone: string;
   subject: string;
   message: string;
+  website: string;
 }
+
+type ContactApiResult = {
+  ok?: boolean;
+  error?: string;
+};
 
 const hours = [
   { day: "Monday", hours: "7:00 AM – 4:00 PM" },
@@ -24,7 +31,30 @@ const hours = [
 
 const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
 
+async function submitContactForm(data: FormData) {
+  const response = await fetch("/api/contact", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  let result: ContactApiResult | null = null;
+  try {
+    result = (await response.json()) as ContactApiResult;
+  } catch {
+    // A non-JSON response usually means the API route is unavailable.
+  }
+
+  if (!response.ok || !result?.ok) {
+    throw new Error(result?.error || `Unable to send your message. (${response.status})`);
+  }
+}
+
 export default function Contact() {
+  const [isMapOpen, setIsMapOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -33,10 +63,14 @@ export default function Contact() {
   } = useForm<FormData>();
 
   async function onSubmit(data: FormData) {
-    await new Promise((r) => setTimeout(r, 1200));
-    console.log("Form submission:", data);
-    toast.success("Thanks — we'll be in touch shortly.");
-    reset();
+    try {
+      await submitContactForm(data);
+
+      toast.success("Thanks — your message has been sent. We'll be in touch shortly.");
+      reset();
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Unable to send your message. Please try again.");
+    }
   }
 
   return (
@@ -59,6 +93,10 @@ export default function Contact() {
             {/* Form */}
             <AnimateIn>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
+                <div className="absolute -left-[9999px]" aria-hidden="true">
+                  <label htmlFor="website">Website</label>
+                  <input id="website" type="text" tabIndex={-1} autoComplete="off" {...register("website")} />
+                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">
@@ -66,6 +104,7 @@ export default function Contact() {
                     </label>
                     <input
                       {...register("name", { required: "Name is required" })}
+                      maxLength={100}
                       className="w-full bg-secondary border border-border rounded-[2px] px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-forest-500 transition-colors"
                       placeholder="Your full name"
                     />
@@ -75,6 +114,7 @@ export default function Contact() {
                     <label className="block text-sm font-medium text-foreground mb-2">Company</label>
                     <input
                       {...register("company")}
+                      maxLength={120}
                       className="w-full bg-secondary border border-border rounded-[2px] px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-forest-500 transition-colors"
                       placeholder="Company name"
                     />
@@ -92,6 +132,7 @@ export default function Contact() {
                         required: "Email is required",
                         pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Enter a valid email" },
                       })}
+                      maxLength={254}
                       className="w-full bg-secondary border border-border rounded-[2px] px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-forest-500 transition-colors"
                       placeholder="you@company.com"
                     />
@@ -102,6 +143,7 @@ export default function Contact() {
                     <input
                       type="tel"
                       {...register("phone")}
+                      maxLength={40}
                       className="w-full bg-secondary border border-border rounded-[2px] px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-forest-500 transition-colors"
                       placeholder="(480) 000-0000"
                     />
@@ -109,9 +151,11 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">Subject</label>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    Service / Subject <span className="text-clay">*</span>
+                  </label>
                   <select
-                    {...register("subject")}
+                    {...register("subject", { required: "Please select a service or subject" })}
                     className="w-full bg-secondary border border-border rounded-[2px] px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-forest-500 transition-colors"
                   >
                     <option value="">Select a subject</option>
@@ -122,6 +166,7 @@ export default function Contact() {
                     <option>Installation</option>
                     <option>Other</option>
                   </select>
+                  {errors.subject && <p className="text-destructive text-xs mt-1">{errors.subject.message}</p>}
                 </div>
 
                 <div>
@@ -131,6 +176,7 @@ export default function Contact() {
                   <textarea
                     {...register("message", { required: "Message is required", minLength: { value: 10, message: "Please write at least 10 characters" } })}
                     rows={6}
+                    maxLength={5000}
                     className="w-full bg-secondary border border-border rounded-[2px] px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-forest-500 transition-colors resize-none"
                     placeholder="Describe your project or inquiry..."
                   />
@@ -148,13 +194,6 @@ export default function Contact() {
                   </span>
                 </button>
 
-                <p className="text-xs text-muted-foreground">
-                  This site is protected by reCAPTCHA and the Google{" "}
-                  <a href="https://policies.google.com/privacy" className="underline hover:text-foreground" target="_blank" rel="noreferrer">Privacy Policy</a>{" "}
-                  and{" "}
-                  <a href="https://policies.google.com/terms" className="underline hover:text-foreground" target="_blank" rel="noreferrer">Terms of Service</a>{" "}
-                  apply.
-                </p>
               </form>
             </AnimateIn>
 
@@ -173,14 +212,13 @@ export default function Contact() {
                         <p className="text-muted-foreground">
                           20625 North 29th Place<br />Phoenix, Arizona 85050<br />United States
                         </p>
-                        <a
-                          href="https://maps.google.com/?q=20625+North+29th+Place,+Phoenix,+Arizona+85050"
-                          target="_blank"
-                          rel="noreferrer"
+                        <button
+                          type="button"
+                          onClick={() => setIsMapOpen(true)}
                           className="inline-block mt-2 text-primary hover:text-forest-500 font-medium transition-colors"
                         >
-                          Get Directions →
-                        </a>
+                          View Office Map →
+                        </button>
                       </div>
                     </div>
                     <div className="flex gap-4">
@@ -227,23 +265,65 @@ export default function Contact() {
                   </table>
                 </div>
 
-                {/* Map embed placeholder */}
-                <div className="rounded-[4px] overflow-hidden border border-border h-48 bg-secondary flex items-center justify-center">
-                  <a
-                    href="https://maps.google.com/?q=20625+North+29th+Place,+Phoenix,+Arizona+85050"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-sm text-primary flex items-center gap-2 font-medium"
-                  >
-                    <MapPin size={14} />
-                    View on Google Maps
-                  </a>
-                </div>
+                {/* Office map preview — opens inside this page, not on Google Maps. */}
+                <button
+                  type="button"
+                  onClick={() => setIsMapOpen(true)}
+                  className="relative block w-full rounded-[4px] overflow-hidden border border-border h-64 bg-secondary text-left group"
+                  aria-label="Open office map"
+                >
+                  <iframe
+                    title="Nets Unlimited office location"
+                    src="https://www.google.com/maps?q=20625+North+29th+Place,+Phoenix,+Arizona+85050&output=embed"
+                    width="100%"
+                    height="100%"
+                    className="block border-0 pointer-events-none"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    tabIndex={-1}
+                  />
+                  <span className="absolute inset-x-0 bottom-0 bg-forest-900/90 px-4 py-3 text-center text-sm font-medium text-white transition-colors group-hover:bg-forest-900">
+                    View map on this page
+                  </span>
+                </button>
               </div>
             </AnimateIn>
           </div>
         </div>
       </section>
+
+      {isMapOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 md:p-8"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Nets Unlimited office map"
+          onClick={() => setIsMapOpen(false)}
+        >
+          <div
+            className="relative h-[75vh] w-full max-w-5xl overflow-hidden rounded-[4px] bg-background shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <iframe
+              title="Nets Unlimited office location — expanded map"
+              src="https://www.google.com/maps?q=20625+North+29th+Place,+Phoenix,+Arizona+85050&output=embed"
+              width="100%"
+              height="100%"
+              className="block border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+            <button
+              type="button"
+              onClick={() => setIsMapOpen(false)}
+              className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-white text-forest-900 shadow-lg hover:bg-secondary"
+              aria-label="Close map"
+            >
+              <X size={20} />
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
