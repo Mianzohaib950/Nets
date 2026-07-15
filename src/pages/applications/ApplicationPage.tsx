@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import { AnimateIn } from "../../components/shared/AnimateIn";
+import { applicationCardImages } from "./applicationCardImages";
 
 export interface Subsection {
   title: string;
@@ -126,11 +127,12 @@ export default function ApplicationPage({
                 <AnimateIn key={app.to} delay={i * 0.08}>
                   <Link
                     to={app.to}
+                    preventScrollReset={false}
                     className="group block border border-border rounded-[4px] overflow-hidden"
                   >
                     <div className="relative overflow-hidden h-48 bg-secondary">
                       <img
-                        src={app.image}
+                        src={applicationCardImages[app.to] ?? app.image}
                         alt={app.title}
                         className="w-full h-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
                       />

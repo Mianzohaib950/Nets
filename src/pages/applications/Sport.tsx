@@ -1,5 +1,7 @@
 import ApplicationPage from "./ApplicationPage";
 import sportBaseballNetting from "../../imports/sport-baseball-netting.png";
+import sportCourtContainment from "../../imports/sport-court-containment.png";
+import sportGolfNetting from "../../imports/sport-golf-netting.png";
 
 export default function Sport() {
   return (
@@ -11,7 +13,7 @@ export default function Sport() {
         {
           title: "Golf",
           body: "We understand the importance of maintaining a beautiful course and driving range, while also protecting the golfers, nearby homeowners, roads, and other structures. Nets Unlimited will work with you to build protection solutions that are unobtrusive and effective while making sure that these barriers do not take away from the overall aesthetics of the course.",
-          image: "https://images.unsplash.com/photo-1632946269126-0f8edbe8b068?w=800&h=600&fit=crop&auto=format",
+          image: sportGolfNetting,
         },
         {
           title: "Baseball Netting",
@@ -21,7 +23,7 @@ export default function Sport() {
         {
           title: "Sport Court Containment / Barrier Netting",
           body: "Do you have a sports court that needs barriers so the balls stay in the court? Nets Unlimited can customize containment netting to keep those balls in play and provide years of service with little to no maintenance.",
-          image: "https://images.unsplash.com/photo-1780608775906-f7315afc979e?w=800&h=600&fit=crop&auto=format",
+          image: sportCourtContainment,
         },
       ]}
       ctaText="Golf and Sport Netting Gallery"

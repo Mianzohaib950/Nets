@@ -1,24 +1,40 @@
 import { AnimateIn } from "../../components/shared/AnimateIn";
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
+import decorate1 from "../../imports/decorate/decorate-1.png";
+import decorate2 from "../../imports/decorate/decorate-2.png";
+import decorate3 from "../../imports/decorate/decorate-3.png";
+import decorate4 from "../../imports/decorate/decorate-4.png";
+import decorate5 from "../../imports/decorate/decorate-5.png";
+import decorate6 from "../../imports/decorate/decorate-6.png";
+import decorate7 from "../../imports/decorate/decorate-7.png";
+import decorate8 from "../../imports/decorate/decorate-8.png";
+import decorate9 from "../../imports/decorate/decorate-9.png";
+import decorate10 from "../../imports/decorate/decorate-10.png";
+import decorate11 from "../../imports/decorate/decorate-11.png";
+import decorate12 from "../../imports/decorate/decorate-12.png";
+import decorate13 from "../../imports/decorate/decorate-13.png";
+import decorate14 from "../../imports/decorate/decorate-14.png";
+import decorate15 from "../../imports/decorate/decorate-15.png";
+import decorate16 from "../../imports/decorate/decorate-16.png";
 
 const images = [
-  { src: "https://images.unsplash.com/photo-1780608775906-f7315afc979e?w=600&h=500&fit=crop&auto=format", alt: "Geodesic rope dome structure" },
-  { src: "https://images.unsplash.com/photo-1554992985-8ab04fbe59b8?w=600&h=400&fit=crop&auto=format", alt: "Hanging rope footbridge" },
-  { src: "https://images.unsplash.com/photo-1563300467-5a9220d63233?w=600&h=500&fit=crop&auto=format", alt: "Brown rope hanging bridge" },
-  { src: "https://images.unsplash.com/photo-1706149855185-528284ee6eeb?w=600&h=400&fit=crop&auto=format", alt: "Forest suspension bridge" },
-  { src: "https://images.unsplash.com/photo-1779881259467-ee4b804f8c6a?w=600&h=500&fit=crop&auto=format", alt: "Rope net climbing element" },
-  { src: "https://images.unsplash.com/photo-1777626760240-08320afdad30?w=600&h=400&fit=crop&auto=format", alt: "Playground climbing net" },
-  { src: "https://images.unsplash.com/photo-1714466614031-b128463b8767?w=600&h=500&fit=crop&auto=format", alt: "Zoo netting exhibit" },
-  { src: "https://images.unsplash.com/photo-1779612547670-6b9eb9cf61ca?w=600&h=400&fit=crop&auto=format", alt: "Aquatic exhibit netting" },
-  { src: "https://images.unsplash.com/photo-1642717841683-c0323214617c?w=600&h=500&fit=crop&auto=format", alt: "Waterpark rope elements" },
-  { src: "https://images.unsplash.com/photo-1778941120800-6ecd662bbc36?w=600&h=400&fit=crop&auto=format", alt: "Decorative netting pattern" },
-  { src: "https://images.unsplash.com/photo-1632946269126-0f8edbe8b068?w=600&h=500&fit=crop&auto=format", alt: "Themed golf course netting" },
-  { src: "https://images.unsplash.com/photo-1587493513878-d68611233b03?w=600&h=400&fit=crop&auto=format", alt: "Wooden bridge design" },
-  { src: "https://images.unsplash.com/photo-1629834598512-77a443808b73?w=600&h=500&fit=crop&auto=format", alt: "Themed park rope elements" },
-  { src: "https://images.unsplash.com/photo-1758055660529-fed15bb902c1?w=600&h=400&fit=crop&auto=format", alt: "Fence netting pattern" },
-  { src: "https://images.unsplash.com/photo-1554992985-8ab04fbe59b8?w=600&h=500&fit=crop&auto=format", alt: "Suspension rope bridge" },
-  { src: "https://images.unsplash.com/photo-1691328431608-58fa2e5d9592?w=600&h=400&fit=crop&auto=format", alt: "Natural habitat exhibit" },
+  { src: decorate1, alt: "Decorative gallery image 1" },
+  { src: decorate2, alt: "Decorative gallery image 2" },
+  { src: decorate3, alt: "Decorative gallery image 3" },
+  { src: decorate4, alt: "Decorative gallery image 4" },
+  { src: decorate5, alt: "Decorative gallery image 5" },
+  { src: decorate6, alt: "Decorative gallery image 6" },
+  { src: decorate7, alt: "Decorative gallery image 7" },
+  { src: decorate8, alt: "Decorative gallery image 8" },
+  { src: decorate9, alt: "Decorative gallery image 9" },
+  { src: decorate10, alt: "Decorative gallery image 10" },
+  { src: decorate11, alt: "Decorative gallery image 11" },
+  { src: decorate12, alt: "Decorative gallery image 12" },
+  { src: decorate13, alt: "Decorative gallery image 13" },
+  { src: decorate14, alt: "Decorative gallery image 14" },
+  { src: decorate15, alt: "Decorative gallery image 15" },
+  { src: decorate16, alt: "Decorative gallery image 16" },
 ];
 
 export default function Decorate() {
