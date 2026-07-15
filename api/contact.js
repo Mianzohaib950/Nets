@@ -134,25 +134,37 @@ export default async function handler(req, res) {
         submission.message,
       ].join("\n"),
       html: `
-        <div style="font-family:Arial,Helvetica,sans-serif;color:#172b23;line-height:1.6;max-width:680px;margin:0 auto;border:1px solid #e2e6e3">
-          <div style="background:#123c2b;padding:22px 28px;color:#ffffff">
+        <style>
+          @media only screen and (max-width:600px) {
+            .email-shell { width:100% !important; }
+            .email-header { padding:18px 20px !important; }
+            .email-content { padding:20px !important; }
+            .email-title { font-size:20px !important; }
+            .detail-label,.detail-value { display:block !important;width:auto !important;padding:5px 8px !important; }
+            .detail-label { padding-top:12px !important;border-bottom:0 !important; }
+            .detail-value { padding-bottom:12px !important; }
+            .email-footer { padding:12px 20px !important; }
+          }
+        </style>
+        <div class="email-shell" style="box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;color:#172b23;line-height:1.5;width:100%;max-width:680px;margin:0 auto;border:1px solid #e2e6e3">
+          <div class="email-header" style="background:#123c2b;padding:22px 28px;color:#ffffff">
             <div style="font-size:12px;letter-spacing:1.6px;text-transform:uppercase;opacity:.8">Nets Unlimited, Inc.</div>
-            <h2 style="font-size:22px;margin:5px 0 0">New Contact Form Submission</h2>
+            <h2 class="email-title" style="font-size:22px;line-height:1.3;margin:5px 0 0">New Contact Form Submission</h2>
           </div>
-          <div style="padding:24px 28px">
+          <div class="email-content" style="padding:24px 28px">
             <p style="margin:0 0 20px;color:#52645c">A new customer inquiry has been received through the Nets Unlimited, Inc. website.</p>
-            <table style="width:100%;border-collapse:collapse;margin:0 0 24px">
-              <tr><td style="width:34%;padding:10px;border-bottom:1px solid #e2e6e3;font-weight:bold">Service / Subject</td><td style="padding:10px;border-bottom:1px solid #e2e6e3">${safe.subject}</td></tr>
-              <tr><td style="padding:10px;border-bottom:1px solid #e2e6e3;font-weight:bold">Name</td><td style="padding:10px;border-bottom:1px solid #e2e6e3">${safe.name}</td></tr>
-              <tr><td style="padding:10px;border-bottom:1px solid #e2e6e3;font-weight:bold">Company</td><td style="padding:10px;border-bottom:1px solid #e2e6e3">${safe.company || "Not provided"}</td></tr>
-              <tr><td style="padding:10px;border-bottom:1px solid #e2e6e3;font-weight:bold">Email</td><td style="padding:10px;border-bottom:1px solid #e2e6e3"><a style="color:#1f5a40" href="mailto:${safe.email}">${safe.email}</a></td></tr>
-              <tr><td style="padding:10px;border-bottom:1px solid #e2e6e3;font-weight:bold">Phone</td><td style="padding:10px;border-bottom:1px solid #e2e6e3">${safe.phone || "Not provided"}</td></tr>
+            <table role="presentation" style="width:100%;table-layout:fixed;border-collapse:collapse;margin:0 0 24px">
+              <tr><td class="detail-label" style="width:34%;padding:10px;border-bottom:1px solid #e2e6e3;font-weight:bold;vertical-align:top">Service / Subject</td><td class="detail-value" style="padding:10px;border-bottom:1px solid #e2e6e3;word-break:break-word">${safe.subject}</td></tr>
+              <tr><td class="detail-label" style="padding:10px;border-bottom:1px solid #e2e6e3;font-weight:bold;vertical-align:top">Name</td><td class="detail-value" style="padding:10px;border-bottom:1px solid #e2e6e3;word-break:break-word">${safe.name}</td></tr>
+              <tr><td class="detail-label" style="padding:10px;border-bottom:1px solid #e2e6e3;font-weight:bold;vertical-align:top">Company</td><td class="detail-value" style="padding:10px;border-bottom:1px solid #e2e6e3;word-break:break-word">${safe.company || "Not provided"}</td></tr>
+              <tr><td class="detail-label" style="padding:10px;border-bottom:1px solid #e2e6e3;font-weight:bold;vertical-align:top">Email</td><td class="detail-value" style="padding:10px;border-bottom:1px solid #e2e6e3;word-break:break-all"><a style="color:#1f5a40;word-break:break-all" href="mailto:${safe.email}">${safe.email}</a></td></tr>
+              <tr><td class="detail-label" style="padding:10px;border-bottom:1px solid #e2e6e3;font-weight:bold;vertical-align:top">Phone</td><td class="detail-value" style="padding:10px;border-bottom:1px solid #e2e6e3;word-break:break-word">${safe.phone || "Not provided"}</td></tr>
             </table>
             <h3 style="font-size:16px;margin:0 0 8px">Customer Message</h3>
-            <div style="white-space:pre-wrap;background:#f4f5f1;border-left:4px solid #b97445;padding:16px 18px">${safe.message}</div>
-            <p style="font-size:13px;color:#607168;margin:22px 0 0">Use Reply to respond directly to ${safe.name} at ${safe.email}.</p>
+            <div style="white-space:pre-wrap;overflow-wrap:anywhere;background:#f4f5f1;border-left:4px solid #b97445;padding:16px 18px">${safe.message}</div>
+            <p style="font-size:13px;color:#607168;overflow-wrap:anywhere;margin:22px 0 0">Use Reply to respond directly to ${safe.name} at <a style="color:#1f5a40;word-break:break-all" href="mailto:${safe.email}">${safe.email}</a>.</p>
           </div>
-          <div style="background:#f4f5f1;padding:14px 28px;font-size:12px;color:#718078">Automated notification from the Nets Unlimited, Inc. website.</div>
+          <div class="email-footer" style="background:#f4f5f1;padding:14px 28px;font-size:12px;color:#718078">Automated notification from the Nets Unlimited, Inc. website.</div>
         </div>`,
     });
 
