@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { MapPin, Phone, Mail, Clock, X } from "lucide-react";
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { AnimateIn } from "../components/shared/AnimateIn";
 
 interface FormData {
@@ -54,7 +53,6 @@ async function submitContactForm(data: FormData) {
 }
 
 export default function Contact() {
-  const [isMapOpen, setIsMapOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -212,13 +210,14 @@ export default function Contact() {
                         <p className="text-muted-foreground">
                           20625 North 29th Place<br />Phoenix, Arizona 85050<br />United States
                         </p>
-                        <button
-                          type="button"
-                          onClick={() => setIsMapOpen(true)}
+                        <a
+                          href="https://www.google.com/maps/search/?api=1&query=20625+North+29th+Place,+Phoenix,+Arizona+85050"
+                          target="_blank"
+                          rel="noreferrer"
                           className="inline-block mt-2 text-primary hover:text-forest-500 font-medium transition-colors"
                         >
-                          View Office Map →
-                        </button>
+                          Open in Maps →
+                        </a>
                       </div>
                     </div>
                     <div className="flex gap-4">
@@ -265,65 +264,25 @@ export default function Contact() {
                   </table>
                 </div>
 
-                {/* Office map preview — opens inside this page, not on Google Maps. */}
-                <button
-                  type="button"
-                  onClick={() => setIsMapOpen(true)}
-                  className="relative block w-full rounded-[4px] overflow-hidden border border-border h-64 bg-secondary text-left group"
-                  aria-label="Open office map"
-                >
+                {/* Interactive office map */}
+                <div className="w-full rounded-[4px] overflow-hidden border border-border h-64 bg-secondary">
                   <iframe
                     title="Nets Unlimited office location"
                     src="https://www.google.com/maps?q=20625+North+29th+Place,+Phoenix,+Arizona+85050&output=embed"
                     width="100%"
                     height="100%"
-                    className="block border-0 pointer-events-none"
+                    className="block border-0"
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    tabIndex={-1}
+                    allowFullScreen
                   />
-                  <span className="absolute inset-x-0 bottom-0 bg-forest-900/90 px-4 py-3 text-center text-sm font-medium text-white transition-colors group-hover:bg-forest-900">
-                    View map on this page
-                  </span>
-                </button>
+                </div>
               </div>
             </AnimateIn>
           </div>
         </div>
       </section>
 
-      {isMapOpen && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 md:p-8"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Nets Unlimited office map"
-          onClick={() => setIsMapOpen(false)}
-        >
-          <div
-            className="relative h-[75vh] w-full max-w-5xl overflow-hidden rounded-[4px] bg-background shadow-2xl"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <iframe
-              title="Nets Unlimited office location — expanded map"
-              src="https://www.google.com/maps?q=20625+North+29th+Place,+Phoenix,+Arizona+85050&output=embed"
-              width="100%"
-              height="100%"
-              className="block border-0"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-            <button
-              type="button"
-              onClick={() => setIsMapOpen(false)}
-              className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-white text-forest-900 shadow-lg hover:bg-secondary"
-              aria-label="Close map"
-            >
-              <X size={20} />
-            </button>
-          </div>
-        </div>
-      )}
     </>
   );
 }
