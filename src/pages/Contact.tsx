@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, ExternalLink } from "lucide-react";
 import { AnimateIn } from "../components/shared/AnimateIn";
 
 interface FormData {
@@ -265,7 +265,7 @@ export default function Contact() {
                 </div>
 
                 {/* Interactive office map */}
-                <div className="w-full rounded-[4px] overflow-hidden border border-border h-64 bg-secondary">
+                <div className="relative w-full rounded-[4px] overflow-hidden border border-border h-64 bg-secondary">
                   <iframe
                     title="Nets Unlimited office location"
                     src="https://www.google.com/maps?q=20625+North+29th+Place,+Phoenix,+Arizona+85050&output=embed"
@@ -276,6 +276,19 @@ export default function Contact() {
                     referrerPolicy="no-referrer-when-downgrade"
                     allowFullScreen
                   />
+                  {/* Mask Google's built-in link so only one map action is visible. */}
+                  <div className="absolute left-0 top-0 z-10 h-[52px] w-[150px] bg-[#edf1ec]">
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=20625+North+29th+Place,+Phoenix,+Arizona+85050"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="absolute left-2 top-2 inline-flex h-9 items-center gap-1.5 bg-white px-3 text-sm font-medium text-[#1967d2] shadow-md hover:bg-[#f8f9fa]"
+                      aria-label="Open office location in Google Maps"
+                    >
+                      Maps
+                      <ExternalLink size={14} strokeWidth={2} />
+                    </a>
+                  </div>
                 </div>
               </div>
             </AnimateIn>
