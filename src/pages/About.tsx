@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
 import { AnimateIn } from "../components/shared/AnimateIn";
+import aboutOurApproachSafetyNetting from "../imports/about-our-approach-safety-netting.webp";
 
 const industries = [
   "Zoos & Aquariums",
@@ -60,7 +61,7 @@ export default function About() {
             <AnimateIn>
               <div className="relative overflow-hidden rounded-[4px] bg-secondary min-h-[400px]">
                 <img
-                  src="https://images.unsplash.com/photo-1554992985-8ab04fbe59b8?w=800&h=600&fit=crop&auto=format"
+                  src={aboutOurApproachSafetyNetting}
                   alt="Rope bridge — craftsmanship in action"
                   className="w-full h-full object-cover min-h-[400px]"
                 />

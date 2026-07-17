@@ -1,6 +1,9 @@
 import ApplicationPage from "./ApplicationPage";
 import handrailHeroWalkway from "../../imports/handrail-hero-walkway.png";
 import handrailCableRopeRails from "../../imports/handrail-cable-rope-rails.webp";
+import handrailHandWovenStainlessSteel from "../../imports/handrail-hand-woven-stainless-steel.webp";
+import handrailHandwovenRopeStairway from "../../imports/handrail-handwoven-rope-stairway.webp";
+import handrailMachineKnottedThemed from "../../imports/handrail-machine-knotted-themed.webp";
 
 export default function Handrail() {
   return (
@@ -12,17 +15,17 @@ export default function Handrail() {
         {
           title: "Hand Woven Stainless Steel Netting",
           body: "Stainless steel handrail nets offer an architectural element to help create the illusion of open space, while simultaneously being one of the most enduring netting products on the market. Their longevity is unrivaled by synthetic products; often lasting 15 years or more both indoors and out. Stainless steel nets also have the advantage of being vandal and pest resistant. These nets are handwoven to custom fit any design application required.",
-          image: "https://images.unsplash.com/photo-1780608775906-f7315afc979e?w=800&h=600&fit=crop&auto=format",
+          image: handrailHandWovenStainlessSteel,
         },
         {
           title: "Machine Knotted Netting / Themed Handrails",
           body: "Machine knotted netting is a perfect solution for long runs of handrails. These options help to carry or continue the aesthetic of areas in a jungle, tropical, or nautical theme past where handwoven rope handrails are employed for high visual impact. The machine knotted netting is a more budget-friendly choice than a hand-woven net.",
-          image: "https://images.unsplash.com/photo-1706149855185-528284ee6eeb?w=800&h=600&fit=crop&auto=format",
+          image: handrailMachineKnottedThemed,
         },
         {
           title: "Handwoven Rope Handrails",
           body: "When an individualized high-impact design is needed for a project such as a gateway, restaurant, lobby, or guest entrance area, handwoven rope handrails are an excellent choice. These handrails are custom made to order in any configuration required, and ultimately lead to a beautiful and memorable design element for your property.",
-          image: "https://images.unsplash.com/photo-1554992985-8ab04fbe59b8?w=800&h=600&fit=crop&auto=format",
+          image: handrailHandwovenRopeStairway,
         },
         {
           title: "Cable and Rope Rails",

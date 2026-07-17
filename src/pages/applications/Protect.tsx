@@ -1,14 +1,15 @@
 import ApplicationPage from "./ApplicationPage";
 import protectBlastForceNetting from "../../imports/protect-jump-prevention-netting.webp";
 import protectFallDebrisNetting from "../../imports/protect-fall-debris-netting.webp";
-import protectJumpPreventionNetting from "../../imports/protect-jump-prevention-netting.png";
+import protectJumpPreventionBarrier from "../../imports/protect-jump-prevention-barrier.webp";
 import protectSecondaryBarrierWaterSlide from "../../imports/protect-secondary-barrier-water-slide.webp";
+import protectHeroRiskMitigationNetting from "../../imports/protect-hero-risk-mitigation-netting.webp";
 
 export default function Protect() {
   return (
     <ApplicationPage
       pageTitle="We Mitigate Risk"
-      heroImage="https://images.unsplash.com/photo-1778941120800-6ecd662bbc36?w=900&h=700&fit=crop&auto=format"
+      heroImage={protectHeroRiskMitigationNetting}
       heroIntro="There are a multitude of applications that safety netting can be utilized for including construction, animal containment, people barriers, safety netting for entertainment and sporting venues, and much more. Customized safety systems can lower insurance costs, positively impact public image, and create better worker morale."
       subsections={[
         {
@@ -29,7 +30,7 @@ export default function Protect() {
         {
           title: "Jump Prevention Nets",
           body: "Suicide affects over 1,000,000 people a year. Research shows that suicide prevention nets not only can save jumpers lives but also act as a deterrent to suicide attempts. If your building, or bridge, can benefit from a suicide prevention net, we are available to go through the specifications and best options for your situation.",
-          image: protectJumpPreventionNetting,
+          image: protectJumpPreventionBarrier,
         },
       ]}
       ctaText="Safety Netting Gallery"

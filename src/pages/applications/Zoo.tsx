@@ -1,5 +1,5 @@
 import ApplicationPage from "./ApplicationPage";
-import zooHeroOrangutanEnrichment from "../../imports/zoo-hero-orangutan-enrichment.png";
+import zooHeroJaguar from "../../imports/zoo-hero-jaguar.webp";
 import zooNewConstructionNetting from "../../imports/zoo-new-construction-netting.webp";
 import zooRefurbishmentNetEnclosure from "../../imports/zoo-refurbishment-net-enclosure.webp";
 import zooAnimalEnrichmentHabitat from "../../imports/zoo-animal-enrichment-habitat.webp";
@@ -8,7 +8,7 @@ export default function Zoo() {
   return (
     <ApplicationPage
       pageTitle="We Zoo"
-      heroImage={zooHeroOrangutanEnrichment}
+      heroImage={zooHeroJaguar}
       heroIntro="Nets Unlimited has worked with zoos across the country to help bring to life new exhibits, refurbish or re-purpose older exhibits, reface exhibits, or even just create enrichment for your animals' mental health. No matter what stage you are in we are here to help."
       subsections={[
         {

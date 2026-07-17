@@ -29,6 +29,7 @@ const hours = [
 ];
 
 const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
+const googleMapsUrl = "https://maps.app.goo.gl/Ka7icMBxsSZ5ZPRz8";
 
 async function submitContactForm(data: FormData) {
   const response = await fetch("/api/contact", {
@@ -211,7 +212,7 @@ export default function Contact() {
                           20625 North 29th Place<br />Phoenix, Arizona 85050<br />United States
                         </p>
                         <a
-                          href="https://www.google.com/maps/search/?api=1&query=20625+North+29th+Place,+Phoenix,+Arizona+85050"
+                          href={googleMapsUrl}
                           target="_blank"
                           rel="noreferrer"
                           className="inline-block mt-2 text-primary hover:text-forest-500 font-medium transition-colors"
@@ -279,7 +280,7 @@ export default function Contact() {
                   {/* Mask Google's built-in link so only one map action is visible. */}
                   <div className="absolute left-0 top-0 z-10 h-[52px] w-[150px] bg-[#edf1ec]">
                     <a
-                      href="https://www.google.com/maps/search/?api=1&query=20625+North+29th+Place,+Phoenix,+Arizona+85050"
+                      href={googleMapsUrl}
                       target="_blank"
                       rel="noreferrer"
                       className="absolute left-2 top-2 inline-flex h-9 items-center gap-1.5 bg-white px-3 text-sm font-medium text-[#1967d2] shadow-md hover:bg-[#f8f9fa]"

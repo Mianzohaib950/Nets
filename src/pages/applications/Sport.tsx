@@ -1,29 +1,30 @@
 import ApplicationPage from "./ApplicationPage";
-import sportBaseballNetting from "../../imports/sport-baseball-netting.png";
-import sportCourtContainment from "../../imports/sport-court-containment.png";
-import sportGolfNetting from "../../imports/sport-golf-netting.png";
+import sportBaseballBarrierNetting from "../../imports/sport-baseball-barrier-netting.webp";
+import sportCourtContainmentBarrier from "../../imports/sport-court-containment-barrier.webp";
+import sportGolfCourseBarrierNetting from "../../imports/sport-golf-course-barrier-netting.webp";
+import sportHeroGolfContainmentNetting from "../../imports/sport-hero-golf-containment-netting.webp";
 
 export default function Sport() {
   return (
     <ApplicationPage
       pageTitle="We Golf & Sport"
-      heroImage="https://images.unsplash.com/photo-1632946269126-0f8edbe8b068?w=900&h=700&fit=crop&auto=format"
+      heroImage={sportHeroGolfContainmentNetting}
       heroIntro="Nets Unlimited, Inc. has built a variety of driving ranges and sport court containment systems. We provide a wide array of options to meet the challenge of creating aesthetically pleasing solutions that protect against property damage and injury from stray balls."
       subsections={[
         {
           title: "Golf",
           body: "We understand the importance of maintaining a beautiful course and driving range, while also protecting the golfers, nearby homeowners, roads, and other structures. Nets Unlimited will work with you to build protection solutions that are unobtrusive and effective while making sure that these barriers do not take away from the overall aesthetics of the course.",
-          image: sportGolfNetting,
+          image: sportGolfCourseBarrierNetting,
         },
         {
           title: "Baseball Netting",
           body: "Whether you need a single batting cage for an indoor experience or multiple cages for an entertainment center we can help you build what you need or replace existing damaged or worn out nets. Nets Unlimited also provides barrier netting for ballparks and park departments around sport complexes.",
-          image: sportBaseballNetting,
+          image: sportBaseballBarrierNetting,
         },
         {
           title: "Sport Court Containment / Barrier Netting",
           body: "Do you have a sports court that needs barriers so the balls stay in the court? Nets Unlimited can customize containment netting to keep those balls in play and provide years of service with little to no maintenance.",
-          image: sportCourtContainment,
+          image: sportCourtContainmentBarrier,
         },
       ]}
       ctaText="Golf and Sport Netting Gallery"
