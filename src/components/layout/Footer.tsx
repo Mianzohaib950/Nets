@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Facebook, Instagram, Linkedin, Twitter, MapPin, Phone, Mail, Clock } from "lucide-react";
+import { Linkedin, MapPin, Phone, Mail, Clock } from "lucide-react";
 import logoImg from "@/imports/qt_q_95__1_.png";
 
 const appLinks = [
@@ -34,6 +34,10 @@ export default function Footer() {
               <img
                 src={logoImg}
                 alt="Nets Unlimited, Inc."
+                width="300"
+                height="112"
+                loading="lazy"
+                decoding="async"
                 className="h-20 w-auto object-contain brightness-0 invert"
               />
             </Link>
@@ -64,15 +68,14 @@ export default function Footer() {
             </div>
             <div className="flex gap-4 mt-6">
               {[
-                { icon: Facebook, href: "#", label: "Facebook" },
-                { icon: Instagram, href: "#", label: "Instagram" },
-                { icon: Linkedin, href: "#", label: "LinkedIn" },
-                { icon: Twitter, href: "#", label: "Twitter" },
+                { icon: Linkedin, href: "https://www.linkedin.com/company/nets-unlimited-inc", label: "LinkedIn" },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-8 h-8 flex items-center justify-center border border-primary-foreground/20 rounded-[2px] text-primary-foreground/60 hover:text-primary-foreground hover:border-primary-foreground/60 transition-colors"
                 >
                   <Icon size={14} />
@@ -148,6 +151,9 @@ export default function Footer() {
           <p className="text-xs text-primary-foreground/40">
             © {new Date().getFullYear()} Nets Unlimited, Inc. All Rights Reserved.
           </p>
+          <Link to="/privacy/" className="text-xs text-primary-foreground/50 hover:text-primary-foreground underline underline-offset-2">
+            Privacy Policy
+          </Link>
           <p className="text-xs text-primary-foreground/40">
             Designed & Developed by{" "}
             <a href="https://novatore.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground/70 transition-colors underline underline-offset-2">

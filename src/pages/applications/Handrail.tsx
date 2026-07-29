@@ -1,8 +1,8 @@
 import ApplicationPage from "./ApplicationPage";
-import handrailHeroWalkway from "../../imports/handrail-hero-walkway.png";
+import handrailHeroWalkway from "../../imports/handrail-hero-walkway.webp";
 import handrailCableRopeRails from "../../imports/handrail-cable-rope-rails.webp";
-import handrailHandWovenStainlessSteel from "../../imports/handrail-hand-woven-stainless-steel.webp";
-import handrailHandwovenRopeStairway from "../../imports/handrail-handwoven-rope-stairway.webp";
+import handrailHandWovenStainlessSteel from "../../imports/handrail-hand-woven-stainless-steel.seo.webp";
+import handrailHandwovenRopeStairway from "../../imports/handrail-handwoven-rope-stairway.seo.webp";
 import handrailMachineKnottedThemed from "../../imports/handrail-machine-knotted-themed.webp";
 
 export default function Handrail() {

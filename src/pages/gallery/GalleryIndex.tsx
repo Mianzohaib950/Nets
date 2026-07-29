@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
 import { AnimateIn } from "../../components/shared/AnimateIn";
+import galleryImageDimensions from "../../data/gallery-image-dimensions.json";
 
 const categories = [
   {
@@ -81,6 +82,10 @@ export default function GalleryIndex() {
                     <img
                       src={cat.image}
                       alt={cat.title}
+                      width={galleryImageDimensions[cat.image as keyof typeof galleryImageDimensions]?.width}
+                      height={galleryImageDimensions[cat.image as keyof typeof galleryImageDimensions]?.height}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
                     />
                     <div className="absolute inset-0 bg-forest-900/30 group-hover:bg-forest-900/10 transition-colors duration-300" />

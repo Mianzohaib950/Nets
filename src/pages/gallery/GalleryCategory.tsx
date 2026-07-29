@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router";
 import { X, ChevronLeft, ChevronRight, ArrowLeft, Plus } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { AnimateIn } from "../../components/shared/AnimateIn";
+import galleryImageDimensions from "../../data/gallery-image-dimensions.json";
 
 interface GalleryItem {
   id: number;
@@ -344,18 +345,27 @@ export default function GalleryCategory() {
             <>
               <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
                 {displayedItems.map((item, i) => (
-                  <div
+                  (() => {
+                    const dimensions = galleryImageDimensions[item.src as keyof typeof galleryImageDimensions];
+                    return (
+                  <button
+                    type="button"
                     key={item.id}
-                    className="break-inside-avoid overflow-hidden rounded-[4px] border border-border cursor-pointer group"
+                    className="block w-full break-inside-avoid overflow-hidden rounded-[4px] border border-border cursor-pointer group"
                     onClick={() => openLightbox(i)}
                   >
                     <img
                       src={item.src}
-                      alt=""
-                      className="w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
+                      alt={`${data.title} custom netting project ${i + 1}`}
+                      width={dimensions?.width}
+                      height={dimensions?.height}
                       loading="lazy"
+                      decoding="async"
+                      className="w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
                     />
-                  </div>
+                  </button>
+                    );
+                  })()
                 ))}
               </div>
               
@@ -383,7 +393,7 @@ export default function GalleryCategory() {
             aria-describedby={undefined}
           >
             <Dialog.Title className="sr-only">
-              {lightboxIndex !== null ? items[lightboxIndex]?.alt : "Gallery image"}
+              {lightboxIndex !== null ? `${data.title} custom netting project ${lightboxIndex + 1}` : "Gallery image"}
             </Dialog.Title>
             {lightboxIndex !== null && (
               <div className="relative max-w-5xl max-h-[90vh] flex flex-col items-center">
@@ -392,7 +402,10 @@ export default function GalleryCategory() {
                 </div>
                 <img
                   src={items[lightboxIndex].src}
-                  alt={items[lightboxIndex].alt}
+                  alt={`${data.title} custom netting project ${lightboxIndex + 1}`}
+                  width={galleryImageDimensions[items[lightboxIndex].src as keyof typeof galleryImageDimensions]?.width}
+                  height={galleryImageDimensions[items[lightboxIndex].src as keyof typeof galleryImageDimensions]?.height}
+                  decoding="async"
                   className="max-h-[80vh] max-w-full object-contain rounded-[4px]"
                 />
                 <div className="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-14">

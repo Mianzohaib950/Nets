@@ -1,7 +1,7 @@
 import ApplicationPage from "./ApplicationPage";
-import playClimbsRopeTunnel from "../../imports/play-climbs-rope-tunnel.png";
+import playClimbsRopeTunnel from "../../imports/play-climbs-rope-tunnel.webp";
 import playSpiderwebKids from "../../imports/play-spiderweb-kids.webp";
-import playSpiderwebNet from "../../imports/play-spiderweb-net.png";
+import playSpiderwebNet from "../../imports/play-spiderweb-net.webp";
 import playTunnelsRopeBridge from "../../imports/play-tunnels-rope-bridge.webp";
 
 export default function Play() {

@@ -15,21 +15,21 @@ const services = [
     badge: "Phase 01",
   },
   {
-    title: "Inspections & Maintenance",
-    body: "We offer inspection and quality control services for existing net structures. A competent and thorough inspection is one of the most important elements in achieving the longevity of your nets and structures. Proper inspections require not only technical expertise and knowledge of the materials and procedures but also sound judgment. Our team comes with over 75 combined years of experience. With our onsite inspections, we are able to verify that your structure was built using industry standards, that the net is intact and not showing signs of wear, and provide a written report to be submitted to your insurance company. If any netting requires repairs we can repair it, during the inspection or through one of our maintenance plans.",
-    image: inspectionMaintenanceSiteCheck,
-    badge: "Phase 02",
-  },
-  {
     title: "Fabrication",
     body: "Fabrication is the cornerstone of Nets Unlimited's business. Our crew of highly skilled craftsmen fabricates everything from simple rope lanyards to handrail nets, to full-scale animal exhibits. Whether you need a net made from twine, rope, or stainless steel cable, rest assured Nets Unlimited will produce the highest quality products in the industry. We make rope nets out of any material the customer requires, but we pride ourselves on nets made from our signature NU-Line rope. Additionally, all of the hand-woven stainless steel nets are made to order, in whatever custom size works for your project.",
     image: fabricationLargeNet,
-    badge: "Phase 03",
+    badge: "Phase 02",
   },
   {
     title: "Installation",
     body: "Since our inception Nets Unlimited has set the benchmark for quality netting and rope installations. Our team of professional installers are licensed, bonded, and insured. Supervisors are OSHA 30 trained and all installers are OSHA 10 certified at a minimum. In addition to safety conscientiousness, we aim to deliver the best customer service, regardless of how simple or complicated a project may be. Our experience ensures a professional installation with unparalleled workmanship which will keep your project looking beautiful for years to come. Having Nets Unlimited perform your installations means you know that things were done right and to the highest standards in the industry — ours.",
     image: installationNettingSite,
+    badge: "Phase 03",
+  },
+  {
+    title: "Inspections & Maintenance",
+    body: "We offer inspection and quality control services for existing net structures. A competent and thorough inspection is one of the most important elements in achieving the longevity of your nets and structures. Proper inspections require not only technical expertise and knowledge of the materials and procedures but also sound judgment. Our team comes with over 75 combined years of experience. With our onsite inspections, we are able to verify that your structure was built using industry standards, that the net is intact and not showing signs of wear, and provide a written report to be submitted to your insurance company. If any netting requires repairs we can repair it, during the inspection or through one of our maintenance plans.",
+    image: inspectionMaintenanceSiteCheck,
     badge: "Phase 04",
   },
 ];
@@ -60,6 +60,8 @@ export default function Services() {
             <img
               src={svc.image}
               alt={svc.title}
+              loading="lazy"
+              decoding="async"
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-[600ms] ease-out hover:scale-[1.03]"
             />
             <div className="absolute top-6 left-6">
