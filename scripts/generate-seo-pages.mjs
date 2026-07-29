@@ -89,7 +89,7 @@ function schemaFor(route, title, description, canonical) {
 
 function fallbackContent(title, description) {
   const heading = title.split(" | ")[0];
-  return `<div data-seo-fallback="true"><header><a href="/" aria-label="Nets Unlimited home">Nets Unlimited</a><nav aria-label="Primary"><a href="/services/">Services</a> <a href="/gallery/">Project Gallery</a> <a href="/about/">About</a> <a href="/contact/">Contact</a></nav></header><main><h1>${escape(heading)}</h1><p>${escape(description)}</p><p>Nets Unlimited designs, fabricates, installs, inspects and maintains custom rope and netting systems for commercial projects across the United States.</p><a href="/contact/">Request a custom netting project consultation</a></main></div>`;
+  return `<div data-seo-fallback="true" hidden><header><a href="/" aria-label="Nets Unlimited home">Nets Unlimited</a><nav aria-label="Primary"><a href="/services/">Services</a> <a href="/gallery/">Project Gallery</a> <a href="/about/">About</a> <a href="/contact/">Contact</a></nav></header><main><h1>${escape(heading)}</h1><p>${escape(description)}</p><p>Nets Unlimited designs, fabricates, installs, inspects and maintains custom rope and netting systems for commercial projects across the United States.</p><a href="/contact/">Request a custom netting project consultation</a></main></div>`;
 }
 
 const allPages = [["", "Custom Rope & Safety Netting | Nets Unlimited", "Custom rope, safety netting, animal enclosures, handrails, bridges and play systems for zoos, waterparks and commercial projects since 2004."], ...pages];
