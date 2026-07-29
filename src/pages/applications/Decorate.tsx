@@ -1,22 +1,22 @@
 import { AnimateIn } from "../../components/shared/AnimateIn";
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
-import decorate1 from "../../imports/decorate/decorate-1.png";
-import decorate2 from "../../imports/decorate/decorate-2.png";
-import decorate3 from "../../imports/decorate/decorate-3.png";
-import decorate4 from "../../imports/decorate/decorate-4.png";
-import decorate5 from "../../imports/decorate/decorate-5.png";
-import decorate6 from "../../imports/decorate/decorate-6.png";
-import decorate7 from "../../imports/decorate/decorate-7.png";
-import decorate8 from "../../imports/decorate/decorate-8.png";
-import decorate9 from "../../imports/decorate/decorate-9.png";
-import decorate10 from "../../imports/decorate/decorate-10.png";
-import decorate11 from "../../imports/decorate/decorate-11.png";
-import decorate12 from "../../imports/decorate/decorate-12.png";
-import decorate13 from "../../imports/decorate/decorate-13.png";
-import decorate14 from "../../imports/decorate/decorate-14.png";
-import decorate15 from "../../imports/decorate/decorate-15.png";
-import decorate16 from "../../imports/decorate/decorate-16.png";
+import decorate1 from "../../imports/decorate/decorate-1.webp";
+import decorate2 from "../../imports/decorate/decorate-2.webp";
+import decorate3 from "../../imports/decorate/decorate-3.webp";
+import decorate4 from "../../imports/decorate/decorate-4.webp";
+import decorate5 from "../../imports/decorate/decorate-5.webp";
+import decorate6 from "../../imports/decorate/decorate-6.webp";
+import decorate7 from "../../imports/decorate/decorate-7.webp";
+import decorate8 from "../../imports/decorate/decorate-8.webp";
+import decorate9 from "../../imports/decorate/decorate-9.webp";
+import decorate10 from "../../imports/decorate/decorate-10.webp";
+import decorate11 from "../../imports/decorate/decorate-11.webp";
+import decorate12 from "../../imports/decorate/decorate-12.webp";
+import decorate13 from "../../imports/decorate/decorate-13.webp";
+import decorate14 from "../../imports/decorate/decorate-14.webp";
+import decorate15 from "../../imports/decorate/decorate-15.webp";
+import decorate16 from "../../imports/decorate/decorate-16.webp";
 
 const images = [
   { src: decorate1, alt: "Decorative gallery image 1" },
@@ -70,8 +70,9 @@ export default function Decorate() {
                   <img
                     src={img.src}
                     alt={img.alt}
-                    className="w-full object-cover transition-transform duration-[600ms] ease-out hover:scale-[1.03]"
                     loading="lazy"
+                    decoding="async"
+                    className="w-full object-cover transition-transform duration-[600ms] ease-out hover:scale-[1.03]"
                   />
                 </div>
               </AnimateIn>

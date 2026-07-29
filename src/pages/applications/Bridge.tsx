@@ -1,8 +1,8 @@
 import ApplicationPage from "./ApplicationPage";
-import bridgeHeroTropicalRopeBridge from "../../imports/bridge-hero-tropical-rope-bridge.webp";
-import bridgeStationarySolidSurface from "../../imports/bridge-stationary-solid-surface.webp";
-import bridgeSuspensionMovingCreek from "../../imports/bridge-suspension-moving-creek.webp";
-import bridgeOneWayVBridge from "../../imports/bridge-one-way-v-bridge.webp";
+import bridgeHeroTropicalRopeBridge from "../../imports/bridge-hero-tropical-rope-bridge.seo.webp";
+import bridgeStationarySolidSurface from "../../imports/bridge-stationary-solid-surface.seo.webp";
+import bridgeSuspensionMovingCreek from "../../imports/bridge-suspension-moving-creek.seo.webp";
+import bridgeOneWayVBridge from "../../imports/bridge-one-way-v-bridge.seo.webp";
 
 export default function Bridge() {
   return (

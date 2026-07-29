@@ -27,11 +27,11 @@ const galleryLinks = [
 function DropdownMenu({ label, links }: { label: string; links: { label: string; to: string }[] }) {
   return (
     <div className="group relative">
-      <button className="flex items-center gap-1 text-sm font-medium py-2 px-1 hover:text-primary transition-colors">
+      <button aria-haspopup="true" className="flex min-h-12 items-center gap-1 text-sm font-medium py-2 px-1 hover:text-primary transition-colors">
         {label}
         <ChevronDown size={14} className="transition-transform duration-200 group-hover:rotate-180" />
       </button>
-      <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 absolute top-full left-0 mt-1 w-52 bg-background border border-border shadow-sm z-50 rounded-[2px]">
+      <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 transition-all duration-200 absolute top-full left-0 mt-1 w-52 bg-background border border-border shadow-sm z-50 rounded-[2px]">
         {links.map((l) => (
           <Link
             key={l.to}
@@ -82,6 +82,9 @@ export default function Header() {
           <img
             src={logoImg}
             alt="Nets Unlimited, Inc."
+            width="300"
+            height="112"
+            decoding="async"
             className={`h-9 sm:h-11 lg:h-14 w-auto object-contain transition-all duration-300 ${
               transparent ? "brightness-0 invert" : ""
             }`}
@@ -123,9 +126,11 @@ export default function Header() {
 
         {/* Mobile toggle */}
         <button
-          className={`lg:hidden p-2 transition-colors ${transparent ? "text-primary-foreground" : "text-foreground"}`}
+          className={`lg:hidden min-h-12 min-w-12 p-2 transition-colors ${transparent ? "text-primary-foreground" : "text-foreground"}`}
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-navigation"
         >
           {mobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -133,7 +138,7 @@ export default function Header() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-background border-t border-border max-h-[80vh] overflow-y-auto">
+        <div id="mobile-navigation" className="lg:hidden bg-background border-t border-border max-h-[80vh] overflow-y-auto">
           <div className="px-6 py-4 space-y-1">
             {[
               { label: "Home", to: "/" },
@@ -155,6 +160,7 @@ export default function Header() {
               <button
                 onClick={() => setMobileAppsOpen(!mobileAppsOpen)}
                 className="w-full flex items-center justify-between py-3 text-sm font-medium text-foreground border-b border-border"
+                aria-expanded={mobileAppsOpen}
               >
                 Applications
                 <ChevronDown size={14} className={`transition-transform ${mobileAppsOpen ? "rotate-180" : ""}`} />
@@ -179,6 +185,7 @@ export default function Header() {
               <button
                 onClick={() => setMobileGalOpen(!mobileGalOpen)}
                 className="w-full flex items-center justify-between py-3 text-sm font-medium text-foreground border-b border-border"
+                aria-expanded={mobileGalOpen}
               >
                 Galleries
                 <ChevronDown size={14} className={`transition-transform ${mobileGalOpen ? "rotate-180" : ""}`} />

@@ -4,14 +4,14 @@ import { ArrowRight } from "lucide-react";
 import { motion, useInView, AnimatePresence } from "motion/react";
 import { AnimateIn } from "../components/shared/AnimateIn";
 import zooNetEnclosure from "../imports/zoo-net-enclosure.webp";
-import waterparkRopeNetting from "../imports/waterpark-rope-netting.webp";
+import waterparkRopeNetting from "../imports/waterpark-rope-netting.seo.webp";
 import childrenPlayRopeBridge from "../imports/children-play-rope-bridge.webp";
-import handrailThemedNetting from "../imports/handrail-themed-netting.png";
+import handrailThemedNetting from "../imports/handrail-themed-netting.webp";
 import secondaryProtectionNetting from "../imports/secondary-protection-netting.webp";
 import bridgeTunnelNetting from "../imports/bridge-tunnel-netting.webp";
 import ropeCableHardware from "../imports/rope-cable-hardware.webp";
 import themingDecorPoolNetting from "../imports/theming-decor-pool-netting.webp";
-import themingDecorRopePlay from "../imports/theming-decor-rope-play.webp";
+import themingDecorRopePlay from "../imports/theming-decor-rope-play.seo.webp";
 
 const HERO_IMAGES = [
   {
@@ -49,6 +49,12 @@ const stats = [
 ];
 
 const statText = { value: "AZ ROC", label: "#236070 — Licensed & Bonded" };
+
+const faqs = [
+  { question: "What types of custom netting does Nets Unlimited provide?", answer: "We design, fabricate and install zoo enclosures, waterpark barriers, rope bridges, play elements, handrails, sports containment systems and fall or debris protection netting." },
+  { question: "Does Nets Unlimited work outside Arizona?", answer: "Yes. Our Phoenix-based team supports commercial, recreational and zoological projects throughout the United States." },
+  { question: "Can you help before a project has final drawings?", answer: "Yes. We provide planning and consultation from early concepts through custom fabrication, installation, inspection and maintenance." },
+];
 
 function CountUp({ target, suffix }: { target: number; suffix: string }) {
   const [count, setCount] = useState(0);
@@ -254,6 +260,8 @@ export default function Home() {
                 <motion.img
                   src={HERO_IMAGES[heroIndex].src}
                   alt={HERO_IMAGES[heroIndex].alt}
+                  fetchPriority={heroIndex === 0 ? "high" : "auto"}
+                  decoding="async"
                   className="absolute inset-0 w-full h-full object-cover"
                   initial={{ scale: 1.06 }}
                   animate={{ scale: 1 }}
@@ -387,6 +395,8 @@ export default function Home() {
                 <img
                   src={item.image}
                   alt={item.title}
+                  loading="lazy"
+                  decoding="async"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-[700ms] ease-out hover:scale-[1.04]"
                 />
               </AnimateIn>
@@ -424,13 +434,34 @@ export default function Home() {
         ))}
       </section>
 
+      <section className="bg-background py-20 md:py-28" aria-labelledby="faq-heading">
+        <div className="max-w-[960px] mx-auto px-6">
+          <AnimateIn>
+            <p className="text-xs font-medium tracking-widest uppercase text-clay mb-4">Frequently Asked Questions</p>
+            <h2 id="faq-heading" className="font-serif text-4xl md:text-5xl font-light text-forest-900 tracking-[-0.02em] mb-10">Custom netting questions</h2>
+          </AnimateIn>
+          <div className="divide-y divide-border border-y border-border">
+            {faqs.map((faq, index) => (
+              <AnimateIn key={faq.question} delay={index * 0.06}>
+                <article className="py-7">
+                  <h3 className="font-serif text-2xl font-light text-forest-900 mb-3">{faq.question}</h3>
+                  <p className="text-foreground/75 leading-relaxed">{faq.answer}</p>
+                </article>
+              </AnimateIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA BAND */}
       <section className="py-28 overflow-hidden relative">
         {/* Background image with deep gradient overlay */}
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1554992985-8ab04fbe59b8?w=1600&h=600&fit=crop&auto=format"
+            src={bridgeTunnelNetting}
             alt=""
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(15,42,29,0.97) 0%, rgba(31,74,50,0.92) 50%, rgba(15,42,29,0.97) 100%)" }} />

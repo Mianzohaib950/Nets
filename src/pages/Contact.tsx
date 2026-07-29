@@ -98,10 +98,11 @@ export default function Contact() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
+                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                       Name <span className="text-clay">*</span>
                     </label>
                     <input
+                      id="name"
                       {...register("name", { required: "Name is required" })}
                       maxLength={100}
                       className="w-full bg-secondary border border-border rounded-[2px] px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-forest-500 transition-colors"
@@ -110,8 +111,9 @@ export default function Contact() {
                     {errors.name && <p className="text-destructive text-xs mt-1">{errors.name.message}</p>}
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Company</label>
+                    <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2">Company</label>
                     <input
+                      id="company"
                       {...register("company")}
                       maxLength={120}
                       className="w-full bg-secondary border border-border rounded-[2px] px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-forest-500 transition-colors"
@@ -122,10 +124,11 @@ export default function Contact() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
+                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                       Email <span className="text-clay">*</span>
                     </label>
                     <input
+                      id="email"
                       type="email"
                       {...register("email", {
                         required: "Email is required",
@@ -138,8 +141,9 @@ export default function Contact() {
                     {errors.email && <p className="text-destructive text-xs mt-1">{errors.email.message}</p>}
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Phone</label>
+                    <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">Phone</label>
                     <input
+                      id="phone"
                       type="tel"
                       {...register("phone")}
                       maxLength={40}
@@ -150,10 +154,11 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
                     Service / Subject <span className="text-clay">*</span>
                   </label>
                   <select
+                    id="subject"
                     {...register("subject", { required: "Please select a service or subject" })}
                     className="w-full bg-secondary border border-border rounded-[2px] px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-forest-500 transition-colors"
                   >
@@ -169,10 +174,11 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                     Message <span className="text-clay">*</span>
                   </label>
                   <textarea
+                    id="message"
                     {...register("message", { required: "Message is required", minLength: { value: 10, message: "Please write at least 10 characters" } })}
                     rows={6}
                     maxLength={5000}

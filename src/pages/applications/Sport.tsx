@@ -1,8 +1,8 @@
 import ApplicationPage from "./ApplicationPage";
-import sportBaseballBarrierNetting from "../../imports/sport-baseball-barrier-netting.webp";
+import sportBaseballBarrierNetting from "../../imports/sport-baseball-barrier-netting.seo.webp";
 import sportCourtContainmentBarrier from "../../imports/sport-court-containment-barrier.webp";
 import sportGolfCourseBarrierNetting from "../../imports/sport-golf-course-barrier-netting.webp";
-import sportHeroGolfContainmentNetting from "../../imports/sport-hero-golf-containment-netting.webp";
+import sportHeroGolfContainmentNetting from "../../imports/sport-hero-golf-containment-netting.seo.webp";
 
 export default function Sport() {
   return (

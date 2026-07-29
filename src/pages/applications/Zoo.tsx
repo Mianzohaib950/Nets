@@ -2,7 +2,7 @@ import ApplicationPage from "./ApplicationPage";
 import zooHeroJaguar from "../../imports/zoo-hero-jaguar.webp";
 import zooNewConstructionNetting from "../../imports/zoo-new-construction-netting.webp";
 import zooRefurbishmentNetEnclosure from "../../imports/zoo-refurbishment-net-enclosure.webp";
-import zooAnimalEnrichmentHabitat from "../../imports/zoo-animal-enrichment-habitat.webp";
+import zooAnimalEnrichmentHabitat from "../../imports/zoo-animal-enrichment-habitat.seo.webp";
 
 export default function Zoo() {
   return (

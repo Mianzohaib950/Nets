@@ -58,6 +58,8 @@ export default function ApplicationPage({
             <motion.img
               src={heroImage}
               alt={pageTitle}
+              fetchPriority="high"
+              decoding="async"
               className="absolute inset-0 w-full h-full object-cover"
               initial={{ scale: 1.07 }}
               animate={{ scale: 1 }}
@@ -77,6 +79,8 @@ export default function ApplicationPage({
             <img
               src={sub.image}
               alt={sub.title}
+              loading="lazy"
+              decoding="async"
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-[600ms] ease-out hover:scale-[1.03]"
             />
           </div>
@@ -134,6 +138,8 @@ export default function ApplicationPage({
                       <img
                         src={applicationCardImages[app.to] ?? app.image}
                         alt={app.title}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
                       />
                     </div>

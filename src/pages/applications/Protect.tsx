@@ -1,7 +1,6 @@
 import ApplicationPage from "./ApplicationPage";
-import protectBlastForceNetting from "../../imports/protect-jump-prevention-netting.webp";
 import protectFallDebrisNetting from "../../imports/protect-fall-debris-netting.webp";
-import protectJumpPreventionBarrier from "../../imports/protect-jump-prevention-barrier.webp";
+import protectJumpPreventionBarrier from "../../imports/protect-jump-prevention-barrier.seo.webp";
 import protectSecondaryBarrierWaterSlide from "../../imports/protect-secondary-barrier-water-slide.webp";
 import protectHeroRiskMitigationNetting from "../../imports/protect-hero-risk-mitigation-netting.webp";
 
@@ -9,7 +8,7 @@ export default function Protect() {
   return (
     <ApplicationPage
       pageTitle="We Mitigate Risk"
-      heroImage={protectHeroRiskMitigationNetting}
+      heroImage={protectJumpPreventionBarrier}
       heroIntro="There are a multitude of applications that safety netting can be utilized for including construction, animal containment, people barriers, safety netting for entertainment and sporting venues, and much more. Customized safety systems can lower insurance costs, positively impact public image, and create better worker morale."
       subsections={[
         {
@@ -25,12 +24,12 @@ export default function Protect() {
         {
           title: "Blast Force Containment",
           body: "Blast force injuries are traumas that can occur from direct or indirect exposure to an explosion. Nets Unlimited's blast force protection netting is GSA approved to help absorb the blast force in an effort to reduce human traumas suffered as a result of explosions. This includes solutions for potential high-threat settings including materials storage facilities, production facilities, testing labs, material and equipment service centers, and other potential blast sites.",
-          image: protectBlastForceNetting,
+          image: "/images/protection-netting/protection4.webp",
         },
         {
           title: "Jump Prevention Nets",
           body: "Suicide affects over 1,000,000 people a year. Research shows that suicide prevention nets not only can save jumpers lives but also act as a deterrent to suicide attempts. If your building, or bridge, can benefit from a suicide prevention net, we are available to go through the specifications and best options for your situation.",
-          image: protectJumpPreventionBarrier,
+          image: protectHeroRiskMitigationNetting,
         },
       ]}
       ctaText="Safety Netting Gallery"
