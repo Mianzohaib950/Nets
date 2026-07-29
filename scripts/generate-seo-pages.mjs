@@ -65,7 +65,15 @@ function schemaFor(route, title, description, canonical) {
     openingHoursSpecification: [{ "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "07:00", closes: "16:00" }],
     areaServed: { "@type": "Country", name: "United States" },
     hasMap: "https://maps.app.goo.gl/Ka7icMBxsSZ5ZPRz8",
-    sameAs: ["https://www.linkedin.com/company/nets-unlimited-inc"],
+    sameAs: [
+      "https://www.facebook.com/NetsUnlimited/",
+      "https://www.houzz.com/pro/webuser-536029029/__public",
+      "https://www.instagram.com/netsunlimitedinc/",
+      "https://www.linkedin.com/company/nets-unlimited-inc",
+      "https://www.pinterest.com/NetsUnlimitedInc/",
+      "https://x.com/nets_unlimited",
+      "https://www.yelp.com/biz/nets-unlimited-phoenix-2",
+    ],
   };
   const graph = [
     organization,

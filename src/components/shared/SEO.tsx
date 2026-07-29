@@ -66,14 +66,15 @@ export function SEO() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const gallerySlug = pathname.startsWith("/gallery/") ? pathname.split("/")[2] : "";
+    const normalizedPath = pathname === "/" ? "/" : pathname.replace(/\/+$/, "");
+    const gallerySlug = normalizedPath.startsWith("/gallery/") ? normalizedPath.split("/")[2] : "";
     const galleryName = galleryNames[gallerySlug];
-    const page = pages[pathname] ?? (galleryName ? {
+    const page = pages[normalizedPath] ?? (galleryName ? {
       title: `${galleryName} Gallery | Nets Unlimited`,
       description: `View completed ${galleryName.toLowerCase()} projects designed, fabricated and installed by Nets Unlimited.`,
     } : { title: "Page Not Found | Nets Unlimited", description: "The requested page could not be found.", noindex: true });
     page.description = completeDescription(page.description);
-    const canonicalPath = pathname === "/" ? "/" : `${pathname.replace(/\/$/, "")}/`;
+    const canonicalPath = normalizedPath === "/" ? "/" : `${normalizedPath}/`;
     const canonical = `${SITE_URL}${canonicalPath}`;
     const robots = page.noindex ? "noindex, follow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
 
@@ -112,14 +113,22 @@ export function SEO() {
         openingHoursSpecification: [{ "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "07:00", closes: "16:00" }],
         areaServed: { "@type": "Country", name: "United States" },
         hasMap: "https://maps.app.goo.gl/Ka7icMBxsSZ5ZPRz8",
-        sameAs: ["https://www.linkedin.com/company/nets-unlimited-inc"],
+        sameAs: [
+          "https://www.facebook.com/NetsUnlimited/",
+          "https://www.houzz.com/pro/webuser-536029029/__public",
+          "https://www.instagram.com/netsunlimitedinc/",
+          "https://www.linkedin.com/company/nets-unlimited-inc",
+          "https://www.pinterest.com/NetsUnlimitedInc/",
+          "https://x.com/nets_unlimited",
+          "https://www.yelp.com/biz/nets-unlimited-phoenix-2",
+        ],
         knowsAbout: ["Custom netting", "Rope fabrication", "Animal enclosures", "Safety netting", "Rope bridges", "Commercial handrails"],
       },
-      { "@context": "https://schema.org", "@type": pathname === "/contact" ? "ContactPage" : pathname === "/about" ? "AboutPage" : "WebPage", "@id": `${canonical}#webpage`, url: canonical, name: page.title, description: page.description, isPartOf: { "@id": `${SITE_URL}/#website` }, about: { "@id": `${SITE_URL}/#organization` }, inLanguage: "en-US" },
+      { "@context": "https://schema.org", "@type": normalizedPath === "/contact" ? "ContactPage" : normalizedPath === "/about" ? "AboutPage" : "WebPage", "@id": `${canonical}#webpage`, url: canonical, name: page.title, description: page.description, isPartOf: { "@id": `${SITE_URL}/#website` }, about: { "@id": `${SITE_URL}/#organization` }, inLanguage: "en-US" },
       { "@context": "https://schema.org", "@type": "WebSite", "@id": `${SITE_URL}/#website`, url: SITE_URL, name: "Nets Unlimited", publisher: { "@id": `${SITE_URL}/#organization` } },
     ];
-    if (pathname !== "/") {
-      const segments = pathname.split("/").filter(Boolean);
+    if (normalizedPath !== "/") {
+      const segments = normalizedPath.split("/").filter(Boolean);
       const items = [{ "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` }];
       if (segments.length > 1) items.push({ "@type": "ListItem", position: 2, name: segments[0] === "applications" ? "Applications" : "Gallery", item: segments[0] === "gallery" ? `${SITE_URL}/gallery/` : `${SITE_URL}/#applications` });
       items.push({ "@type": "ListItem", position: items.length + 1, name: page.title.split(" | ")[0], item: canonical });
@@ -128,11 +137,11 @@ export function SEO() {
       itemListElement: items,
       });
     }
-    if (serviceNames[pathname]) schemas.push({
+    if (serviceNames[normalizedPath]) schemas.push({
       "@context": "https://schema.org", "@type": "Service", "@id": `${canonical}#service`,
-      name: serviceNames[pathname], description: page.description, url: canonical,
+      name: serviceNames[normalizedPath], description: page.description, url: canonical,
       provider: { "@id": `${SITE_URL}/#organization` }, areaServed: { "@type": "Country", name: "United States" },
-      serviceType: serviceNames[pathname],
+      serviceType: serviceNames[normalizedPath],
     });
     schemas.forEach((schema) => {
       const script = document.createElement("script");

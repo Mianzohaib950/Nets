@@ -1,5 +1,17 @@
 import { Link } from "react-router";
-import { Linkedin, MapPin, Phone, Mail, Clock } from "lucide-react";
+import {
+  Asterisk,
+  CircleParking,
+  Clock,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
+  PanelsTopLeft,
+  Phone,
+  Twitter,
+} from "lucide-react";
 import logoImg from "@/imports/qt_q_95__1_.png";
 
 const appLinks = [
@@ -21,6 +33,16 @@ const galleryLinks = [
   { label: "Play Elements", to: "/gallery/play-elements" },
   { label: "Golf & Sport", to: "/gallery/golf-and-sport" },
   { label: "Protection Netting", to: "/gallery/protection-netting" },
+];
+
+const socialLinks = [
+  { icon: Facebook, href: "https://www.facebook.com/NetsUnlimited/", label: "Facebook" },
+  { icon: PanelsTopLeft, href: "https://www.houzz.com/pro/webuser-536029029/__public", label: "Houzz" },
+  { icon: Instagram, href: "https://www.instagram.com/netsunlimitedinc/", label: "Instagram" },
+  { icon: Linkedin, href: "https://www.linkedin.com/company/nets-unlimited-inc", label: "LinkedIn" },
+  { icon: CircleParking, href: "https://www.pinterest.com/NetsUnlimitedInc/", label: "Pinterest" },
+  { icon: Twitter, href: "https://x.com/nets_unlimited", label: "X / Twitter" },
+  { icon: Asterisk, href: "https://www.yelp.com/biz/nets-unlimited-phoenix-2", label: "Yelp" },
 ];
 
 export default function Footer() {
@@ -66,21 +88,23 @@ export default function Footer() {
                 <span>Mon–Fri 7:00 AM – 4:00 PM<br />Closed Sat &amp; Sun</span>
               </div>
             </div>
-            <div className="flex gap-4 mt-6">
-              {[
-                { icon: Linkedin, href: "https://www.linkedin.com/company/nets-unlimited-inc", label: "LinkedIn" },
-              ].map(({ icon: Icon, href, label }) => (
+            <div className="mt-7">
+              <p className="text-xs font-medium tracking-widest uppercase text-clay mb-3">Follow Us</p>
+              <div className="flex flex-nowrap items-center gap-4">
+              {socialLinks.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
-                  aria-label={label}
+                  aria-label={`Follow Nets Unlimited on ${label}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 flex items-center justify-center border border-primary-foreground/20 rounded-[2px] text-primary-foreground/60 hover:text-primary-foreground hover:border-primary-foreground/60 transition-colors"
+                  title={label}
+                  className="group inline-flex items-center justify-center text-primary-foreground/60 hover:text-primary-foreground transition-colors"
                 >
-                  <Icon size={14} />
+                  <Icon size={18} strokeWidth={1.8} className="shrink-0 text-clay/90 group-hover:text-clay" />
                 </a>
               ))}
+              </div>
             </div>
           </div>
 
