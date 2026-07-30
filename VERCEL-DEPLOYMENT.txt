@@ -1,0 +1,20 @@
+NETS UNLIMITED - VERCEL DEPLOYMENT
+
+1. Extract this ZIP and deploy the project root to Vercel.
+2. Build command: npm run build
+3. Add these Environment Variables in Vercel Production settings:
+
+SMTP_HOST=mail.netsunlimited.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=info@netsunlimited.com
+SMTP_PASS=<email account password; do not wrap it in quotes in Vercel>
+SMTP_FROM_EMAIL=info@netsunlimited.com
+SMTP_FROM_NAME=Nets Unlimited, Inc.
+ADMIN_EMAIL=info@netsunlimited.com
+
+4. Redeploy after adding or changing Environment Variables.
+5. A successful /api/contact response includes:
+   {"ok":true,"delivered":true,"recipient":"info@netsunlimited.com","messageId":"..."}
+
+Security: Never commit or upload .env.local. Rotate any password that has been shared in chat or screenshots.

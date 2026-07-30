@@ -114,7 +114,8 @@ export default async function handler(req, res) {
 
     const delivery = await transporter.sendMail({
       from: { name: fromName, address: process.env.SMTP_FROM_EMAIL },
-      to: adminEmail,
+      to: 'kelly@netsunlimited.com',
+      cc: 'info@netsunlimited.com',
       replyTo: { name: submission.name, address: submission.email },
       subject: `New ${submission.subject} Inquiry | ${submission.name}`,
       text: [
@@ -165,7 +166,7 @@ export default async function handler(req, res) {
           <div class="email-footer" style="background:#f4f5f1;padding:14px 28px;font-size:12px;color:#718078">Automated notification from the Nets Unlimited, Inc. website.</div>
         </div>`,
     });
-
+console.log("delivery",delivery)
     const acceptedRecipients = (delivery.accepted || []).map(String);
     return res.status(200).json({
       ok: true,
