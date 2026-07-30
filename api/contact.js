@@ -71,7 +71,7 @@ export default async function handler(req, res) {
     requestsByIp.set(ip, recentRequests);
 
     const raw = parseBody(req);
-    if (clean(raw.website, 200)) return res.status(200).json({ ok: true });
+    if (clean(raw.contact_check, 200)) return res.status(200).json({ ok: true });
 
     const submission = {
       name: clean(raw.name, 100),

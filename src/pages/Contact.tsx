@@ -10,7 +10,7 @@ interface FormData {
   phone: string;
   subject: string;
   message: string;
-  website: string;
+  contact_check: string;
 }
 
 type ContactApiResult = {
@@ -93,8 +93,14 @@ export default function Contact() {
             <AnimateIn>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
                 <div className="absolute -left-[9999px]" aria-hidden="true">
-                  <label htmlFor="website">Website</label>
-                  <input id="website" type="text" tabIndex={-1} autoComplete="off" {...register("website")} />
+                  <label htmlFor="contact_check">Leave this field blank</label>
+                  <input
+                    id="contact_check"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="new-password"
+                    {...register("contact_check")}
+                  />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
