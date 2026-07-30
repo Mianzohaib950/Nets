@@ -17,6 +17,8 @@ import decorate13 from "../../imports/decorate/decorate-13.webp";
 import decorate14 from "../../imports/decorate/decorate-14.webp";
 import decorate15 from "../../imports/decorate/decorate-15.webp";
 import decorate16 from "../../imports/decorate/decorate-16.webp";
+import decorate17 from "../../imports/decorate/decorate-17.webp";
+import decorate18 from "../../imports/decorate/decorate-18.webp";
 
 const images = [
   { src: decorate1, alt: "Decorative gallery image 1" },
@@ -35,6 +37,8 @@ const images = [
   { src: decorate14, alt: "Decorative gallery image 14" },
   { src: decorate15, alt: "Decorative gallery image 15" },
   { src: decorate16, alt: "Decorative gallery image 16" },
+  { src: decorate17, alt: "Decorative rope-wrapped posts" },
+  { src: decorate18, alt: "Decorative hockey net structure" },
 ];
 
 export default function Decorate() {
@@ -63,16 +67,20 @@ export default function Decorate() {
           </AnimateIn>
 
           {/* Gallery grid */}
-          <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {images.map((img, i) => (
-              <AnimateIn key={i} delay={i * 0.04}>
-                <div className="break-inside-avoid overflow-hidden rounded-[4px] border border-border">
+              <AnimateIn
+                key={i}
+                delay={i * 0.04}
+                className={i === images.length - 2 ? "xl:col-start-2" : undefined}
+              >
+                <div className="aspect-video overflow-hidden rounded-[4px] border border-border">
                   <img
                     src={img.src}
                     alt={img.alt}
                     loading="lazy"
                     decoding="async"
-                    className="w-full object-cover transition-transform duration-[600ms] ease-out hover:scale-[1.03]"
+                    className="w-full h-full object-cover transition-transform duration-[600ms] ease-out hover:scale-[1.03]"
                   />
                 </div>
               </AnimateIn>

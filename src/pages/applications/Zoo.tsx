@@ -1,6 +1,6 @@
 import ApplicationPage from "./ApplicationPage";
-import zooHeroJaguar from "../../imports/zoo-hero-jaguar.webp";
-import zooNewConstructionNetting from "../../imports/zoo-new-construction-netting.webp";
+import zooHeroLemurs from "../../imports/zoo-hero-lemurs.webp";
+import zooNewConstructionInstallation from "../../imports/zoo-new-construction-installation.webp";
 import zooRefurbishmentNetEnclosure from "../../imports/zoo-refurbishment-net-enclosure.webp";
 import zooAnimalEnrichmentHabitat from "../../imports/zoo-animal-enrichment-habitat.seo.webp";
 
@@ -8,13 +8,13 @@ export default function Zoo() {
   return (
     <ApplicationPage
       pageTitle="We Zoo"
-      heroImage={zooHeroJaguar}
+      heroImage={zooHeroLemurs}
       heroIntro="Nets Unlimited has worked with zoos across the country to help bring to life new exhibits, refurbish or re-purpose older exhibits, reface exhibits, or even just create enrichment for your animals' mental health. No matter what stage you are in we are here to help."
       subsections={[
         {
           title: "New Construction",
           body: "Zoos, aquariums, and nature centers are entering a new era of the visitor experience, working to create far more immersive, memorable, and engaging animal exhibits that help promote an important conservation message. Nets Unlimited, Inc. has extensive experience in creating beautiful exhibits that are visually unobtrusive while providing a safe and secure experience for the animals that inhabit them. Whether you have fully executed drawings, or just an idea, we are here to help make your plans become reality.",
-          image: zooNewConstructionNetting,
+          image: zooNewConstructionInstallation,
         },
         {
           title: "Refurbishment",

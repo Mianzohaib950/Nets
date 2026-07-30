@@ -3,6 +3,7 @@ import protectFallDebrisNetting from "../../imports/protect-fall-debris-netting.
 import protectJumpPreventionBarrier from "../../imports/protect-jump-prevention-barrier.seo.webp";
 import protectSecondaryBarrierWaterSlide from "../../imports/protect-secondary-barrier-water-slide.webp";
 import protectHeroRiskMitigationNetting from "../../imports/protect-hero-risk-mitigation-netting.webp";
+import protectBlastForceResidentialNetting from "../../imports/protect-blast-force-residential-netting.webp";
 
 export default function Protect() {
   return (
@@ -24,7 +25,7 @@ export default function Protect() {
         {
           title: "Blast Force Containment",
           body: "Blast force injuries are traumas that can occur from direct or indirect exposure to an explosion. Nets Unlimited's blast force protection netting is GSA approved to help absorb the blast force in an effort to reduce human traumas suffered as a result of explosions. This includes solutions for potential high-threat settings including materials storage facilities, production facilities, testing labs, material and equipment service centers, and other potential blast sites.",
-          image: "/images/protection-netting/protection4.webp",
+          image: protectBlastForceResidentialNetting,
         },
         {
           title: "Jump Prevention Nets",
