@@ -71,8 +71,6 @@ export default async function handler(req, res) {
     requestsByIp.set(ip, recentRequests);
 
     const raw = parseBody(req);
-    if (clean(raw.contact_check, 200)) return res.status(200).json({ ok: true });
-
     const submission = {
       name: clean(raw.name, 100),
       company: clean(raw.company, 120),
@@ -114,7 +112,7 @@ export default async function handler(req, res) {
     const fromName = "Nets Unlimited, Inc.";
     const safe = Object.fromEntries(Object.entries(submission).map(([key, value]) => [key, escapeHtml(value)]));
 
-    await transporter.sendMail({
+    const delivery = await transporter.sendMail({
       from: { name: fromName, address: process.env.SMTP_FROM_EMAIL },
       to: adminEmail,
       replyTo: { name: submission.name, address: submission.email },
@@ -168,7 +166,13 @@ export default async function handler(req, res) {
         </div>`,
     });
 
-    return res.status(200).json({ ok: true });
+    const acceptedRecipients = (delivery.accepted || []).map(String);
+    return res.status(200).json({
+      ok: true,
+      delivered: acceptedRecipients.some((address) => address.toLowerCase() === adminEmail.toLowerCase()),
+      recipient: adminEmail,
+      messageId: delivery.messageId,
+    });
   } catch (error) {
     if (error instanceof Error && error.message === "PAYLOAD_TOO_LARGE") {
       return res.status(413).json({ error: "Submission is too large." });
