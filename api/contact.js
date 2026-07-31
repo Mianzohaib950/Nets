@@ -85,7 +85,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Please complete all required fields correctly." });
     }
 
-    const requiredEnv = ["SMTP_HOST", "SMTP_PORT", "SMTP_USER", "SMTP_PASS", "SMTP_FROM_EMAIL"];
+    const requiredEnv = ["SMTP_HOST", "SMTP_PORT", "SMTP_USER", "SMTP_PASS", "SMTP_FROM_EMAIL", "ADMIN_EMAIL",];
     const missingEnv = requiredEnv.filter((key) => !process.env[key]);
     if (missingEnv.length) {
       console.error(`Contact email configuration is missing: ${missingEnv.join(", ")}`);
@@ -108,14 +108,15 @@ export default async function handler(req, res) {
       socketTimeout: 15_000,
     });
 
-    const adminEmail = process.env.ADMIN_EMAIL || process.env.SMTP_FROM_EMAIL;
-    const fromName = "Nets Unlimited, Inc.";
+   const adminEmail = process.env.ADMIN_EMAIL || process.env.SMTP_FROM_EMAIL;
+   const ccEmail = process.env.CC_EMAIL;
+   const fromName = "Nets Unlimited, Inc.";
     const safe = Object.fromEntries(Object.entries(submission).map(([key, value]) => [key, escapeHtml(value)]));
 
     const delivery = await transporter.sendMail({
       from: { name: fromName, address: process.env.SMTP_FROM_EMAIL },
-      to: 'kelly@netsunlimited.com',
-      cc: 'info@netsunlimited.com',
+      to: adminEmail,
+      cc: ccEmail,
       replyTo: { name: submission.name, address: submission.email },
       subject: `New ${submission.subject} Inquiry | ${submission.name}`,
       text: [
@@ -167,13 +168,20 @@ export default async function handler(req, res) {
         </div>`,
     });
 console.log("delivery",delivery)
-    const acceptedRecipients = (delivery.accepted || []).map(String);
-    return res.status(200).json({
-      ok: true,
-      delivered: acceptedRecipients.some((address) => address.toLowerCase() === adminEmail.toLowerCase()),
-      recipient: adminEmail,
-      messageId: delivery.messageId,
-    });
+    const acceptedRecipients = (delivery.accepted || []).map((address) =>
+  address.toLowerCase()
+);
+
+const delivered =
+  acceptedRecipients.includes(adminEmail.toLowerCase()) ||
+  (ccEmail && acceptedRecipients.includes(ccEmail.toLowerCase()));
+
+return res.status(200).json({
+  ok: true,
+  delivered,
+  recipient: adminEmail,
+  messageId: delivery.messageId,
+});
   } catch (error) {
     if (error instanceof Error && error.message === "PAYLOAD_TOO_LARGE") {
       return res.status(413).json({ error: "Submission is too large." });
