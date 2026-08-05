@@ -180,7 +180,7 @@ export default function Footer() {
           </Link>
           <p className="text-xs text-primary-foreground/40">
             Designed & Developed by{" "}
-            <a href="https://novatore.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground/70 transition-colors underline underline-offset-2">
+            <a href="https://novatoresols.com/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground/70 transition-colors underline underline-offset-2">
               Novatore Solutions
             </a>
           </p>

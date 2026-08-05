@@ -27,8 +27,10 @@ export default function Sport() {
           image: sportCourtContainmentBarrier,
         },
       ]}
-      ctaText="Golf and Sport Netting Gallery"
+      ctaText="View Golf and Sport Netting Gallery"
       ctaTo="/gallery/golf-and-sport"
+      secondaryCtaText="Explore More Golf Netting Solutions"
+      secondaryCtaHref="https://golfnetsunlimited.com/"
       relatedApps={[
         { title: "We Protect", to: "/applications/protect", image: "https://images.unsplash.com/photo-1778941120800-6ecd662bbc36?w=600&h=400&fit=crop&auto=format" },
         { title: "We Handrail", to: "/applications/handrail", image: "https://images.unsplash.com/photo-1563300467-5a9220d63233?w=600&h=400&fit=crop&auto=format" },

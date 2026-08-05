@@ -1,111 +1,227 @@
-import { Link } from "react-router";
-import { ArrowRight } from "lucide-react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
+import {
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Plus,
+  LayoutGrid,
+  PawPrint,
+  Waves,
+  Landmark,
+  Fence,
+  Route,
+  Flag,
+  Shield,
+  type LucideIcon,
+} from "lucide-react";
 import { AnimateIn } from "../../components/shared/AnimateIn";
 import galleryImageDimensions from "../../data/gallery-image-dimensions.json";
+import { galleryCategories } from "../../data/galleryData";
 
-const categories = [
-  {
-    title: "Zoos",
-    slug: "zoos",
-    desc: "Animal exhibits, aquariums, and nature centers",
-    image: "/images/zoos/zoo1.webp",
-    count: 24,
-  },
-  {
-    title: "Waterparks",
-    slug: "waterparks",
-    desc: "Water attractions, dry play, and theming elements",
-    image: "/images/waterparks/rs=w_2560 (8).webp",
-    count: 25,
-  },
-  {
-    title: "Bridges",
-    slug: "bridges",
-    desc: "Suspension, stationary, and V bridges of all kinds",
-    image: "/images/bridges/rs=w_2560 (1).webp",
-    count: 22,
-  },
-  {
-    title: "Handrails",
-    slug: "handrails",
-    desc: "Stainless steel, rope, and cable handrail systems",
-    image: "/images/handrails/rs=w_2560 (1).webp",
-    count: 35,
-  },
-  {
-    title: "Play Elements",
-    slug: "play-elements",
-    desc: "Tunnels, climbs, spiderweb nets, and obstacle courses",
-    image: "/images/play-elements/play1.webp",
-    count: 20,
-  },
-  {
-    title: "Golf & Sport",
-    slug: "golf-and-sport",
-    desc: "Driving ranges, batting cages, and sport court containment",
-    image: "/images/golf-and-sport/golf1.webp",
-    count: 15,
-  },
-  {
-    title: "Protection Netting",
-    slug: "protection-netting",
-    desc: "Fall protection, debris containment, and safety systems",
-    image: "/images/protection-netting/protection1.webp",
-    count: 22,
-  },
+const categoryIcons: Record<string, LucideIcon> = {
+  zoos: PawPrint,
+  waterparks: Waves,
+  bridges: Landmark,
+  handrails: Fence,
+  "play-elements": Route,
+  "golf-and-sport": Flag,
+  "protection-netting": Shield,
+};
+
+const filters = [
+  { slug: "All", navLabel: "All", icon: LayoutGrid },
+  ...galleryCategories.map((cat) => ({ slug: cat.slug, navLabel: cat.navLabel, icon: categoryIcons[cat.slug] })),
 ];
 
+const allItems = galleryCategories.flatMap((cat) =>
+  cat.items.map((item) => ({
+    key: `${cat.slug}-${item.id}`,
+    src: item.src,
+    alt: item.alt,
+    category: cat.slug,
+    categoryTitle: cat.title,
+  }))
+);
+
 export default function GalleryIndex() {
+  const [activeFilter, setActiveFilter] = useState("All");
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const initialDisplayCount = 18;
+  const [displayCount, setDisplayCount] = useState(initialDisplayCount);
+
+  const items = useMemo(
+    () => (activeFilter === "All" ? allItems : allItems.filter((item) => item.category === activeFilter)),
+    [activeFilter]
+  );
+  const displayedItems = items.slice(0, displayCount);
+  const hasMoreItems = displayCount < items.length;
+
+  const openLightbox = (i: number) => setLightboxIndex(i);
+  const closeLightbox = () => setLightboxIndex(null);
+
+  useEffect(() => {
+    setDisplayCount(initialDisplayCount);
+  }, [activeFilter]);
+
+  const prev = useCallback(() => {
+    if (lightboxIndex === null) return;
+    setLightboxIndex((lightboxIndex - 1 + items.length) % items.length);
+  }, [lightboxIndex, items.length]);
+
+  const next = useCallback(() => {
+    if (lightboxIndex === null) return;
+    setLightboxIndex((lightboxIndex + 1) % items.length);
+  }, [lightboxIndex, items.length]);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+      if (e.key === "Escape") closeLightbox();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxIndex, prev, next]);
+
   return (
     <>
       <div className="bg-forest-900 pt-32 pb-20">
         <div className="max-w-[1280px] mx-auto px-6">
           <AnimateIn>
-            <p className="text-xs font-medium tracking-widest uppercase text-clay mb-4">Our Work</p>
-            <h1 className="font-serif text-5xl md:text-6xl font-light text-primary-foreground tracking-[-0.02em] leading-[1.05]">
-              Galleries
+            <h1 className="font-serif text-5xl md:text-6xl font-light text-primary-foreground tracking-[-0.02em] leading-[1.05] mb-5">
+              All Galleries
             </h1>
+            <p className="text-primary-foreground/70 text-lg leading-[1.7] max-w-2xl">
+              Explore our complete collection of custom netting solutions across zoos, waterparks, bridges, play
+              areas, and more.
+            </p>
           </AnimateIn>
         </div>
       </div>
 
-      <section className="bg-background py-20 md:py-28">
+      <section className="bg-background py-16 md:py-20">
         <div className="max-w-[1280px] mx-auto px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categories.map((cat, i) => (
-              <AnimateIn key={cat.slug} delay={i * 0.07}>
-                <Link
-                  to={`/gallery/${cat.slug}`}
-                  className="group block border border-border rounded-[4px] overflow-hidden"
+          {/* Category filter pills */}
+          <div className="flex items-center gap-3 mb-10 flex-wrap">
+            {filters.map((f) => {
+              const Icon = f.icon;
+              return (
+                <button
+                  key={f.slug}
+                  onClick={() => setActiveFilter(f.slug)}
+                  className={`inline-flex items-center gap-2 px-4 py-2 text-sm rounded-[2px] border transition-colors ${
+                    activeFilter === f.slug
+                      ? "bg-primary text-primary-foreground border-primary"
+                      : "border-border text-muted-foreground hover:text-foreground hover:border-foreground/20"
+                  }`}
                 >
-                  <div className="relative overflow-hidden h-56 bg-secondary">
-                    <img
-                      src={cat.image}
-                      alt={cat.title}
-                      width={galleryImageDimensions[cat.image as keyof typeof galleryImageDimensions]?.width}
-                      height={galleryImageDimensions[cat.image as keyof typeof galleryImageDimensions]?.height}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
-                    />
-                    <div className="absolute inset-0 bg-forest-900/30 group-hover:bg-forest-900/10 transition-colors duration-300" />
-                    <span className="absolute top-4 right-4 text-xs font-medium text-primary-foreground/80 bg-forest-900/60 backdrop-blur-sm px-2.5 py-1 rounded-[2px]">
-                      {cat.count} photos
-                    </span>
-                  </div>
-                  <div className="px-6 py-5">
-                    <div className="flex items-center justify-between mb-2">
-                      <h2 className="font-serif text-xl font-light text-forest-900">{cat.title}</h2>
-                      <ArrowRight size={14} className="text-clay group-hover:translate-x-1 transition-transform" />
-                    </div>
-                    <p className="text-sm text-muted-foreground">{cat.desc}</p>
-                  </div>
-                </Link>
-              </AnimateIn>
-            ))}
+                  <Icon size={14} /> {f.navLabel}
+                </button>
+              );
+            })}
+            <span className="ml-auto text-sm text-muted-foreground">{items.length} photos</span>
           </div>
+
+          {items.length === 0 ? (
+            <div className="text-center py-24">
+              <p className="text-muted-foreground">No photos available yet. Check back soon.</p>
+            </div>
+          ) : (
+            <>
+              <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+                {displayedItems.map((item, i) => {
+                  const dimensions = galleryImageDimensions[item.src as keyof typeof galleryImageDimensions];
+                  return (
+                    <button
+                      type="button"
+                      key={item.key}
+                      className="block w-full break-inside-avoid overflow-hidden rounded-[4px] border border-border cursor-pointer group"
+                      onClick={() => openLightbox(i)}
+                    >
+                      <img
+                        src={item.src}
+                        alt={`${item.categoryTitle} custom netting project`}
+                        width={dimensions?.width}
+                        height={dimensions?.height}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
+                      />
+                    </button>
+                  );
+                })}
+              </div>
+
+              {hasMoreItems && (
+                <div className="flex justify-center mt-12">
+                  <button
+                    onClick={() => setDisplayCount((c) => Math.min(c + initialDisplayCount, items.length))}
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-[4px] border border-primary hover:bg-primary/90 transition-colors text-sm font-medium"
+                  >
+                    <Plus size={16} /> Load More Photos
+                  </button>
+                </div>
+              )}
+            </>
+          )}
         </div>
       </section>
+
+      {/* Lightbox */}
+      <Dialog.Root open={lightboxIndex !== null} onOpenChange={(open) => !open && closeLightbox()}>
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 z-50" style={{ backgroundColor: "rgba(15,42,29,0.92)" }} />
+          <Dialog.Content
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 outline-none"
+            aria-describedby={undefined}
+          >
+            <Dialog.Title className="sr-only">
+              {lightboxIndex !== null ? `${items[lightboxIndex].categoryTitle} custom netting project` : "Gallery image"}
+            </Dialog.Title>
+            {lightboxIndex !== null && (
+              <div className="relative max-w-5xl max-h-[90vh] flex flex-col items-center">
+                <div className="absolute top-6 right-16 text-sm font-medium text-primary-foreground bg-forest-900/50 backdrop-blur-sm px-3 py-1 rounded-[2px] z-10">
+                  {lightboxIndex + 1} / {items.length}
+                </div>
+                <img
+                  src={items[lightboxIndex].src}
+                  alt={`${items[lightboxIndex].categoryTitle} custom netting project`}
+                  width={galleryImageDimensions[items[lightboxIndex].src as keyof typeof galleryImageDimensions]?.width}
+                  height={galleryImageDimensions[items[lightboxIndex].src as keyof typeof galleryImageDimensions]?.height}
+                  decoding="async"
+                  className="max-h-[80vh] max-w-full object-contain rounded-[4px]"
+                />
+                <div className="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-14">
+                  <button
+                    onClick={prev}
+                    className="w-10 h-10 flex items-center justify-center text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                    aria-label="Previous image"
+                  >
+                    <ChevronLeft size={24} />
+                  </button>
+                </div>
+                <div className="absolute top-1/2 -translate-y-1/2 right-0 translate-x-14">
+                  <button
+                    onClick={next}
+                    className="w-10 h-10 flex items-center justify-center text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                    aria-label="Next image"
+                  >
+                    <ChevronRight size={24} />
+                  </button>
+                </div>
+              </div>
+            )}
+            <Dialog.Close
+              className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+              aria-label="Close"
+            >
+              <X size={20} />
+            </Dialog.Close>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
     </>
   );
 }

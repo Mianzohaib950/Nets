@@ -3,7 +3,7 @@ import protectFallDebrisNetting from "../../imports/protect-fall-debris-netting.
 import protectJumpPreventionBarrier from "../../imports/protect-jump-prevention-barrier.seo.webp";
 import protectSecondaryBarrierWaterSlide from "../../imports/protect-secondary-barrier-water-slide.webp";
 import protectHeroRiskMitigationNetting from "../../imports/protect-hero-risk-mitigation-netting.webp";
-import protectBlastForceResidentialNetting from "../../imports/protect-blast-force-residential-netting.webp";
+import protectBlastForceResidentialNetting from "../../imports/protect-blast-force-netting-material.webp";
 
 export default function Protect() {
   return (

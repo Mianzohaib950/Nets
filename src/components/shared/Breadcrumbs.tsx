@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router";
 
 const labels: Record<string, string> = {
-  services: "Services", about: "About", contact: "Contact", privacy: "Privacy Policy", gallery: "Project Gallery",
+  services: "Services", about: "About", contact: "Contact", privacy: "Privacy Policy", gallery: "Galleries",
   zoo: "Zoo & Aquarium Netting", waterpark: "Waterpark Netting", bridge: "Rope Bridges",
   handrail: "Handrail Systems", play: "Rope Play", sport: "Sports Netting",
   protect: "Protection Netting", decorate: "Architectural Decor", zoos: "Zoos & Aquariums",

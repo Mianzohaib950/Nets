@@ -23,6 +23,8 @@ interface Props {
   subsections: Subsection[];
   ctaText: string;
   ctaTo: string;
+  secondaryCtaText?: string;
+  secondaryCtaHref?: string;
   relatedApps: RelatedApp[];
 }
 
@@ -33,6 +35,8 @@ export default function ApplicationPage({
   subsections,
   ctaText,
   ctaTo,
+  secondaryCtaText,
+  secondaryCtaHref,
   relatedApps,
 }: Props) {
   return (
@@ -103,16 +107,32 @@ export default function ApplicationPage({
       <section className="bg-forest-900 py-20">
         <div className="max-w-[1280px] mx-auto px-6 text-center">
           <AnimateIn>
-            <Link
-              to={ctaTo}
-              className="relative group inline-flex items-center gap-2 bg-clay text-primary-foreground px-8 py-3.5 rounded-[2px] text-sm font-medium"
-            >
-              <span className="relative">
-                {ctaText}
-                <span className="absolute left-0 bottom-0 w-0 h-px bg-primary-foreground group-hover:w-full transition-all duration-300" />
-              </span>
-              <ArrowRight size={14} />
-            </Link>
+            <div className="inline-flex flex-wrap items-center justify-center gap-4">
+              <Link
+                to={ctaTo}
+                className="relative group inline-flex items-center gap-2 bg-clay text-primary-foreground px-8 py-3.5 rounded-[2px] text-sm font-medium"
+              >
+                <span className="relative">
+                  {ctaText}
+                  <span className="absolute left-0 bottom-0 w-0 h-px bg-primary-foreground group-hover:w-full transition-all duration-300" />
+                </span>
+                <ArrowRight size={14} />
+              </Link>
+              {secondaryCtaText && secondaryCtaHref && (
+                <a
+                  href={secondaryCtaHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative group inline-flex items-center gap-2 border border-primary-foreground/50 text-primary-foreground px-8 py-3.5 rounded-[2px] text-sm font-medium hover:border-primary-foreground transition-colors"
+                >
+                  <span className="relative">
+                    {secondaryCtaText}
+                    <span className="absolute left-0 bottom-0 w-0 h-px bg-primary-foreground group-hover:w-full transition-all duration-300" />
+                  </span>
+                  <ArrowRight size={14} />
+                </a>
+              )}
+            </div>
           </AnimateIn>
         </div>
       </section>

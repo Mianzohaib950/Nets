@@ -169,7 +169,7 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
               className="text-xs font-medium tracking-widest uppercase text-clay mb-6"
             >
-              Phoenix, Arizona · Est. 2004
+              Phoenix, Arizona · Est. 2003
             </motion.p>
 
             <h1 className="font-serif text-5xl md:text-6xl xl:text-7xl font-light text-primary-foreground leading-[1.05] tracking-[-0.02em] mb-8 flex flex-wrap gap-x-4 gap-y-1">
@@ -204,7 +204,7 @@ export default function Home() {
               className="text-primary-foreground/70 text-xl md:text-2xl leading-relaxed mb-10 max-w-lg font-normal"
             >
               Custom rope and netting solutions for zoos, waterparks, play areas, handrails,
-              bridges, and more — crafted with expert precision since 2004.
+              bridges, and more — crafted with expert precision since 2003.
             </motion.p>
 
             <motion.div
@@ -333,7 +333,7 @@ export default function Home() {
             </AnimateIn>
             <AnimateIn variant="fadeRight" delay={0.1}>
               <p className="text-foreground/80 text-lg leading-[1.7]">
-                Since our beginning in 2004, Nets Unlimited has endeavored to become the world's
+                Since our beginning in 2003, Nets Unlimited has endeavored to become the world's
                 leading provider of the highest quality rope and netting products. We invite you to
                 explore our site to discover how Nets Unlimited, Inc. serves a wide range of
                 industries by combining expert craftsmanship and customized service to deliver
