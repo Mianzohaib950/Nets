@@ -179,7 +179,7 @@ export default function Footer() {
             Privacy Policy
           </Link>
           <p className="text-xs text-primary-foreground/40">
-            Designed & Developed by{" "}
+           Developed by{" "}
             <a href="https://novatoresols.com/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground/70 transition-colors underline underline-offset-2">
               Novatore Solutions
             </a>

@@ -16,6 +16,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { AnimateIn } from "../../components/shared/AnimateIn";
+import { useSearchParams } from "react-router";
 import galleryImageDimensions from "../../data/gallery-image-dimensions.json";
 import { galleryCategories } from "../../data/galleryData";
 
@@ -45,7 +46,9 @@ const allItems = galleryCategories.flatMap((cat) =>
 );
 
 export default function GalleryIndex() {
-  const [activeFilter, setActiveFilter] = useState("All");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const requestedFilter = searchParams.get("category");
+  const activeFilter = filters.some((filter) => filter.slug === requestedFilter) ? requestedFilter! : "All";
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const initialDisplayCount = 18;
   const [displayCount, setDisplayCount] = useState(initialDisplayCount);
@@ -54,11 +57,25 @@ export default function GalleryIndex() {
     () => (activeFilter === "All" ? allItems : allItems.filter((item) => item.category === activeFilter)),
     [activeFilter]
   );
-  const displayedItems = items.slice(0, displayCount);
-  const hasMoreItems = displayCount < items.length;
+  const showAllItems = activeFilter === "zoos";
+  const displayedItems = showAllItems ? items : items.slice(0, displayCount);
+  const displayedBatches = useMemo(() => {
+    if (showAllItems) return [displayedItems];
+
+    const batches = [];
+    for (let start = 0; start < displayedItems.length; start += initialDisplayCount) {
+      batches.push(displayedItems.slice(start, start + initialDisplayCount));
+    }
+    return batches;
+  }, [displayedItems, showAllItems]);
+  const hasMoreItems = !showAllItems && displayCount < items.length;
 
   const openLightbox = (i: number) => setLightboxIndex(i);
   const closeLightbox = () => setLightboxIndex(null);
+
+  const selectFilter = (slug: string) => {
+    setSearchParams(slug === "All" ? {} : { category: slug });
+  };
 
   useEffect(() => {
     setDisplayCount(initialDisplayCount);
@@ -110,7 +127,7 @@ export default function GalleryIndex() {
               return (
                 <button
                   key={f.slug}
-                  onClick={() => setActiveFilter(f.slug)}
+                  onClick={() => selectFilter(f.slug)}
                   className={`inline-flex items-center gap-2 px-4 py-2 text-sm rounded-[2px] border transition-colors ${
                     activeFilter === f.slug
                       ? "bg-primary text-primary-foreground border-primary"
@@ -130,29 +147,37 @@ export default function GalleryIndex() {
             </div>
           ) : (
             <>
-              <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
-                {displayedItems.map((item, i) => {
-                  const dimensions = galleryImageDimensions[item.src as keyof typeof galleryImageDimensions];
-                  return (
-                    <button
-                      type="button"
-                      key={item.key}
-                      className="block w-full break-inside-avoid overflow-hidden rounded-[4px] border border-border cursor-pointer group"
-                      onClick={() => openLightbox(i)}
-                    >
-                      <img
-                        src={item.src}
-                        alt={`${item.categoryTitle} custom netting project`}
-                        width={dimensions?.width}
-                        height={dimensions?.height}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
-                      />
-                    </button>
-                  );
-                })}
-              </div>
+              {displayedBatches.map((batch, batchIndex) => {
+                const batchStart = batchIndex * initialDisplayCount;
+                return (
+                  <div
+                    key={`${activeFilter}-batch-${batchIndex}`}
+                    className={`columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4 ${batchIndex > 0 ? "mt-4" : ""}`}
+                  >
+                    {batch.map((item, i) => {
+                      const dimensions = galleryImageDimensions[item.src as keyof typeof galleryImageDimensions];
+                      return (
+                        <button
+                          type="button"
+                          key={item.key}
+                          className="block w-full break-inside-avoid overflow-hidden rounded-[4px] border border-border cursor-pointer group"
+                          onClick={() => openLightbox(batchStart + i)}
+                        >
+                          <img
+                            src={item.src}
+                            alt={`${item.categoryTitle} custom netting project`}
+                            width={dimensions?.width}
+                            height={dimensions?.height}
+                            loading="lazy"
+                            decoding="async"
+                            className="w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
+                          />
+                        </button>
+                      );
+                    })}
+                  </div>
+                );
+              })}
 
               {hasMoreItems && (
                 <div className="flex justify-center mt-12">

@@ -50,8 +50,6 @@ export const galleryCategories: GalleryCategoryInfo[] = [
       { id: 31, src: "/images/zoos/zoo31.webp", alt: "zoo31" },
       { id: 32, src: "/images/zoos/zoo32.webp", alt: "zoo32" },
       { id: 33, src: "/images/zoos/zoo33.webp", alt: "zoo33" },
-      { id: 34, src: "/images/zoos/zoo34.webp", alt: "zoo34" },
-      { id: 35, src: "/images/zoos/zoo35.webp", alt: "zoo35" },
       { id: 36, src: "/images/zoos/zoo36.webp", alt: "zoo36" },
       { id: 37, src: "/images/zoos/zoo37.webp", alt: "zoo37" },
       { id: 38, src: "/images/zoos/zoo38.webp", alt: "zoo38" },

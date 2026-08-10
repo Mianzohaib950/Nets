@@ -25,17 +25,41 @@ const galleryLinks = [
 ];
 
 function DropdownMenu({ label, links }: { label: string; links: { label: string; to: string }[] }) {
+  const [open, setOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname, location.search]);
+
   return (
-    <div className="group relative">
-      <button aria-haspopup="true" className="flex min-h-12 items-center gap-1 text-sm font-medium py-2 px-1 hover:text-primary transition-colors">
+    <div
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onFocusCapture={() => setOpen(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setOpen(false);
+      }}
+    >
+      <button
+        type="button"
+        aria-haspopup="true"
+        aria-expanded={open}
+        onClick={() => setOpen((current) => !current)}
+        className="flex min-h-12 items-center gap-1 text-sm font-medium py-2 px-1 hover:text-primary transition-colors"
+      >
         {label}
-        <ChevronDown size={14} className="transition-transform duration-200 group-hover:rotate-180" />
+        <ChevronDown size={14} className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
       </button>
-      <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 transition-all duration-200 absolute top-full left-0 mt-1 w-52 bg-background border border-border shadow-sm z-50 rounded-[2px]">
+      <div
+        className={`${open ? "visible opacity-100" : "invisible opacity-0"} transition-all duration-200 absolute top-full left-0 mt-1 w-52 bg-background border border-border shadow-sm z-50 rounded-[2px]`}
+      >
         {links.map((l) => (
           <Link
             key={l.to}
             to={l.to}
+            onClick={() => setOpen(false)}
             className="block px-4 py-2.5 text-sm text-foreground hover:bg-secondary hover:text-primary transition-colors border-b border-border last:border-0"
           >
             {l.label}
@@ -52,6 +76,12 @@ export default function Header() {
   const [mobileAppsOpen, setMobileAppsOpen] = useState(false);
   const [mobileGalOpen, setMobileGalOpen] = useState(false);
   const location = useLocation();
+
+  const closeMobileNavigation = () => {
+    setMobileOpen(false);
+    setMobileAppsOpen(false);
+    setMobileGalOpen(false);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -149,6 +179,7 @@ export default function Header() {
               <Link
                 key={l.to}
                 to={l.to}
+                onClick={closeMobileNavigation}
                 className="block py-3 text-sm font-medium text-foreground border-b border-border"
               >
                 {l.label}
@@ -171,6 +202,7 @@ export default function Header() {
                     <Link
                       key={l.to}
                       to={l.to}
+                      onClick={closeMobileNavigation}
                       className="block py-2.5 text-sm text-muted-foreground hover:text-primary"
                     >
                       {l.label}
@@ -196,6 +228,7 @@ export default function Header() {
                     <Link
                       key={l.to}
                       to={l.to}
+                      onClick={closeMobileNavigation}
                       className="block py-2.5 text-sm text-muted-foreground hover:text-primary"
                     >
                       {l.label}

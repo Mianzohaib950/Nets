@@ -15,8 +15,14 @@ export default function GalleryCategory() {
   const [displayCount, setDisplayCount] = useState(initialDisplayCount);
 
   const items = data.items;
-  const displayedItems = items.slice(0, displayCount);
-  const hasMoreItems = displayCount < items.length;
+  const showAllItems = category === "zoos";
+  const displayedItems = showAllItems ? items : items.slice(0, displayCount);
+  const displayedBatches = showAllItems
+    ? [displayedItems]
+    : Array.from({ length: Math.ceil(displayedItems.length / initialDisplayCount) }, (_, batchIndex) =>
+        displayedItems.slice(batchIndex * initialDisplayCount, (batchIndex + 1) * initialDisplayCount)
+      );
+  const hasMoreItems = !showAllItems && displayCount < items.length;
 
   const openLightbox = (i: number) => setLightboxIndex(i);
   const closeLightbox = () => setLightboxIndex(null);
@@ -53,7 +59,7 @@ export default function GalleryCategory() {
         <div className="max-w-[1280px] mx-auto px-6">
           <AnimateIn>
             <Link
-              to="/gallery"
+              to={`/gallery?category=${category ?? ""}`}
               className="inline-flex items-center gap-2 text-primary-foreground/60 hover:text-primary-foreground text-sm mb-6 transition-colors"
             >
               <ArrowLeft size={14} /> View All Gallery Images
@@ -72,7 +78,7 @@ export default function GalleryCategory() {
           <div className="flex items-center gap-3 mb-10 flex-wrap">
             <span className="text-sm text-muted-foreground">{items.length} photos</span>
             <Link
-              to="/gallery"
+              to={`/gallery?category=${category ?? ""}`}
               className="ml-auto px-4 py-2 text-sm rounded-[2px] border transition-colors bg-primary text-primary-foreground border-primary hover:bg-primary/90"
             >
               View All Gallery Images
@@ -85,31 +91,38 @@ export default function GalleryCategory() {
             </div>
           ) : (
             <>
-              <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
-                {displayedItems.map((item, i) => (
-                  (() => {
-                    const dimensions = galleryImageDimensions[item.src as keyof typeof galleryImageDimensions];
-                    return (
-                  <button
-                    type="button"
-                    key={item.id}
-                    className="block w-full break-inside-avoid overflow-hidden rounded-[4px] border border-border cursor-pointer group"
-                    onClick={() => openLightbox(i)}
+              {displayedBatches.map((batch, batchIndex) => {
+                const batchStart = batchIndex * initialDisplayCount;
+                return (
+                  <div
+                    key={`${category ?? "gallery"}-batch-${batchIndex}`}
+                    className={`columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4 ${batchIndex > 0 ? "mt-4" : ""}`}
                   >
-                    <img
-                      src={item.src}
-                      alt={`${data.title} custom netting project ${i + 1}`}
-                      width={dimensions?.width}
-                      height={dimensions?.height}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
-                    />
-                  </button>
-                    );
-                  })()
-                ))}
-              </div>
+                    {batch.map((item, i) => {
+                      const itemIndex = batchStart + i;
+                      const dimensions = galleryImageDimensions[item.src as keyof typeof galleryImageDimensions];
+                      return (
+                        <button
+                          type="button"
+                          key={item.id}
+                          className="block w-full break-inside-avoid overflow-hidden rounded-[4px] border border-border cursor-pointer group"
+                          onClick={() => openLightbox(itemIndex)}
+                        >
+                          <img
+                            src={item.src}
+                            alt={`${data.title} custom netting project ${itemIndex + 1}`}
+                            width={dimensions?.width}
+                            height={dimensions?.height}
+                            loading="lazy"
+                            decoding="async"
+                            className="w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
+                          />
+                        </button>
+                      );
+                    })}
+                  </div>
+                );
+              })}
               
               {hasMoreItems && (
                 <div className="flex justify-center mt-12">
