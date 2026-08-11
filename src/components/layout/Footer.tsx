@@ -33,6 +33,7 @@ const galleryLinks = [
   { label: "Play Elements", to: "/gallery/play-elements" },
   { label: "Golf & Sport", to: "/gallery/golf-and-sport" },
   { label: "Protection Netting", to: "/gallery/protection-netting" },
+  { label: "We Decorate", to: "/gallery/we-decorate" },
 ];
 
 const socialLinks = [

@@ -4,7 +4,6 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
-  Plus,
   LayoutGrid,
   PawPrint,
   Waves,
@@ -13,6 +12,7 @@ import {
   Route,
   Flag,
   Shield,
+  Sparkles,
   type LucideIcon,
 } from "lucide-react";
 import { AnimateIn } from "../../components/shared/AnimateIn";
@@ -28,6 +28,7 @@ const categoryIcons: Record<string, LucideIcon> = {
   "play-elements": Route,
   "golf-and-sport": Flag,
   "protection-netting": Shield,
+  "we-decorate": Sparkles,
 };
 
 const filters = [
@@ -50,36 +51,17 @@ export default function GalleryIndex() {
   const requestedFilter = searchParams.get("category");
   const activeFilter = filters.some((filter) => filter.slug === requestedFilter) ? requestedFilter! : "All";
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const initialDisplayCount = 18;
-  const [displayCount, setDisplayCount] = useState(initialDisplayCount);
 
   const items = useMemo(
     () => (activeFilter === "All" ? allItems : allItems.filter((item) => item.category === activeFilter)),
     [activeFilter]
   );
-  const showAllItems = activeFilter === "zoos";
-  const displayedItems = showAllItems ? items : items.slice(0, displayCount);
-  const displayedBatches = useMemo(() => {
-    if (showAllItems) return [displayedItems];
-
-    const batches = [];
-    for (let start = 0; start < displayedItems.length; start += initialDisplayCount) {
-      batches.push(displayedItems.slice(start, start + initialDisplayCount));
-    }
-    return batches;
-  }, [displayedItems, showAllItems]);
-  const hasMoreItems = !showAllItems && displayCount < items.length;
-
   const openLightbox = (i: number) => setLightboxIndex(i);
   const closeLightbox = () => setLightboxIndex(null);
 
   const selectFilter = (slug: string) => {
     setSearchParams(slug === "All" ? {} : { category: slug });
   };
-
-  useEffect(() => {
-    setDisplayCount(initialDisplayCount);
-  }, [activeFilter]);
 
   const prev = useCallback(() => {
     if (lightboxIndex === null) return;
@@ -121,14 +103,14 @@ export default function GalleryIndex() {
       <section className="bg-background py-16 md:py-20">
         <div className="max-w-[1280px] mx-auto px-6">
           {/* Category filter pills */}
-          <div className="flex items-center gap-3 mb-10 flex-wrap">
+          <div className="flex items-center gap-2 mb-10 flex-wrap xl:flex-nowrap">
             {filters.map((f) => {
               const Icon = f.icon;
               return (
                 <button
                   key={f.slug}
                   onClick={() => selectFilter(f.slug)}
-                  className={`inline-flex items-center gap-2 px-4 py-2 text-sm rounded-[2px] border transition-colors ${
+                  className={`inline-flex shrink-0 items-center gap-1.5 px-3 py-2 text-xs rounded-[2px] border transition-colors ${
                     activeFilter === f.slug
                       ? "bg-primary text-primary-foreground border-primary"
                       : "border-border text-muted-foreground hover:text-foreground hover:border-foreground/20"
@@ -138,7 +120,7 @@ export default function GalleryIndex() {
                 </button>
               );
             })}
-            <span className="ml-auto text-sm text-muted-foreground">{items.length} photos</span>
+            <span className="ml-auto shrink-0 pl-2 text-xs text-muted-foreground">{items.length} photos</span>
           </div>
 
           {items.length === 0 ? (
@@ -146,22 +128,15 @@ export default function GalleryIndex() {
               <p className="text-muted-foreground">No photos available yet. Check back soon.</p>
             </div>
           ) : (
-            <>
-              {displayedBatches.map((batch, batchIndex) => {
-                const batchStart = batchIndex * initialDisplayCount;
-                return (
-                  <div
-                    key={`${activeFilter}-batch-${batchIndex}`}
-                    className={`columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4 ${batchIndex > 0 ? "mt-4" : ""}`}
-                  >
-                    {batch.map((item, i) => {
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+                    {items.map((item, i) => {
                       const dimensions = galleryImageDimensions[item.src as keyof typeof galleryImageDimensions];
                       return (
                         <button
                           type="button"
                           key={item.key}
                           className="block w-full break-inside-avoid overflow-hidden rounded-[4px] border border-border cursor-pointer group"
-                          onClick={() => openLightbox(batchStart + i)}
+                          onClick={() => openLightbox(i)}
                         >
                           <img
                             src={item.src}
@@ -175,21 +150,7 @@ export default function GalleryIndex() {
                         </button>
                       );
                     })}
-                  </div>
-                );
-              })}
-
-              {hasMoreItems && (
-                <div className="flex justify-center mt-12">
-                  <button
-                    onClick={() => setDisplayCount((c) => Math.min(c + initialDisplayCount, items.length))}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-[4px] border border-primary hover:bg-primary/90 transition-colors text-sm font-medium"
-                  >
-                    <Plus size={16} /> Load More Photos
-                  </button>
-                </div>
-              )}
-            </>
+            </div>
           )}
         </div>
       </section>

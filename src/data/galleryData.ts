@@ -1,3 +1,5 @@
+import { decorateGalleryImages } from "./decorateGalleryData";
+
 export interface GalleryItem {
   id: number;
   src: string;
@@ -281,6 +283,12 @@ export const galleryCategories: GalleryCategoryInfo[] = [
       { id: 25, src: "/images/protection-netting/protection25.webp", alt: "catch net safety installation" },
       { id: 26, src: "/images/protection-netting/protection26.webp", alt: "residential safety netting" },
     ],
+  },
+  {
+    slug: "we-decorate",
+    title: "We Decorate",
+    navLabel: "We Decorate",
+    items: decorateGalleryImages.map((image, index) => ({ id: index + 1, ...image })),
   },
 ];
 

@@ -29,7 +29,7 @@ export default function Sport() {
       ]}
       ctaText="View Golf and Sport Netting Gallery"
       ctaTo="/gallery/golf-and-sport"
-      secondaryCtaText="Explore More Golf Netting Solutions"
+      secondaryCtaText="Explore Golf Nets Unlimited Website"
       secondaryCtaHref="https://golfnetsunlimited.com/"
       relatedApps={[
         { title: "We Protect", to: "/applications/protect", image: "https://images.unsplash.com/photo-1778941120800-6ecd662bbc36?w=600&h=400&fit=crop&auto=format" },

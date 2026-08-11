@@ -8,6 +8,7 @@ const labels: Record<string, string> = {
   waterparks: "Waterparks", bridges: "Bridges & Tunnels", handrails: "Handrails",
   "play-elements": "Play Elements", "golf-and-sport": "Golf & Sports",
   "protection-netting": "Protection Netting",
+  "we-decorate": "We Decorate",
 };
 
 export function Breadcrumbs() {

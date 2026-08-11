@@ -1,45 +1,7 @@
 import { AnimateIn } from "../../components/shared/AnimateIn";
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
-import decorate1 from "../../imports/decorate/decorate-1.webp";
-import decorate2 from "../../imports/decorate/decorate-2.webp";
-import decorate3 from "../../imports/decorate/decorate-3.webp";
-import decorate4 from "../../imports/decorate/decorate-4.webp";
-import decorate5 from "../../imports/decorate/decorate-5.webp";
-import decorate6 from "../../imports/decorate/decorate-6.webp";
-import decorate7 from "../../imports/decorate/decorate-7.webp";
-import decorate8 from "../../imports/decorate/decorate-8.webp";
-import decorate9 from "../../imports/decorate/decorate-9.webp";
-import decorate10 from "../../imports/decorate/decorate-10.webp";
-import decorate11 from "../../imports/decorate/decorate-11.webp";
-import decorate12 from "../../imports/decorate/decorate-12.webp";
-import decorate13 from "../../imports/decorate/decorate-13.webp";
-import decorate14 from "../../imports/decorate/decorate-14.webp";
-import decorate15 from "../../imports/decorate/decorate-15.webp";
-import decorate16 from "../../imports/decorate/decorate-16.webp";
-import decorate17 from "../../imports/decorate/decorate-17.webp";
-import decorate18 from "../../imports/decorate/decorate-18.webp";
-
-const images = [
-  { src: decorate1, alt: "Decorative gallery image 1" },
-  { src: decorate2, alt: "Decorative gallery image 2" },
-  { src: decorate3, alt: "Decorative gallery image 3" },
-  { src: decorate4, alt: "Decorative gallery image 4" },
-  { src: decorate5, alt: "Decorative gallery image 5" },
-  { src: decorate6, alt: "Decorative gallery image 6" },
-  { src: decorate7, alt: "Decorative gallery image 7" },
-  { src: decorate8, alt: "Decorative gallery image 8" },
-  { src: decorate9, alt: "Decorative gallery image 9" },
-  { src: decorate10, alt: "Decorative gallery image 10" },
-  { src: decorate11, alt: "Decorative gallery image 11" },
-  { src: decorate12, alt: "Decorative gallery image 12" },
-  { src: decorate13, alt: "Decorative gallery image 13" },
-  { src: decorate14, alt: "Decorative gallery image 14" },
-  { src: decorate15, alt: "Decorative gallery image 15" },
-  { src: decorate16, alt: "Decorative gallery image 16" },
-  { src: decorate17, alt: "Decorative rope-wrapped posts" },
-  { src: decorate18, alt: "Decorative hockey net structure" },
-];
+import { decorateGalleryImages } from "../../data/decorateGalleryData";
 
 export default function Decorate() {
   return (
@@ -68,11 +30,11 @@ export default function Decorate() {
 
           {/* Gallery grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {images.map((img, i) => (
+            {decorateGalleryImages.map((img, i) => (
               <AnimateIn
                 key={i}
                 delay={i * 0.04}
-                className={i === images.length - 2 ? "xl:col-start-2" : undefined}
+                className={i === decorateGalleryImages.length - 2 ? "xl:col-start-2" : undefined}
               >
                 <div className="aspect-video overflow-hidden rounded-[4px] border border-border">
                   <img

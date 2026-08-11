@@ -38,6 +38,7 @@ const galleryNames: Record<string, string> = {
   "play-elements": "Rope Play Elements",
   "golf-and-sport": "Golf & Sports Netting",
   "protection-netting": "Protection Netting",
+  "we-decorate": "Architectural Rope & Net Decor",
 };
 
 const serviceNames: Record<string, string> = {

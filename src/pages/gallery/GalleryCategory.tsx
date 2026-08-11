@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams, Link } from "react-router";
-import { X, ChevronLeft, ChevronRight, ArrowLeft, Plus } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { AnimateIn } from "../../components/shared/AnimateIn";
 import galleryImageDimensions from "../../data/gallery-image-dimensions.json";
@@ -11,26 +11,11 @@ export default function GalleryCategory() {
   const data = galleryCategoryMap[category ?? ""] ?? { title: "Gallery", items: [] };
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const initialDisplayCount = 9;
-  const [displayCount, setDisplayCount] = useState(initialDisplayCount);
 
   const items = data.items;
-  const showAllItems = category === "zoos";
-  const displayedItems = showAllItems ? items : items.slice(0, displayCount);
-  const displayedBatches = showAllItems
-    ? [displayedItems]
-    : Array.from({ length: Math.ceil(displayedItems.length / initialDisplayCount) }, (_, batchIndex) =>
-        displayedItems.slice(batchIndex * initialDisplayCount, (batchIndex + 1) * initialDisplayCount)
-      );
-  const hasMoreItems = !showAllItems && displayCount < items.length;
 
   const openLightbox = (i: number) => setLightboxIndex(i);
   const closeLightbox = () => setLightboxIndex(null);
-
-  // Reset displayed count when category changes
-  useEffect(() => {
-    setDisplayCount(initialDisplayCount);
-  }, [category]);
 
   const prev = useCallback(() => {
     if (lightboxIndex === null) return;
@@ -90,16 +75,8 @@ export default function GalleryCategory() {
               <p className="text-muted-foreground">No photos available yet. Check back soon.</p>
             </div>
           ) : (
-            <>
-              {displayedBatches.map((batch, batchIndex) => {
-                const batchStart = batchIndex * initialDisplayCount;
-                return (
-                  <div
-                    key={`${category ?? "gallery"}-batch-${batchIndex}`}
-                    className={`columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4 ${batchIndex > 0 ? "mt-4" : ""}`}
-                  >
-                    {batch.map((item, i) => {
-                      const itemIndex = batchStart + i;
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+                    {items.map((item, itemIndex) => {
                       const dimensions = galleryImageDimensions[item.src as keyof typeof galleryImageDimensions];
                       return (
                         <button
@@ -120,21 +97,7 @@ export default function GalleryCategory() {
                         </button>
                       );
                     })}
-                  </div>
-                );
-              })}
-              
-              {hasMoreItems && (
-                <div className="flex justify-center mt-12">
-                  <button
-                    onClick={() => setDisplayCount((c) => Math.min(c + initialDisplayCount, items.length))}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-[4px] border border-primary hover:bg-primary/90 transition-colors text-sm font-medium"
-                  >
-                    <Plus size={16} /> Show More
-                  </button>
-                </div>
-              )}
-            </>
+            </div>
           )}
         </div>
       </section>

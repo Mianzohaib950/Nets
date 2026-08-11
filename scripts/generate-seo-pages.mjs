@@ -27,6 +27,7 @@ const pages = [
   ["gallery/play-elements", "Rope Play Elements Gallery | Nets Unlimited", "View custom climbing nets, rope tunnels, spiderwebs and interactive play systems."],
   ["gallery/golf-and-sport", "Golf & Sports Netting Gallery | Nets Unlimited", "View golf, court and sports containment netting projects by Nets Unlimited."],
   ["gallery/protection-netting", "Protection Netting Gallery | Nets Unlimited", "View fall, debris and secondary protection netting projects by Nets Unlimited."],
+  ["gallery/we-decorate", "Architectural Rope & Net Decor Gallery | Nets Unlimited", "View custom rope, cable, mesh and netting installations created for architectural theming and decor."],
 ];
 
 function completeDescription(description) {
