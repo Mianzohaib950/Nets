@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import {
   Asterisk,
+  ArrowUpRight,
   CircleParking,
   Clock,
   Facebook,
@@ -33,7 +34,7 @@ const galleryLinks = [
   { label: "Play Elements", to: "/gallery/play-elements" },
   { label: "Golf & Sport", to: "/gallery/golf-and-sport" },
   { label: "Protection Netting", to: "/gallery/protection-netting" },
-  { label: "We Decorate", to: "/gallery/we-decorate" },
+  { label: "Decorative Elements", to: "/gallery/we-decorate" },
 ];
 
 const socialLinks = [
@@ -50,7 +51,7 @@ export default function Footer() {
   return (
     <footer className="bg-forest-900 text-primary-foreground">
       <div className="max-w-[1280px] mx-auto px-6 py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-10">
           {/* Brand column */}
           <div className="lg:col-span-1">
             <Link to="/" className="block mb-4">
@@ -87,24 +88,6 @@ export default function Footer() {
               <div className="flex gap-3 items-start">
                 <Clock size={14} className="mt-0.5 shrink-0 text-clay" />
                 <span>Mon–Fri 7:00 AM – 4:00 PM<br />Closed Sat &amp; Sun</span>
-              </div>
-            </div>
-            <div className="mt-7">
-              <p className="text-xs font-medium tracking-widest uppercase text-clay mb-3">Follow Us</p>
-              <div className="flex flex-nowrap items-center gap-4">
-              {socialLinks.map(({ icon: Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={`Follow Nets Unlimited on ${label}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title={label}
-                  className="group inline-flex items-center justify-center text-primary-foreground/60 hover:text-primary-foreground transition-colors"
-                >
-                  <Icon size={18} strokeWidth={1.8} className="shrink-0 text-clay/90 group-hover:text-clay" />
-                </a>
-              ))}
               </div>
             </div>
           </div>
@@ -169,6 +152,38 @@ export default function Footer() {
                 Licensed · Bonded · Insured
               </p>
             </div>
+          </div>
+        </div>
+
+        <div className="mb-16 grid grid-cols-1 items-end gap-8 lg:grid-cols-4">
+          <div>
+            <p className="mb-3 text-xs font-medium uppercase tracking-widest text-clay">Follow Us</p>
+            <div className="flex flex-nowrap items-center gap-4">
+              {socialLinks.map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={`Follow Nets Unlimited on ${label}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={label}
+                  className="group inline-flex items-center justify-center text-primary-foreground/60 transition-colors hover:text-primary-foreground"
+                >
+                  <Icon size={18} strokeWidth={1.8} className="shrink-0 text-clay/90 group-hover:text-clay" />
+                </a>
+              ))}
+            </div>
+          </div>
+          <div className="lg:col-start-4">
+            <a
+              href="https://golfnetsunlimited.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-[2px] border border-clay bg-clay px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-clay/90"
+            >
+              Visit Golf Nets Unlimited
+              <ArrowUpRight size={15} />
+            </a>
           </div>
         </div>
 

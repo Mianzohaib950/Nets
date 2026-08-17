@@ -20,6 +20,13 @@ import { useSearchParams } from "react-router";
 import galleryImageDimensions from "../../data/gallery-image-dimensions.json";
 import { galleryCategories } from "../../data/galleryData";
 
+const getLightboxWidth = (src: string) => {
+  const dimensions = galleryImageDimensions[src as keyof typeof galleryImageDimensions];
+  return dimensions
+    ? `min(100%, ${dimensions.width}px, calc(80vh * ${dimensions.width} / ${dimensions.height}))`
+    : "100%";
+};
+
 const categoryIcons: Record<string, LucideIcon> = {
   zoos: PawPrint,
   waterparks: Waves,
@@ -36,15 +43,19 @@ const filters = [
   ...galleryCategories.map((cat) => ({ slug: cat.slug, navLabel: cat.navLabel, icon: categoryIcons[cat.slug] })),
 ];
 
-const allItems = galleryCategories.flatMap((cat) =>
-  cat.items.map((item) => ({
+const allItems = galleryCategories.flatMap((cat, categoryIndex) =>
+  cat.items.map((item, itemIndex) => ({
     key: `${cat.slug}-${item.id}`,
     src: item.src,
     alt: item.alt,
     category: cat.slug,
     categoryTitle: cat.title,
+    imageNumber:
+      galleryCategories.slice(0, categoryIndex).reduce((total, gallery) => total + gallery.items.length, 0) + itemIndex + 1,
   }))
 );
+
+const formatImageNumber = (number: number) => `IMG-${String(number).padStart(3, "0")}`;
 
 export default function GalleryIndex() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -128,14 +139,14 @@ export default function GalleryIndex() {
               <p className="text-muted-foreground">No photos available yet. Check back soon.</p>
             </div>
           ) : (
-            <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {items.map((item, i) => {
                       const dimensions = galleryImageDimensions[item.src as keyof typeof galleryImageDimensions];
                       return (
                         <button
                           type="button"
                           key={item.key}
-                          className="block w-full break-inside-avoid overflow-hidden rounded-[4px] border border-border cursor-pointer group"
+                            className="relative block aspect-[4/3] w-full overflow-hidden rounded-[4px] border border-border cursor-pointer group"
                           onClick={() => openLightbox(i)}
                         >
                           <img
@@ -145,8 +156,11 @@ export default function GalleryIndex() {
                             height={dimensions?.height}
                             loading="lazy"
                             decoding="async"
-                            className="w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
+                            className="h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
                           />
+                          <span className="absolute top-3 right-3 rounded-[2px] bg-forest-900/65 px-2.5 py-1 text-[11px] font-medium tracking-wider text-white/90 backdrop-blur-sm">
+                            {formatImageNumber(item.imageNumber)}
+                          </span>
                         </button>
                       );
                     })}
@@ -167,18 +181,20 @@ export default function GalleryIndex() {
               {lightboxIndex !== null ? `${items[lightboxIndex].categoryTitle} custom netting project` : "Gallery image"}
             </Dialog.Title>
             {lightboxIndex !== null && (
-              <div className="relative max-w-5xl max-h-[90vh] flex flex-col items-center">
-                <div className="absolute top-6 right-16 text-sm font-medium text-primary-foreground bg-forest-900/50 backdrop-blur-sm px-3 py-1 rounded-[2px] z-10">
-                  {lightboxIndex + 1} / {items.length}
+              <div className="relative flex w-full max-w-5xl max-h-[90vh] flex-col items-center">
+                <div className="relative" style={{ width: getLightboxWidth(items[lightboxIndex].src) }}>
+                  <div className="absolute top-3 right-3 text-sm font-medium text-primary-foreground bg-forest-900/50 backdrop-blur-sm px-3 py-1 rounded-[2px] z-10">
+                    {formatImageNumber(items[lightboxIndex].imageNumber)}
+                  </div>
+                  <img
+                    src={items[lightboxIndex].src}
+                    alt={`${items[lightboxIndex].categoryTitle} custom netting project`}
+                    width={galleryImageDimensions[items[lightboxIndex].src as keyof typeof galleryImageDimensions]?.width}
+                    height={galleryImageDimensions[items[lightboxIndex].src as keyof typeof galleryImageDimensions]?.height}
+                    decoding="async"
+                    className="block h-auto w-full rounded-[4px]"
+                  />
                 </div>
-                <img
-                  src={items[lightboxIndex].src}
-                  alt={`${items[lightboxIndex].categoryTitle} custom netting project`}
-                  width={galleryImageDimensions[items[lightboxIndex].src as keyof typeof galleryImageDimensions]?.width}
-                  height={galleryImageDimensions[items[lightboxIndex].src as keyof typeof galleryImageDimensions]?.height}
-                  decoding="async"
-                  className="max-h-[80vh] max-w-full object-contain rounded-[4px]"
-                />
                 <div className="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-14">
                   <button
                     onClick={prev}

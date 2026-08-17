@@ -286,8 +286,8 @@ export const galleryCategories: GalleryCategoryInfo[] = [
   },
   {
     slug: "we-decorate",
-    title: "We Decorate",
-    navLabel: "We Decorate",
+    title: "Decorative Elements",
+    navLabel: "Decorative Elements",
     items: decorateGalleryImages.map((image, index) => ({ id: index + 1, ...image })),
   },
 ];
