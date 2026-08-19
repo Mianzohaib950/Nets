@@ -12,32 +12,26 @@ import bridgeTunnelNetting from "../imports/bridge-tunnel-netting.webp";
 const HERO_IMAGES = [
   {
     src: "/hero-home-1280.webp",
-    mobileSrc: "/hero-home-960.webp",
     alt: "Themed rope and net play structure",
   },
   {
     src: zooNetEnclosure,
-    mobileSrc: zooNetEnclosure,
     alt: "Zoo net enclosure",
   },
   {
     src: waterparkRopeNetting,
-    mobileSrc: waterparkRopeNetting,
     alt: "Waterpark rope netting barrier",
   },
   {
     src: childrenPlayRopeBridge,
-    mobileSrc: childrenPlayRopeBridge,
     alt: "Children's rope bridge play structure",
   },
   {
     src: bridgeTunnelNetting,
-    mobileSrc: bridgeTunnelNetting,
     alt: "Bridge with netted handrails",
   },
   {
     src: secondaryProtectionNetting,
-    mobileSrc: secondaryProtectionNetting,
     alt: "Secondary protection netting corridor",
   },
 ];
@@ -146,8 +140,6 @@ const whatWeDo = [
   },
 ];
 
-const wordDelay = [0.15, 0.28, 0.42];
-
 export default function Home() {
   const [heroIndex, setHeroIndex] = useState(0);
 
@@ -183,26 +175,14 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-[55fr_45fr] h-full">
           {/* Text side */}
           <div className="relative z-10 flex flex-col justify-center px-10 md:px-16 lg:px-20 bg-forest-900 py-24 lg:py-0">
-            <m.p
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-              className="text-xs font-medium tracking-widest uppercase text-clay mb-6"
-            >
+            <p className="text-xs font-medium tracking-widest uppercase text-clay mb-6">
               Phoenix, Arizona · Est. 2003
-            </m.p>
+            </p>
 
             <h1 className="font-serif text-5xl md:text-6xl xl:text-7xl font-light text-primary-foreground leading-[1.05] tracking-[-0.02em] mb-8 flex flex-wrap gap-x-4 gap-y-1">
-              {heroWords.map((word, i) => (
-                <m.span
+              {heroWords.map((word) => (
+                <span
                   key={word}
-                  initial={{ opacity: 0, y: 40, rotateX: -20 }}
-                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: wordDelay[i],
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
                   style={{ display: "inline-block" }}
                   className={word === "Alter'NET'ives" ? "text-primary-foreground" : ""}
                 >
@@ -213,36 +193,21 @@ export default function Home() {
                   ) : (
                     word
                   )}
-                </m.span>
+                </span>
               ))}
             </h1>
 
-            <m.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="text-primary-foreground/70 text-xl md:text-2xl leading-relaxed mb-10 max-w-lg font-normal"
-            >
+            <p className="text-primary-foreground/70 text-xl md:text-2xl leading-relaxed mb-10 max-w-lg font-normal">
               Custom rope and netting solutions for zoos, waterparks, play areas, handrails,
               bridges, and more — crafted with expert precision since 2003.
-            </m.p>
+            </p>
 
-            <m.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col sm:flex-row gap-4"
-            >
+            <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 to="/contact"
                 className="relative group inline-flex items-center gap-2 bg-clay text-primary-foreground px-8 py-3.5 rounded-[2px] text-sm font-medium overflow-hidden"
               >
-                <m.span
-                  className="absolute inset-0 bg-white/10"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%" }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
-                />
+                <span className="absolute inset-0 -translate-x-full bg-white/10 transition-transform duration-500 group-hover:translate-x-full" />
                 <span className="relative flex items-center gap-2">
                   Get a Quote <ArrowRight size={14} />
                 </span>
@@ -253,7 +218,7 @@ export default function Home() {
               >
                 View Our Work <ArrowRight size={14} />
               </Link>
-            </m.div>
+            </div>
           </div>
 
           {/* Image side — clips in on load, then cycles */}
@@ -311,29 +276,6 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </div>
-
-        {/* Mobile background — cycles too */}
-        <div className="lg:hidden absolute inset-0 -z-10 overflow-hidden">
-          <AnimatePresence mode="sync">
-            <m.img
-              key={`mob-${heroIndex}`}
-              src={HERO_IMAGES[heroIndex].mobileSrc}
-              alt=""
-              aria-hidden="true"
-              fetchPriority={heroIndex === 0 ? "high" : "auto"}
-              loading={heroIndex === 0 ? "eager" : "lazy"}
-              decoding="async"
-              width="960"
-              height="720"
-              className="absolute inset-0 h-full w-full object-cover object-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.2, ease: "easeInOut" }}
-            />
-          </AnimatePresence>
-          <div className="absolute inset-0 bg-forest-900/85" />
         </div>
 
         {/* Scroll indicator */}

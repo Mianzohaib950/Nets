@@ -58,8 +58,8 @@ export default function Footer() {
               <img
                 src={logoImg}
                 alt="Nets Unlimited, Inc."
-                width="300"
-                height="112"
+                width="256"
+                height="108"
                 loading="lazy"
                 decoding="async"
                 className="h-20 w-auto object-contain brightness-0 invert"

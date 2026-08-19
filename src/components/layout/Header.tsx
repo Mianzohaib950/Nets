@@ -113,8 +113,8 @@ export default function Header() {
           <img
             src={logoImg}
             alt="Nets Unlimited, Inc."
-            width="300"
-            height="112"
+            width="256"
+            height="108"
             decoding="async"
             className={`h-9 sm:h-11 lg:h-14 w-auto object-contain transition-all duration-300 ${
               transparent ? "brightness-0 invert" : ""
