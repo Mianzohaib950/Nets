@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
-import { m } from "motion/react";
+import { motion } from "motion/react";
 import { AnimateIn } from "../../components/shared/AnimateIn";
 import { applicationCardImages } from "./applicationCardImages";
 
@@ -53,13 +53,13 @@ export default function ApplicationPage({
           </AnimateIn>
         </div>
         <div className="w-full lg:w-[45%] relative min-h-[360px] overflow-hidden bg-secondary">
-          <m.div
+          <motion.div
             className="absolute inset-0"
             initial={{ clipPath: "inset(0 100% 0 0)" }}
             animate={{ clipPath: "inset(0 0% 0 0)" }}
             transition={{ duration: 1.0, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
-            <m.img
+            <motion.img
               src={heroImage}
               alt={pageTitle}
               fetchPriority="high"
@@ -69,7 +69,7 @@ export default function ApplicationPage({
               animate={{ scale: 1 }}
               transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
             />
-          </m.div>
+          </motion.div>
         </div>
       </section>
 

@@ -52,8 +52,8 @@ await mkdir(homeCardRoot, { recursive: true });
 for (const [destination, source] of Object.entries(homeCardSources)) {
   await sharp(join(projectRoot, "src", "imports", source))
     .rotate()
-    .resize({ width: 800, height: 600, fit: "cover" })
-    .webp({ quality: 60, effort: 5 })
+    .resize({ width: 720, height: 540, fit: "cover" })
+    .webp({ quality: 52, effort: 6 })
     .toFile(join(homeCardRoot, destination));
 }
 console.log(`Generated ${Object.keys(homeCardSources).length} optimized home-card images.`);

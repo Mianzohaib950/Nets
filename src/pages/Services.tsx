@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
-import { m } from "motion/react";
+import { motion } from "motion/react";
 import { AnimateIn } from "../components/shared/AnimateIn";
 import planningConsultationBlueprint from "../imports/planning-consultation-blueprint.webp";
 import inspectionMaintenanceSiteCheck from "../imports/inspection-maintenance-site-check.webp";
@@ -100,7 +100,7 @@ export default function Services() {
               to="/contact"
               className="relative group inline-flex items-center gap-2 bg-clay text-primary-foreground px-8 py-3.5 rounded-[2px] text-sm font-medium overflow-hidden"
             >
-                <m.span
+                <motion.span
                 className="absolute inset-0 bg-white/10"
                 initial={{ x: "-100%" }}
                 whileHover={{ x: "100%" }}

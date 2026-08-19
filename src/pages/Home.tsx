@@ -1,7 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
-import { m, useInView, AnimatePresence } from "motion/react";
 import { AnimateIn } from "../components/shared/AnimateIn";
 import zooNetEnclosure from "../imports/zoo-net-enclosure.webp";
 import waterparkRopeNetting from "../imports/waterpark-rope-netting.seo.webp";
@@ -55,23 +54,32 @@ const faqs = [
 function CountUp({ target, suffix }: { target: number; suffix: string }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref as React.RefObject<Element>, { once: true });
 
   useEffect(() => {
-    if (!inView) return;
+    const element = ref.current;
+    if (!element) return;
     const duration = 1800;
     const steps = 60;
     const increment = target / steps;
     let current = 0;
     let step = 0;
-    const timer = setInterval(() => {
-      step++;
-      current = Math.min(Math.round(increment * step), target);
-      setCount(current);
-      if (current >= target) clearInterval(timer);
-    }, duration / steps);
-    return () => clearInterval(timer);
-  }, [inView, target]);
+    let timer: ReturnType<typeof setInterval> | undefined;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting || timer) return;
+      observer.disconnect();
+      timer = setInterval(() => {
+        step++;
+        current = Math.min(Math.round(increment * step), target);
+        setCount(current);
+        if (current >= target && timer) clearInterval(timer);
+      }, duration / steps);
+    });
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+      if (timer) clearInterval(timer);
+    };
+  }, [target]);
 
   return (
     <span ref={ref} className="font-serif text-4xl font-light text-forest-900 tabular-nums">
@@ -144,27 +152,34 @@ export default function Home() {
   const [heroIndex, setHeroIndex] = useState(0);
 
   useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let intervalId: ReturnType<typeof setInterval> | undefined;
-    const startCarousel = () => {
-      if (intervalId) return;
+
+    const stopCarousel = () => {
+      if (intervalId) clearInterval(intervalId);
+      intervalId = undefined;
+    };
+    const updateCarousel = () => {
+      stopCarousel();
+      if (!desktop.matches || reducedMotion.matches || document.hidden) return;
       intervalId = setInterval(() => {
         setHeroIndex((i) => (i + 1) % HERO_IMAGES.length);
       }, 4500);
-      window.removeEventListener("pointerdown", startCarousel);
-      window.removeEventListener("keydown", startCarousel);
-      window.removeEventListener("scroll", startCarousel);
     };
+    const onVisibilityChange = () => updateCarousel();
 
-    // Do not download an entire slideshow for visitors who have not interacted.
-    // This preserves the carousel while keeping the initial critical payload lean.
-    window.addEventListener("pointerdown", startCarousel, { passive: true, once: true });
-    window.addEventListener("keydown", startCarousel, { once: true });
-    window.addEventListener("scroll", startCarousel, { passive: true, once: true });
+    // Desktop keeps the visual carousel. Mobile never starts it or downloads
+    // slideshow images because the image column is hidden there.
+    updateCarousel();
+    desktop.addEventListener("change", updateCarousel);
+    reducedMotion.addEventListener("change", updateCarousel);
+    document.addEventListener("visibilitychange", onVisibilityChange);
     return () => {
-      window.removeEventListener("pointerdown", startCarousel);
-      window.removeEventListener("keydown", startCarousel);
-      window.removeEventListener("scroll", startCarousel);
-      if (intervalId) clearInterval(intervalId);
+      desktop.removeEventListener("change", updateCarousel);
+      reducedMotion.removeEventListener("change", updateCarousel);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      stopCarousel();
     };
   }, []);
 
@@ -223,26 +238,12 @@ export default function Home() {
 
           {/* Image side — clips in on load, then cycles */}
           <div className="hidden lg:block relative overflow-hidden bg-forest-900">
-            {/* Intro clip-path reveal (runs once) */}
-            <m.div
-              className="absolute inset-0 z-10 pointer-events-none"
-              initial={{ clipPath: "inset(0 0% 0 0)" }}
-              animate={{ clipPath: "inset(0 100% 0 0)" }}
-              transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              style={{ background: "var(--forest-900)" }}
-            />
-
             {/* Cycling images */}
-            <AnimatePresence mode="sync">
-              <m.div
+              <div
                 key={heroIndex}
-                className="absolute inset-0"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.2, ease: "easeInOut" }}
+                className="hero-slide-enter absolute inset-0"
               >
-                <m.img
+                <img
                   src={HERO_IMAGES[heroIndex].src}
                   alt={HERO_IMAGES[heroIndex].alt}
                   fetchPriority={heroIndex === 0 ? "high" : "auto"}
@@ -250,13 +251,9 @@ export default function Home() {
                   width="1280"
                   height="960"
                   decoding="async"
-                  className="absolute inset-0 w-full h-full object-cover"
-                  initial={{ scale: 1.06 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 5, ease: "linear" }}
+                  className="hero-slide-image absolute inset-0 w-full h-full object-cover"
                 />
-              </m.div>
-            </AnimatePresence>
+              </div>
 
             <div className="absolute inset-0 bg-forest-900/25 z-[5]" />
 
@@ -279,18 +276,13 @@ export default function Home() {
         </div>
 
         {/* Scroll indicator */}
-        <m.div
+        <div
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-primary-foreground/40"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.4, duration: 0.6 }}
         >
-          <m.div
+          <div
             className="w-px h-10 bg-primary-foreground/30"
-            animate={{ scaleY: [0, 1, 0], originY: 0 }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.4 }}
           />
-        </m.div>
+        </div>
       </section>
 
       {/* WHO WE ARE */}
@@ -370,8 +362,8 @@ export default function Home() {
                   loading="lazy"
                   fetchPriority="low"
                   decoding="async"
-                  width="800"
-                  height="600"
+                  width="720"
+                  height="540"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-[700ms] ease-out hover:scale-[1.04]"
                 />
               </AnimateIn>
@@ -393,12 +385,7 @@ export default function Home() {
                   to={item.to}
                   className="relative group inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 rounded-[2px] text-sm font-medium overflow-hidden"
                 >
-                  <m.span
-                    className="absolute inset-0 bg-white/10"
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: "100%" }}
-                    transition={{ duration: 0.45, ease: "easeInOut" }}
-                  />
+                  <span className="absolute inset-0 -translate-x-full bg-white/10 transition-transform duration-500 group-hover:translate-x-full" />
                   <span className="relative flex items-center gap-2">
                     Learn More <ArrowRight size={14} />
                   </span>
@@ -443,36 +430,24 @@ export default function Home() {
         </div>
 
         {/* Glowing orbs */}
-        <m.div
+        <div
           className="absolute w-[500px] h-[500px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, rgba(181,116,74,0.12) 0%, transparent 70%)", top: "-20%", left: "5%" }}
-          animate={{ scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
         />
-        <m.div
+        <div
           className="absolute w-[400px] h-[400px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, rgba(61,122,84,0.15) 0%, transparent 70%)", bottom: "-10%", right: "10%" }}
-          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.9, 0.5] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
         />
 
         {/* Animated diagonal accent line */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <m.div
+          <div
             className="absolute top-0 bottom-0 w-[1px] opacity-20"
             style={{ background: "linear-gradient(to bottom, transparent, #B5744A, transparent)", left: "30%" }}
-            initial={{ scaleY: 0 }}
-            whileInView={{ scaleY: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
           />
-          <m.div
+          <div
             className="absolute top-0 bottom-0 w-[1px] opacity-10"
             style={{ background: "linear-gradient(to bottom, transparent, #fff, transparent)", left: "70%" }}
-            initial={{ scaleY: 0 }}
-            whileInView={{ scaleY: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.4, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           />
         </div>
 
@@ -497,12 +472,7 @@ export default function Home() {
                 to="/contact"
                 className="relative group inline-flex items-center gap-2 bg-clay text-primary-foreground px-9 py-4 rounded-[2px] text-sm font-medium overflow-hidden"
               >
-                <m.span
-                  className="absolute inset-0 bg-white/10"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%" }}
-                  transition={{ duration: 0.45, ease: "easeInOut" }}
-                />
+                <span className="absolute inset-0 -translate-x-full bg-white/10 transition-transform duration-500 group-hover:translate-x-full" />
                 <span className="relative flex items-center gap-2">
                   Contact Us <ArrowRight size={14} />
                 </span>
