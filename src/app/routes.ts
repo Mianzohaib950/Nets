@@ -1,8 +1,8 @@
 import { createElement, lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router";
 import Root from "../components/layout/Root";
+import Home from "../pages/Home";
 
-const Home = lazy(() => import("../pages/Home"));
 const Services = lazy(() => import("../pages/Services"));
 const About = lazy(() => import("../pages/About"));
 const Contact = lazy(() => import("../pages/Contact"));
@@ -20,7 +20,16 @@ const GalleryIndex = lazy(() => import("../pages/gallery/GalleryIndex"));
 const GalleryCategory = lazy(() => import("../pages/gallery/GalleryCategory"));
 
 function deferred(Component: React.LazyExoticComponent<React.ComponentType>) {
-  return createElement(Suspense, { fallback: null }, createElement(Component));
+  return createElement(
+    Suspense,
+    {
+      fallback: createElement("div", {
+        className: "min-h-screen bg-background",
+        "aria-hidden": true,
+      }),
+    },
+    createElement(Component),
+  );
 }
 
 export const router = createBrowserRouter([
@@ -28,7 +37,7 @@ export const router = createBrowserRouter([
     path: "/",
     Component: Root,
     children: [
-      { index: true, element: deferred(Home) },
+      { index: true, Component: Home },
       { path: "services", element: deferred(Services) },
       { path: "about", element: deferred(About) },
       { path: "contact", element: deferred(Contact) },

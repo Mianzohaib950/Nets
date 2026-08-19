@@ -5,6 +5,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { AnimateIn } from "../../components/shared/AnimateIn";
 import galleryImageDimensions from "../../data/gallery-image-dimensions.json";
 import { galleryCategories, galleryCategoryMap } from "../../data/galleryData";
+import { galleryImageSources } from "../../components/shared/GalleryImage";
 
 const getLightboxWidth = (src: string) => {
   const dimensions = galleryImageDimensions[src as keyof typeof galleryImageDimensions];
@@ -99,8 +100,9 @@ export default function GalleryCategory() {
                           onClick={() => openLightbox(itemIndex)}
                         >
                           <img
-                            src={item.src}
-                            alt={`${data.title} custom netting project ${itemIndex + 1}`}
+                            {...galleryImageSources(item.src)}
+                            sizes="(min-width: 1024px) 405px, (min-width: 640px) 50vw, 100vw"
+                            alt={item.alt || `${data.title} custom netting project ${itemIndex + 1}`}
                             width={dimensions?.width}
                             height={dimensions?.height}
                             loading="lazy"
@@ -136,8 +138,9 @@ export default function GalleryCategory() {
                     {formatImageNumber(categoryStartNumber + lightboxIndex)}
                   </div>
                   <img
-                    src={items[lightboxIndex].src}
-                    alt={`${data.title} custom netting project ${lightboxIndex + 1}`}
+                    {...galleryImageSources(items[lightboxIndex].src)}
+                    sizes="(min-width: 1024px) 960px, 100vw"
+                    alt={items[lightboxIndex].alt || `${data.title} custom netting project ${lightboxIndex + 1}`}
                     width={galleryImageDimensions[items[lightboxIndex].src as keyof typeof galleryImageDimensions]?.width}
                     height={galleryImageDimensions[items[lightboxIndex].src as keyof typeof galleryImageDimensions]?.height}
                     decoding="async"

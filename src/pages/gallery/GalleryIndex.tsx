@@ -19,6 +19,7 @@ import { AnimateIn } from "../../components/shared/AnimateIn";
 import { useSearchParams } from "react-router";
 import galleryImageDimensions from "../../data/gallery-image-dimensions.json";
 import { galleryCategories } from "../../data/galleryData";
+import { galleryImageSources } from "../../components/shared/GalleryImage";
 
 const getLightboxWidth = (src: string) => {
   const dimensions = galleryImageDimensions[src as keyof typeof galleryImageDimensions];
@@ -150,8 +151,9 @@ export default function GalleryIndex() {
                           onClick={() => openLightbox(i)}
                         >
                           <img
-                            src={item.src}
-                            alt={`${item.categoryTitle} custom netting project`}
+                            {...galleryImageSources(item.src)}
+                            sizes="(min-width: 1024px) 405px, (min-width: 640px) 50vw, 100vw"
+                            alt={item.alt || `${item.categoryTitle} custom netting project`}
                             width={dimensions?.width}
                             height={dimensions?.height}
                             loading="lazy"
@@ -187,8 +189,9 @@ export default function GalleryIndex() {
                     {formatImageNumber(items[lightboxIndex].imageNumber)}
                   </div>
                   <img
-                    src={items[lightboxIndex].src}
-                    alt={`${items[lightboxIndex].categoryTitle} custom netting project`}
+                    {...galleryImageSources(items[lightboxIndex].src)}
+                    sizes="(min-width: 1024px) 960px, 100vw"
+                    alt={items[lightboxIndex].alt || `${items[lightboxIndex].categoryTitle} custom netting project`}
                     width={galleryImageDimensions[items[lightboxIndex].src as keyof typeof galleryImageDimensions]?.width}
                     height={galleryImageDimensions[items[lightboxIndex].src as keyof typeof galleryImageDimensions]?.height}
                     decoding="async"

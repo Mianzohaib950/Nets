@@ -1,41 +1,43 @@
 import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
-import { motion, useInView, AnimatePresence } from "motion/react";
+import { m, useInView, AnimatePresence } from "motion/react";
 import { AnimateIn } from "../components/shared/AnimateIn";
 import zooNetEnclosure from "../imports/zoo-net-enclosure.webp";
 import waterparkRopeNetting from "../imports/waterpark-rope-netting.seo.webp";
 import childrenPlayRopeBridge from "../imports/children-play-rope-bridge.webp";
-import handrailThemedNetting from "../imports/handrail-themed-netting.webp";
 import secondaryProtectionNetting from "../imports/secondary-protection-netting.webp";
 import bridgeTunnelNetting from "../imports/bridge-tunnel-netting.webp";
-import ropeCableHardware from "../imports/rope-cable-hardware.webp";
-import themingDecorPoolNetting from "../imports/theming-decor-pool-netting.webp";
-import themingDecorRopePlay from "../imports/theming-decor-rope-play.seo.webp";
 
 const HERO_IMAGES = [
   {
-    src: themingDecorRopePlay,
+    src: "/hero-home-1280.webp",
+    mobileSrc: "/hero-home-960.webp",
     alt: "Themed rope and net play structure",
   },
   {
     src: zooNetEnclosure,
+    mobileSrc: zooNetEnclosure,
     alt: "Zoo net enclosure",
   },
   {
     src: waterparkRopeNetting,
+    mobileSrc: waterparkRopeNetting,
     alt: "Waterpark rope netting barrier",
   },
   {
     src: childrenPlayRopeBridge,
+    mobileSrc: childrenPlayRopeBridge,
     alt: "Children's rope bridge play structure",
   },
   {
     src: bridgeTunnelNetting,
+    mobileSrc: bridgeTunnelNetting,
     alt: "Bridge with netted handrails",
   },
   {
     src: secondaryProtectionNetting,
+    mobileSrc: secondaryProtectionNetting,
     alt: "Secondary protection netting corridor",
   },
 ];
@@ -90,56 +92,56 @@ const whatWeDo = [
     title: "Zoos & Aquariums",
     sub: "Animal Exhibits & Enrichment",
     desc: "Custom netting solutions for immersive animal exhibits that are visually unobtrusive, safe, and secure. From new construction to refurbishment and enrichment elements.",
-    image: zooNetEnclosure,
+    image: "/images/home-cards/zoos.webp",
     to: "/applications/zoo",
   },
   {
     title: "Waterparks & Themeparks",
     sub: "New Construction & Dry Play",
     desc: "Barriers, queue lines, handrails, slide covers, wave pool barriers, and dry play attractions that keep guests safe and engaged.",
-    image: waterparkRopeNetting,
+    image: "/images/home-cards/waterparks.webp",
     to: "/applications/waterpark",
   },
   {
     title: "Children's Play",
     sub: "Tunnels, Climbs & Spiderweb Nets",
     desc: "Interactive play elements that develop motor skills, coordination, and promote lifelong learning — all while increasing guest satisfaction and time on site.",
-    image: childrenPlayRopeBridge,
+    image: "/images/home-cards/play.webp",
     to: "/applications/play",
   },
   {
     title: "Handrails",
     sub: "Synthetic & Stainless Steel",
     desc: "Beautiful, decorative handrails that meet OSHA requirements — hand-woven stainless steel, machine knotted netting, or rope handrails in any configuration.",
-    image: handrailThemedNetting,
+    image: "/images/home-cards/handrails.webp",
     to: "/applications/handrail",
   },
   {
     title: "Secondary Protection",
     sub: "Fall, Debris & Blast Protection",
     desc: "Safety netting systems for construction, public areas, and high-threat settings. Customized to lower insurance costs and protect guests and workers.",
-    image: secondaryProtectionNetting,
+    image: "/images/home-cards/protection.webp",
     to: "/applications/protect",
   },
   {
     title: "Bridges & Tunnels",
     sub: "Stationary, Suspension & V Bridges",
     desc: "Hundreds of bridges built for zoos, theme parks, golf courses, and more. Beautiful, fun, and functional in any configuration.",
-    image: bridgeTunnelNetting,
+    image: "/images/home-cards/bridges.webp",
     to: "/applications/bridge",
   },
   {
     title: "Rope, Cable & Hardware",
     sub: "Supporting Materials",
     desc: "Our signature NU-Line rope, stainless steel cable, and supporting hardware — available in any material the customer requires, all fabricated to the highest standards.",
-    image: ropeCableHardware,
+    image: "/images/home-cards/hardware.webp",
     to: "/applications/zoo",
   },
   {
     title: "Theming & Decor",
     sub: "Design Elements",
     desc: "Rope and netting as an architectural element. Stainless steel for modern aesthetics; rope for jungle, desert, or nautical themes.",
-    image: themingDecorPoolNetting,
+    image: "/images/home-cards/decor.webp",
     to: "/applications/decorate",
   },
 ];
@@ -150,10 +152,28 @@ export default function Home() {
   const [heroIndex, setHeroIndex] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => {
-      setHeroIndex((i) => (i + 1) % HERO_IMAGES.length);
-    }, 4500);
-    return () => clearInterval(id);
+    let intervalId: ReturnType<typeof setInterval> | undefined;
+    const startCarousel = () => {
+      if (intervalId) return;
+      intervalId = setInterval(() => {
+        setHeroIndex((i) => (i + 1) % HERO_IMAGES.length);
+      }, 4500);
+      window.removeEventListener("pointerdown", startCarousel);
+      window.removeEventListener("keydown", startCarousel);
+      window.removeEventListener("scroll", startCarousel);
+    };
+
+    // Do not download an entire slideshow for visitors who have not interacted.
+    // This preserves the carousel while keeping the initial critical payload lean.
+    window.addEventListener("pointerdown", startCarousel, { passive: true, once: true });
+    window.addEventListener("keydown", startCarousel, { once: true });
+    window.addEventListener("scroll", startCarousel, { passive: true, once: true });
+    return () => {
+      window.removeEventListener("pointerdown", startCarousel);
+      window.removeEventListener("keydown", startCarousel);
+      window.removeEventListener("scroll", startCarousel);
+      if (intervalId) clearInterval(intervalId);
+    };
   }, []);
 
   return (
@@ -163,18 +183,18 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-[55fr_45fr] h-full">
           {/* Text side */}
           <div className="relative z-10 flex flex-col justify-center px-10 md:px-16 lg:px-20 bg-forest-900 py-24 lg:py-0">
-            <motion.p
+            <m.p
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
               className="text-xs font-medium tracking-widest uppercase text-clay mb-6"
             >
               Phoenix, Arizona · Est. 2003
-            </motion.p>
+            </m.p>
 
             <h1 className="font-serif text-5xl md:text-6xl xl:text-7xl font-light text-primary-foreground leading-[1.05] tracking-[-0.02em] mb-8 flex flex-wrap gap-x-4 gap-y-1">
               {heroWords.map((word, i) => (
-                <motion.span
+                <m.span
                   key={word}
                   initial={{ opacity: 0, y: 40, rotateX: -20 }}
                   animate={{ opacity: 1, y: 0, rotateX: 0 }}
@@ -193,11 +213,11 @@ export default function Home() {
                   ) : (
                     word
                   )}
-                </motion.span>
+                </m.span>
               ))}
             </h1>
 
-            <motion.p
+            <m.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -205,9 +225,9 @@ export default function Home() {
             >
               Custom rope and netting solutions for zoos, waterparks, play areas, handrails,
               bridges, and more — crafted with expert precision since 2003.
-            </motion.p>
+            </m.p>
 
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
@@ -217,7 +237,7 @@ export default function Home() {
                 to="/contact"
                 className="relative group inline-flex items-center gap-2 bg-clay text-primary-foreground px-8 py-3.5 rounded-[2px] text-sm font-medium overflow-hidden"
               >
-                <motion.span
+                <m.span
                   className="absolute inset-0 bg-white/10"
                   initial={{ x: "-100%" }}
                   whileHover={{ x: "100%" }}
@@ -233,13 +253,13 @@ export default function Home() {
               >
                 View Our Work <ArrowRight size={14} />
               </Link>
-            </motion.div>
+            </m.div>
           </div>
 
           {/* Image side — clips in on load, then cycles */}
           <div className="hidden lg:block relative overflow-hidden bg-forest-900">
             {/* Intro clip-path reveal (runs once) */}
-            <motion.div
+            <m.div
               className="absolute inset-0 z-10 pointer-events-none"
               initial={{ clipPath: "inset(0 0% 0 0)" }}
               animate={{ clipPath: "inset(0 100% 0 0)" }}
@@ -249,7 +269,7 @@ export default function Home() {
 
             {/* Cycling images */}
             <AnimatePresence mode="sync">
-              <motion.div
+              <m.div
                 key={heroIndex}
                 className="absolute inset-0"
                 initial={{ opacity: 0 }}
@@ -257,17 +277,20 @@ export default function Home() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1.2, ease: "easeInOut" }}
               >
-                <motion.img
+                <m.img
                   src={HERO_IMAGES[heroIndex].src}
                   alt={HERO_IMAGES[heroIndex].alt}
                   fetchPriority={heroIndex === 0 ? "high" : "auto"}
+                  loading={heroIndex === 0 ? "eager" : "lazy"}
+                  width="1280"
+                  height="960"
                   decoding="async"
                   className="absolute inset-0 w-full h-full object-cover"
                   initial={{ scale: 1.06 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 5, ease: "linear" }}
                 />
-              </motion.div>
+              </m.div>
             </AnimatePresence>
 
             <div className="absolute inset-0 bg-forest-900/25 z-[5]" />
@@ -293,10 +316,17 @@ export default function Home() {
         {/* Mobile background — cycles too */}
         <div className="lg:hidden absolute inset-0 -z-10 overflow-hidden">
           <AnimatePresence mode="sync">
-            <motion.div
+            <m.img
               key={`mob-${heroIndex}`}
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url(${HERO_IMAGES[heroIndex].src})` }}
+              src={HERO_IMAGES[heroIndex].mobileSrc}
+              alt=""
+              aria-hidden="true"
+              fetchPriority={heroIndex === 0 ? "high" : "auto"}
+              loading={heroIndex === 0 ? "eager" : "lazy"}
+              decoding="async"
+              width="960"
+              height="720"
+              className="absolute inset-0 h-full w-full object-cover object-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -307,18 +337,18 @@ export default function Home() {
         </div>
 
         {/* Scroll indicator */}
-        <motion.div
+        <m.div
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-primary-foreground/40"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.4, duration: 0.6 }}
         >
-          <motion.div
+          <m.div
             className="w-px h-10 bg-primary-foreground/30"
             animate={{ scaleY: [0, 1, 0], originY: 0 }}
             transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.4 }}
           />
-        </motion.div>
+        </m.div>
       </section>
 
       {/* WHO WE ARE */}
@@ -396,7 +426,10 @@ export default function Home() {
                   src={item.image}
                   alt={item.title}
                   loading="lazy"
+                  fetchPriority="low"
                   decoding="async"
+                  width="800"
+                  height="600"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-[700ms] ease-out hover:scale-[1.04]"
                 />
               </AnimateIn>
@@ -418,7 +451,7 @@ export default function Home() {
                   to={item.to}
                   className="relative group inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 rounded-[2px] text-sm font-medium overflow-hidden"
                 >
-                  <motion.span
+                  <m.span
                     className="absolute inset-0 bg-white/10"
                     initial={{ x: "-100%" }}
                     whileHover={{ x: "100%" }}
@@ -468,13 +501,13 @@ export default function Home() {
         </div>
 
         {/* Glowing orbs */}
-        <motion.div
+        <m.div
           className="absolute w-[500px] h-[500px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, rgba(181,116,74,0.12) 0%, transparent 70%)", top: "-20%", left: "5%" }}
           animate={{ scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
         />
-        <motion.div
+        <m.div
           className="absolute w-[400px] h-[400px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, rgba(61,122,84,0.15) 0%, transparent 70%)", bottom: "-10%", right: "10%" }}
           animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.9, 0.5] }}
@@ -483,7 +516,7 @@ export default function Home() {
 
         {/* Animated diagonal accent line */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <motion.div
+          <m.div
             className="absolute top-0 bottom-0 w-[1px] opacity-20"
             style={{ background: "linear-gradient(to bottom, transparent, #B5744A, transparent)", left: "30%" }}
             initial={{ scaleY: 0 }}
@@ -491,7 +524,7 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
           />
-          <motion.div
+          <m.div
             className="absolute top-0 bottom-0 w-[1px] opacity-10"
             style={{ background: "linear-gradient(to bottom, transparent, #fff, transparent)", left: "70%" }}
             initial={{ scaleY: 0 }}
@@ -522,7 +555,7 @@ export default function Home() {
                 to="/contact"
                 className="relative group inline-flex items-center gap-2 bg-clay text-primary-foreground px-9 py-4 rounded-[2px] text-sm font-medium overflow-hidden"
               >
-                <motion.span
+                <m.span
                   className="absolute inset-0 bg-white/10"
                   initial={{ x: "-100%" }}
                   whileHover={{ x: "100%" }}

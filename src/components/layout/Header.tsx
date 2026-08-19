@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router";
 import { ChevronDown, Menu, X } from "lucide-react";
-import logoImg from "@/imports/qt_q_95__1_.png";
+import logoImg from "@/imports/nets-unlimited-logo.webp";
 
 const applicationLinks = [
   { label: "We Zoo", to: "/applications/zoo" },

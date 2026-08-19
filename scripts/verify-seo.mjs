@@ -5,6 +5,7 @@ const root = new URL("../", import.meta.url).pathname.replace(/^\/(.:)/, "$1");
 const distRoot = join(root, "dist");
 const publicImagesRoot = join(root, "public", "images");
 const vercelConfigPath = join(root, "vercel.json");
+const responsiveManifestPath = join(root, "src", "data", "gallery-responsive-images.json");
 
 async function walk(directory) {
   const output = [];
@@ -94,7 +95,9 @@ const llms = await readFile(join(distRoot, "llms.txt"), "utf8");
 const notFoundHtml = await readFile(join(distRoot, "404.html"), "utf8");
 const vercelConfig = await readFile(vercelConfigPath, "utf8");
 
-const imageFiles = (await walk(publicImagesRoot)).filter((file) => extname(file).toLowerCase() === ".webp" && !file.includes(`${join("images", "_responsive")}`));
+const imageFiles = (await walk(publicImagesRoot)).filter((file) => extname(file).toLowerCase() === ".webp"
+  && !file.includes(`${join("images", "_responsive")}`)
+  && !file.includes(`${join("images", "home-cards")}`));
 let imagesOver200 = 0;
 let imagesOver500 = 0;
 let imagesOver1024 = 0;
@@ -106,6 +109,25 @@ for (const file of imageFiles) {
   if (size > 200 * 1024) imagesOver200 += 1;
   if (size > 500 * 1024) imagesOver500 += 1;
   if (size > 1024 * 1024) imagesOver1024 += 1;
+}
+
+const responsiveManifest = JSON.parse(await readFile(responsiveManifestPath, "utf8"));
+const responsiveMissing = [];
+let responsiveOver300 = 0;
+for (const [source, entry] of Object.entries(responsiveManifest)) {
+  for (const width of [480, 960]) {
+    const variant = entry[`w${width}`];
+    if (!variant) {
+      if (entry.width > width) responsiveMissing.push(`${source} (${width}w)`);
+      continue;
+    }
+    const variantPath = join(root, "public", variant.replace(/^\//, ""));
+    try {
+      if ((await stat(variantPath)).size > 300 * 1024) responsiveOver300 += 1;
+    } catch {
+      responsiveMissing.push(`${source} (${width}w file)`);
+    }
+  }
 }
 
 const summary = {
@@ -126,6 +148,9 @@ const summary = {
     over200kb: imagesOver200,
     over500kb: imagesOver500,
     over1024kb: imagesOver1024,
+    responsiveEntries: Object.keys(responsiveManifest).length,
+    responsiveMissing: responsiveMissing.length,
+    responsiveOver300kb: responsiveOver300,
   },
 };
 
@@ -141,6 +166,8 @@ const hardFailure = summary.pageFailures.length > 0
   || !summary.static404Noindex
   || !summary.securityHeadersConfigured
   || summary.images.over500kb > 0
-  || summary.images.over1024kb > 0;
+  || summary.images.over1024kb > 0
+  || summary.images.responsiveMissing > 0
+  || summary.images.responsiveOver300kb > 0;
 
 if (hardFailure) process.exit(1);

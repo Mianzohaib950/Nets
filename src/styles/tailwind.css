@@ -1,4 +1,9 @@
 @import 'tailwindcss' source(none);
-@source '../**/*.{js,ts,jsx,tsx}';
+/* Scan only shipped application code. The generated shadcn component library is
+   not imported by this site and previously added thousands of unused utilities. */
+@source '../pages/**/*.{ts,tsx}';
+@source '../components/**/*.{ts,tsx}';
+@source '../app/App.tsx';
+@source '../app/routes.ts';
 
 @import 'tw-animate-css';

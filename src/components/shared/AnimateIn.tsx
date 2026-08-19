@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useInView } from "motion/react";
+import { m, useInView } from "motion/react";
 
 type Variant = "fadeUp" | "fadeLeft" | "fadeRight" | "scale" | "blur";
 
@@ -45,7 +45,7 @@ export function AnimateIn({
   const inView = useInView(ref, { once: true, amount: 0.15 });
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
@@ -54,6 +54,6 @@ export function AnimateIn({
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

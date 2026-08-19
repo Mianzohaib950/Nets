@@ -1,14 +1,11 @@
 import { RouterProvider } from "react-router";
 import { router } from "./routes";
-import { Toaster } from "sonner";
-import { Loader } from "../components/shared/Loader";
+import { LazyMotion, domAnimation } from "motion/react";
 
 export default function App() {
   return (
-    <>
-      <Loader />
+    <LazyMotion features={domAnimation} strict>
       <RouterProvider router={router} />
-      <Toaster position="bottom-right" richColors />
-    </>
+    </LazyMotion>
   );
 }

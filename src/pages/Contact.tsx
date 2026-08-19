@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import { toast, Toaster } from "sonner";
 import { MapPin, Phone, Mail, Clock, ExternalLink } from "lucide-react";
 import { AnimateIn } from "../components/shared/AnimateIn";
 
@@ -73,6 +73,7 @@ export default function Contact() {
 
   return (
     <>
+      <Toaster position="bottom-right" richColors />
       {/* Header */}
       <div className="bg-forest-900 pt-32 pb-20">
         <div className="max-w-[1280px] mx-auto px-6">

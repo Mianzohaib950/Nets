@@ -1,5 +1,6 @@
 import { mkdir, readFile, readdir, rename, rm, stat, writeFile } from "node:fs/promises";
 import { extname, join } from "node:path";
+import { createHash } from "node:crypto";
 import sharp from "sharp";
 
 const projectRoot = new URL("../", import.meta.url).pathname.replace(/^\/(.:)/, "$1");
@@ -36,9 +37,32 @@ for (const source of importedWebps) {
 }
 console.log(`Created ${largeWebps} optimized replacements for large imported WebP files.`);
 
+const homeCardSources = {
+  "zoos.webp": "zoo-net-enclosure.webp",
+  "waterparks.webp": "waterpark-rope-netting.seo.webp",
+  "play.webp": "children-play-rope-bridge.webp",
+  "handrails.webp": "handrail-themed-netting.webp",
+  "protection.webp": "secondary-protection-netting.webp",
+  "bridges.webp": "bridge-tunnel-netting.webp",
+  "hardware.webp": "rope-cable-hardware.webp",
+  "decor.webp": "theming-decor-pool-netting.webp",
+};
+const homeCardRoot = join(projectRoot, "public", "images", "home-cards");
+await mkdir(homeCardRoot, { recursive: true });
+for (const [destination, source] of Object.entries(homeCardSources)) {
+  await sharp(join(projectRoot, "src", "imports", source))
+    .rotate()
+    .resize({ width: 800, height: 600, fit: "cover" })
+    .webp({ quality: 60, effort: 5 })
+    .toFile(join(homeCardRoot, destination));
+}
+console.log(`Generated ${Object.keys(homeCardSources).length} optimized home-card images.`);
+
 const publicGalleryRoot = join(projectRoot, "public", "images");
 const publicWebps = (await walk(publicGalleryRoot))
-  .filter((file) => extname(file).toLowerCase() === ".webp" && !file.includes(`${join("images", "_responsive")}`));
+  .filter((file) => extname(file).toLowerCase() === ".webp"
+    && !file.includes(`${join("images", "_responsive")}`)
+    && !file.includes(`${join("images", "home-cards")}`));
 let optimizedGalleryImages = 0;
 let galleryBytesBefore = 0;
 let galleryBytesAfter = 0;
@@ -87,6 +111,36 @@ for (const source of publicWebps) {
 await mkdir(join(projectRoot, "src", "data"), { recursive: true });
 await writeFile(join(projectRoot, "src", "data", "gallery-image-dimensions.json"), `${JSON.stringify(galleryDimensions, null, 2)}\n`);
 console.log(`Recorded intrinsic dimensions for ${Object.keys(galleryDimensions).length} gallery images.`);
+
+// Generate small card and medium lightbox sources. A manifest avoids putting
+// gallery filenames containing spaces into srcset, where spaces are separators.
+const responsiveRoot = join(publicGalleryRoot, "_responsive");
+await mkdir(responsiveRoot, { recursive: true });
+const responsiveGalleryImages = {};
+for (const source of publicWebps) {
+  const originalPath = source.slice(join(projectRoot, "public").length).replaceAll("\\", "/");
+  const hash = createHash("sha1").update(originalPath).digest("hex").slice(0, 12);
+  const input = await readFile(source);
+  const metadata = await sharp(input).metadata();
+  const entry = { width: metadata.width, height: metadata.height };
+
+  for (const width of [480, 960]) {
+    if ((metadata.width ?? 0) <= width) continue;
+    const filename = `${hash}-${width}.webp`;
+    await sharp(input)
+      .rotate()
+      .resize({ width, withoutEnlargement: true })
+      .webp({ quality: width === 480 ? 58 : 66, effort: 5 })
+      .toFile(join(responsiveRoot, filename));
+    entry[`w${width}`] = `/images/_responsive/${filename}`;
+  }
+  responsiveGalleryImages[originalPath] = entry;
+}
+await writeFile(
+  join(projectRoot, "src", "data", "gallery-responsive-images.json"),
+  `${JSON.stringify(responsiveGalleryImages, null, 2)}\n`,
+);
+console.log(`Generated responsive sources for ${Object.keys(responsiveGalleryImages).length} gallery images.`);
 
 const socialSource = join(projectRoot, "public", "images", "zoos", "zoo1.webp");
 const socialOutput = join(projectRoot, "public", "og-image.webp");

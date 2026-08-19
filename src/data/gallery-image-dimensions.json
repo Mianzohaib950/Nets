@@ -123,9 +123,25 @@
     "width": 1600,
     "height": 1200
   },
+  "/images/golf-and-sport/golf18.webp": {
+    "width": 900,
+    "height": 1600
+  },
+  "/images/golf-and-sport/golf19.webp": {
+    "width": 1600,
+    "height": 1200
+  },
   "/images/golf-and-sport/golf2.webp": {
     "width": 1600,
     "height": 1200
+  },
+  "/images/golf-and-sport/golf20.webp": {
+    "width": 800,
+    "height": 600
+  },
+  "/images/golf-and-sport/golf21.webp": {
+    "width": 640,
+    "height": 326
   },
   "/images/golf-and-sport/golf3.webp": {
     "width": 1600,
@@ -423,9 +439,25 @@
     "width": 1600,
     "height": 1200
   },
+  "/images/play-elements/play39.webp": {
+    "width": 1600,
+    "height": 1200
+  },
   "/images/play-elements/play4.webp": {
     "width": 1600,
     "height": 1064
+  },
+  "/images/play-elements/play40.webp": {
+    "width": 1200,
+    "height": 1600
+  },
+  "/images/play-elements/play41.webp": {
+    "width": 1600,
+    "height": 1200
+  },
+  "/images/play-elements/play42.webp": {
+    "width": 1500,
+    "height": 1125
   },
   "/images/play-elements/play5.webp": {
     "width": 1600,
@@ -508,6 +540,18 @@
     "height": 1600
   },
   "/images/protection-netting/protection23.webp": {
+    "width": 1600,
+    "height": 1200
+  },
+  "/images/protection-netting/protection24.webp": {
+    "width": 244,
+    "height": 182
+  },
+  "/images/protection-netting/protection25.webp": {
+    "width": 346,
+    "height": 428
+  },
+  "/images/protection-netting/protection26.webp": {
     "width": 1600,
     "height": 1200
   },
@@ -799,7 +843,35 @@
     "width": 1200,
     "height": 1600
   },
+  "/images/zoos/zoo46.webp": {
+    "width": 1600,
+    "height": 1200
+  },
+  "/images/zoos/zoo47.webp": {
+    "width": 1600,
+    "height": 1200
+  },
+  "/images/zoos/zoo48.webp": {
+    "width": 1448,
+    "height": 1086
+  },
+  "/images/zoos/zoo49.webp": {
+    "width": 1600,
+    "height": 1200
+  },
   "/images/zoos/zoo5.webp": {
+    "width": 1600,
+    "height": 1200
+  },
+  "/images/zoos/zoo50.webp": {
+    "width": 1200,
+    "height": 1600
+  },
+  "/images/zoos/zoo51.webp": {
+    "width": 1600,
+    "height": 1200
+  },
+  "/images/zoos/zoo52.webp": {
     "width": 1600,
     "height": 1200
   },
@@ -818,77 +890,5 @@
   "/images/zoos/zoo9.webp": {
     "width": 1600,
     "height": 1200
-  },
-  "/images/zoos/zoo46.webp": {
-    "width": 1600,
-    "height": 1200
-  },
-  "/images/zoos/zoo47.webp": {
-    "width": 1600,
-    "height": 1200
-  },
-  "/images/zoos/zoo48.webp": {
-    "width": 1448,
-    "height": 1086
-  },
-  "/images/zoos/zoo49.webp": {
-    "width": 1600,
-    "height": 1200
-  },
-  "/images/zoos/zoo50.webp": {
-    "width": 1200,
-    "height": 1600
-  },
-  "/images/zoos/zoo51.webp": {
-    "width": 1600,
-    "height": 1200
-  },
-  "/images/zoos/zoo52.webp": {
-    "width": 1600,
-    "height": 1200
-  },
-  "/images/golf-and-sport/golf18.webp": {
-    "width": 900,
-    "height": 1600
-  },
-  "/images/golf-and-sport/golf19.webp": {
-    "width": 1600,
-    "height": 1200
-  },
-  "/images/golf-and-sport/golf20.webp": {
-    "width": 800,
-    "height": 600
-  },
-  "/images/golf-and-sport/golf21.webp": {
-    "width": 640,
-    "height": 326
-  },
-  "/images/protection-netting/protection24.webp": {
-    "width": 244,
-    "height": 182
-  },
-  "/images/protection-netting/protection25.webp": {
-    "width": 346,
-    "height": 428
-  },
-  "/images/protection-netting/protection26.webp": {
-    "width": 1600,
-    "height": 1200
-  },
-  "/images/play-elements/play39.webp": {
-    "width": 1600,
-    "height": 1200
-  },
-  "/images/play-elements/play40.webp": {
-    "width": 1200,
-    "height": 1600
-  },
-  "/images/play-elements/play41.webp": {
-    "width": 1600,
-    "height": 1200
-  },
-  "/images/play-elements/play42.webp": {
-    "width": 1500,
-    "height": 1125
   }
 }

@@ -13,7 +13,7 @@ import {
   Phone,
   Twitter,
 } from "lucide-react";
-import logoImg from "@/imports/qt_q_95__1_.png";
+import logoImg from "@/imports/nets-unlimited-logo.webp";
 
 const appLinks = [
   { label: "We Zoo", to: "/applications/zoo" },
