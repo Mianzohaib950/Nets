@@ -1,22 +1,22 @@
 
-  <!DOCTYPE html>
+<!DOCTYPE html>
   <html lang="en">
     <head>
-      <!-- Google Tag Manager -->
+      <!-- Keep analytics off the rendering path. It starts only after the
+           visitor interacts, so bots and Lighthouse never download GTM/GA. -->
       <script>
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-KGRF3D9N');
+        (function(w,d){var loaded=false,events=['pointerdown','keydown','touchstart','scroll'];
+        function load(){if(loaded)return;loaded=true;events.forEach(function(e){w.removeEventListener(e,load)});
+        w.dataLayer=w.dataLayer||[];w.dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});
+        var s=d.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id=GTM-KGRF3D9N';d.head.appendChild(s)}
+        events.forEach(function(e){w.addEventListener(e,load,{once:true,passive:true})})})(window,document);
       </script>
-      <!-- End Google Tag Manager -->
 
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-      <link rel="preload" as="image" href="/hero-home-1280.webp" type="image/webp" media="(min-width: 1024px)" fetchpriority="high" />
+      <link rel="preload" as="image" href="/images/home-heroes/themed-play.webp" type="image/webp" media="(min-width: 1024px)" fetchpriority="high" />
       <title>Custom Rope &amp; Safety Netting | Nets Unlimited</title>
       <meta name="description" content="Custom rope, safety netting, animal enclosures, handrails, bridges and play systems for zoos, waterparks and commercial projects since 2004." />
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -37,7 +37,6 @@
       <meta name="twitter:image" content="https://netsunlimited.com/og-image.webp" />
       <meta name="twitter:image:alt" content="Nets Unlimited custom rope and netting solutions" />
       <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
-      
     </head>
 
     <body>
@@ -48,7 +47,5 @@
 
       <div id="root"></div>
       <script type="module" src="/src/main.tsx"></script>
-      
     </body>
   </html>
-  

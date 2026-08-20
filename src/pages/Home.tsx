@@ -2,35 +2,31 @@ import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
 import { AnimateIn } from "../components/shared/AnimateIn";
-import zooNetEnclosure from "../imports/zoo-net-enclosure.webp";
-import waterparkRopeNetting from "../imports/waterpark-rope-netting.seo.webp";
-import childrenPlayRopeBridge from "../imports/children-play-rope-bridge.webp";
-import secondaryProtectionNetting from "../imports/secondary-protection-netting.webp";
 import bridgeTunnelNetting from "../imports/bridge-tunnel-netting.webp";
 
 const HERO_IMAGES = [
   {
-    src: "/hero-home-1280.webp",
+    src: "/images/home-heroes/themed-play.webp",
     alt: "Themed rope and net play structure",
   },
   {
-    src: zooNetEnclosure,
+    src: "/images/home-heroes/zoo.webp",
     alt: "Zoo net enclosure",
   },
   {
-    src: waterparkRopeNetting,
+    src: "/images/home-heroes/waterpark.webp",
     alt: "Waterpark rope netting barrier",
   },
   {
-    src: childrenPlayRopeBridge,
+    src: "/images/home-heroes/play.webp",
     alt: "Children's rope bridge play structure",
   },
   {
-    src: bridgeTunnelNetting,
+    src: "/images/home-heroes/bridge.webp",
     alt: "Bridge with netted handrails",
   },
   {
-    src: secondaryProtectionNetting,
+    src: "/images/home-heroes/protection.webp",
     alt: "Secondary protection netting corridor",
   },
 ];
@@ -154,7 +150,9 @@ export default function Home() {
   useEffect(() => {
     const desktop = window.matchMedia("(min-width: 1024px)");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const engagementEvents = ["pointerdown", "keydown", "touchstart", "scroll"] as const;
     let intervalId: ReturnType<typeof setInterval> | undefined;
+    let engaged = false;
 
     const stopCarousel = () => {
       if (intervalId) clearInterval(intervalId);
@@ -162,16 +160,22 @@ export default function Home() {
     };
     const updateCarousel = () => {
       stopCarousel();
-      if (!desktop.matches || reducedMotion.matches || document.hidden) return;
+      if (!engaged || !desktop.matches || reducedMotion.matches || document.hidden) return;
       intervalId = setInterval(() => {
         setHeroIndex((i) => (i + 1) % HERO_IMAGES.length);
       }, 4500);
     };
     const onVisibilityChange = () => updateCarousel();
+    const onEngagement = () => {
+      if (engaged) return;
+      engaged = true;
+      engagementEvents.forEach((event) => window.removeEventListener(event, onEngagement));
+      updateCarousel();
+    };
 
-    // Desktop keeps the visual carousel. Mobile never starts it or downloads
-    // slideshow images because the image column is hidden there.
-    updateCarousel();
+    // Only engaged desktop visitors start the visual carousel. This preserves
+    // the interaction while keeping five hidden slides off the critical path.
+    engagementEvents.forEach((event) => window.addEventListener(event, onEngagement, { passive: true }));
     desktop.addEventListener("change", updateCarousel);
     reducedMotion.addEventListener("change", updateCarousel);
     document.addEventListener("visibilitychange", onVisibilityChange);
@@ -179,6 +183,7 @@ export default function Home() {
       desktop.removeEventListener("change", updateCarousel);
       reducedMotion.removeEventListener("change", updateCarousel);
       document.removeEventListener("visibilitychange", onVisibilityChange);
+      engagementEvents.forEach((event) => window.removeEventListener(event, onEngagement));
       stopCarousel();
     };
   }, []);
@@ -248,8 +253,8 @@ export default function Home() {
                   alt={HERO_IMAGES[heroIndex].alt}
                   fetchPriority={heroIndex === 0 ? "high" : "auto"}
                   loading={heroIndex === 0 ? "eager" : "lazy"}
-                  width="1280"
-                  height="960"
+                  width="960"
+                  height="1080"
                   decoding="async"
                   className="hero-slide-image absolute inset-0 w-full h-full object-cover"
                 />

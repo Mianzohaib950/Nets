@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "build": "vite build && node scripts/generate-seo-pages.mjs && node scripts/inline-critical-css.mjs",
+    "build": "node scripts/generate-logo.mjs && node scripts/generate-home-heroes.mjs && vite build && node scripts/generate-seo-pages.mjs && node scripts/inline-critical-css.mjs",
     "optimize:images": "node scripts/optimize-images.mjs",
     "verify:seo": "node scripts/verify-seo.mjs",
     "dev": "vite",

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router";
 import { ChevronDown, Menu, X } from "lucide-react";
-import logoImg from "@/imports/nets-unlimited-logo.webp";
+import logoImg from "@/imports/nets-unlimited-logo-160.webp";
 
 const applicationLinks = [
   { label: "We Zoo", to: "/applications/zoo" },
@@ -113,8 +113,8 @@ export default function Header() {
           <img
             src={logoImg}
             alt="Nets Unlimited, Inc."
-            width="256"
-            height="108"
+            width="160"
+            height="68"
             decoding="async"
             className={`h-9 sm:h-11 lg:h-14 w-auto object-contain transition-all duration-300 ${
               transparent ? "brightness-0 invert" : ""

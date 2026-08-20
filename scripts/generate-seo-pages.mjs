@@ -96,8 +96,23 @@ function schemaFor(route, title, description, canonical) {
   return JSON.stringify({ "@context": "https://schema.org", "@graph": graph }).replaceAll("<", "\\u003c");
 }
 
-function fallbackContent(title, description) {
+function fallbackContent(route, title, description) {
   const heading = title.split(" | ")[0];
+  if (!route) return `<div data-first-paint="true">
+    <style>
+      [data-first-paint]{min-height:100vh;background:#102a1d;color:#fff;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+      .fp-header{position:absolute;z-index:2;inset:0 0 auto;height:80px;padding:0 5vw;display:flex;align-items:center;justify-content:space-between}.fp-logo{width:149px;height:auto;filter:brightness(0) invert(1)}
+      .fp-nav{display:flex;gap:26px;align-items:center}.fp-nav a{color:#fff;text-decoration:none;font-size:14px}.fp-contact{background:#1f4a32;padding:10px 20px}
+      .fp-hero{min-height:100vh;display:grid;grid-template-columns:55fr 45fr}.fp-copy{padding:120px 7vw 80px;display:flex;flex-direction:column;justify-content:center}
+      .fp-kicker{margin:0 0 24px;color:#c98254;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase}.fp-title{max-width:680px;margin:0 0 28px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(48px,5vw,72px);font-weight:400;line-height:1.05;letter-spacing:-.02em}.fp-accent{color:#c98254}
+      .fp-description{max-width:540px;margin:0 0 36px;color:rgba(255,255,255,.72);font-size:clamp(18px,1.7vw,24px);line-height:1.6}.fp-actions{display:flex;gap:28px;align-items:center}.fp-actions a{color:#fff;text-decoration:none;font-size:14px}.fp-quote{background:#b5744a;padding:14px 32px}
+      .fp-image{background:url('/images/home-heroes/themed-play.webp') center/cover no-repeat;position:relative}.fp-image:after{content:"";position:absolute;inset:0;background:rgba(16,42,29,.25)}
+      @media(max-width:1023px){.fp-header{height:56px;padding:0 40px}.fp-logo{width:96px}.fp-nav{display:none}.fp-hero{display:block}.fp-copy{box-sizing:border-box;min-height:100vh;padding:96px 40px 64px}.fp-title{font-size:48px}.fp-description{font-size:20px}.fp-image{display:none}}
+      @media(max-width:420px){.fp-header{padding:0 24px}.fp-title{font-size:46px}.fp-description{font-size:18px}}
+    </style>
+    <header class="fp-header"><a href="/" aria-label="Nets Unlimited home"><img class="fp-logo" src="/nets-unlimited-logo-160.webp" width="160" height="68" alt="Nets Unlimited, Inc."></a><nav class="fp-nav" aria-label="Primary"><a href="/">Home</a><a href="/services/">Services</a><a href="/about/">About</a><a href="/gallery/">Galleries</a><a class="fp-contact" href="/contact/">Contact Us</a></nav></header>
+    <main class="fp-hero"><div class="fp-copy"><p class="fp-kicker">Phoenix, Arizona &middot; Est. 2003</p><h1 class="fp-title">Imagine the Alter<span class="fp-accent">'NET'</span>ives</h1><p class="fp-description">Custom rope and netting solutions for zoos, waterparks, play areas, handrails, bridges, and more &mdash; crafted with expert precision since 2003.</p><div class="fp-actions"><a class="fp-quote" href="/contact/">Get a Quote</a><a href="/gallery/">View Our Work</a></div></div><div class="fp-image" role="img" aria-label="Themed rope and net play structure"></div></main>
+  </div>`;
   return `<div data-seo-fallback="true" hidden><header><a href="/" aria-label="Nets Unlimited home">Nets Unlimited</a><nav aria-label="Primary"><a href="/services/">Services</a> <a href="/gallery/">Project Gallery</a> <a href="/about/">About</a> <a href="/contact/">Contact</a></nav></header><main><h1>${escape(heading)}</h1><p>${escape(description)}</p><p>Nets Unlimited designs, fabricates, installs, inspects and maintains custom rope and netting systems for commercial projects across the United States.</p><a href="/contact/">Request a custom netting project consultation</a></main></div>`;
 }
 
@@ -116,7 +131,7 @@ for (const [route, title, rawDescription] of allPages) {
     .replace(/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${escape(title)}" />`)
     .replace(/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${escape(description)}" />`)
     .replace("</head>", `  <script type="application/ld+json" data-static-schema="true">${schemaFor(route, title, description, canonical)}</script>\n    </head>`)
-    .replace('<div id="root"></div>', `<div id="root">${fallbackContent(title, description)}</div>`);
+    .replace('<div id="root"></div>', `<div id="root">${fallbackContent(route, title, description)}</div>`);
   const output = route ? join(dist, route, "index.html") : join(dist, "index.html");
   await mkdir(dirname(output), { recursive: true });
   await writeFile(output, html);
