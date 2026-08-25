@@ -16,25 +16,25 @@ import {
 import logoImg from "@/imports/nets-unlimited-logo-160.webp";
 
 const appLinks = [
-  { label: "We Zoo", to: "/applications/zoo" },
-  { label: "We Waterpark", to: "/applications/waterpark" },
-  { label: "We Bridge", to: "/applications/bridge" },
-  { label: "We Handrail", to: "/applications/handrail" },
-  { label: "We Play", to: "/applications/play" },
-  { label: "We Sport", to: "/applications/sport" },
-  { label: "We Protect", to: "/applications/protect" },
-  { label: "We Decorate", to: "/applications/decorate" },
+  { label: "We Zoo", to: "/applications/zoo/" },
+  { label: "We Waterpark", to: "/applications/waterpark/" },
+  { label: "We Bridge", to: "/applications/bridge/" },
+  { label: "We Handrail", to: "/applications/handrail/" },
+  { label: "We Play", to: "/applications/play/" },
+  { label: "We Sport", to: "/applications/sport/" },
+  { label: "We Protect", to: "/applications/protect/" },
+  { label: "We Decorate", to: "/applications/decorate/" },
 ];
 
 const galleryLinks = [
-  { label: "Zoos", to: "/gallery/zoos" },
-  { label: "Waterparks", to: "/gallery/waterparks" },
-  { label: "Bridges", to: "/gallery/bridges" },
-  { label: "Handrails", to: "/gallery/handrails" },
-  { label: "Play Elements", to: "/gallery/play-elements" },
-  { label: "Golf & Sport", to: "/gallery/golf-and-sport" },
-  { label: "Protection Netting", to: "/gallery/protection-netting" },
-  { label: "Decorative Elements", to: "/gallery/we-decorate" },
+  { label: "Zoos", to: "/gallery/zoos/" },
+  { label: "Waterparks", to: "/gallery/waterparks/" },
+  { label: "Bridges", to: "/gallery/bridges/" },
+  { label: "Handrails", to: "/gallery/handrails/" },
+  { label: "Play Elements", to: "/gallery/play-elements/" },
+  { label: "Golf & Sport", to: "/gallery/golf-and-sport/" },
+  { label: "Protection Netting", to: "/gallery/protection-netting/" },
+  { label: "Decorative Elements", to: "/gallery/we-decorate/" },
 ];
 
 const socialLinks = [
@@ -131,10 +131,10 @@ export default function Footer() {
             <h4 className="text-xs font-medium tracking-widest uppercase text-clay mb-5">Company</h4>
             <ul className="space-y-2">
               {[
-                { label: "Services", to: "/services" },
-                { label: "About Us", to: "/about" },
-                { label: "Contact", to: "/contact" },
-                { label: "Gallery Index", to: "/gallery" },
+                { label: "Services", to: "/services/" },
+                { label: "About Us", to: "/about/" },
+                { label: "Contact", to: "/contact/" },
+                { label: "Gallery Index", to: "/gallery/" },
               ].map((l) => (
                 <li key={l.to}>
                   <Link

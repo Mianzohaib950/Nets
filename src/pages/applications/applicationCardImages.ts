@@ -10,12 +10,12 @@ import decorate1 from "../../imports/decorate/decorate-1.webp";
 // Keep every related-application card in sync with the first (hero) image
 // shown on that application's own page.
 export const applicationCardImages: Record<string, string> = {
-  "/applications/zoo": zooHeroLemurs,
-  "/applications/waterpark": waterparkHeroWaterslidePool,
-  "/applications/bridge": bridgeHeroTropicalRopeBridge,
-  "/applications/handrail": handrailHeroWalkway,
-  "/applications/play": playHeroIndoorRopeCourse,
-  "/applications/sport": sportHeroGolfContainmentNetting,
-  "/applications/protect": protectJumpPreventionBarrier,
-  "/applications/decorate": decorate1,
+  "/applications/zoo/": zooHeroLemurs,
+  "/applications/waterpark/": waterparkHeroWaterslidePool,
+  "/applications/bridge/": bridgeHeroTropicalRopeBridge,
+  "/applications/handrail/": handrailHeroWalkway,
+  "/applications/play/": playHeroIndoorRopeCourse,
+  "/applications/sport/": sportHeroGolfContainmentNetting,
+  "/applications/protect/": protectJumpPreventionBarrier,
+  "/applications/decorate/": decorate1,
 };

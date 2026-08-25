@@ -28,11 +28,11 @@ export default function Zoo() {
         },
       ]}
       ctaText="See our Zoo Gallery"
-      ctaTo="/gallery/zoos"
+      ctaTo="/gallery/zoos/"
       relatedApps={[
-        { title: "We Waterpark", to: "/applications/waterpark", image: "https://images.unsplash.com/photo-1642717841683-c0323214617c?w=600&h=400&fit=crop&auto=format" },
-        { title: "We Play", to: "/applications/play", image: "https://images.unsplash.com/photo-1779881259467-ee4b804f8c6a?w=600&h=400&fit=crop&auto=format" },
-        { title: "We Protect", to: "/applications/protect", image: "https://images.unsplash.com/photo-1778941120800-6ecd662bbc36?w=600&h=400&fit=crop&auto=format" },
+        { title: "We Waterpark", to: "/applications/waterpark/", image: "https://images.unsplash.com/photo-1642717841683-c0323214617c?w=600&h=400&fit=crop&auto=format" },
+        { title: "We Play", to: "/applications/play/", image: "https://images.unsplash.com/photo-1779881259467-ee4b804f8c6a?w=600&h=400&fit=crop&auto=format" },
+        { title: "We Protect", to: "/applications/protect/", image: "https://images.unsplash.com/photo-1778941120800-6ecd662bbc36?w=600&h=400&fit=crop&auto=format" },
       ]}
     />
   );

@@ -4,25 +4,25 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import logoImg from "@/imports/nets-unlimited-logo-160.webp";
 
 const applicationLinks = [
-  { label: "We Zoo", to: "/applications/zoo" },
-  { label: "We Waterpark", to: "/applications/waterpark" },
-  { label: "We Bridge", to: "/applications/bridge" },
-  { label: "We Handrail", to: "/applications/handrail" },
-  { label: "We Play", to: "/applications/play" },
-  { label: "We Golf & Sport", to: "/applications/sport" },
-  { label: "We Protect", to: "/applications/protect" },
-  { label: "We Decorate", to: "/applications/decorate" },
+  { label: "We Zoo", to: "/applications/zoo/" },
+  { label: "We Waterpark", to: "/applications/waterpark/" },
+  { label: "We Bridge", to: "/applications/bridge/" },
+  { label: "We Handrail", to: "/applications/handrail/" },
+  { label: "We Play", to: "/applications/play/" },
+  { label: "We Golf & Sport", to: "/applications/sport/" },
+  { label: "We Protect", to: "/applications/protect/" },
+  { label: "We Decorate", to: "/applications/decorate/" },
 ];
 
 const galleryLinks = [
-  { label: "Zoos", to: "/gallery/zoos" },
-  { label: "Waterparks", to: "/gallery/waterparks" },
-  { label: "Bridges", to: "/gallery/bridges" },
-  { label: "Handrails", to: "/gallery/handrails" },
-  { label: "Play Elements", to: "/gallery/play-elements" },
-  { label: "Golf & Sport", to: "/gallery/golf-and-sport" },
-  { label: "Protection Netting", to: "/gallery/protection-netting" },
-  { label: "Decorative Elements", to: "/gallery/we-decorate" },
+  { label: "Zoos", to: "/gallery/zoos/" },
+  { label: "Waterparks", to: "/gallery/waterparks/" },
+  { label: "Bridges", to: "/gallery/bridges/" },
+  { label: "Handrails", to: "/gallery/handrails/" },
+  { label: "Play Elements", to: "/gallery/play-elements/" },
+  { label: "Golf & Sport", to: "/gallery/golf-and-sport/" },
+  { label: "Protection Netting", to: "/gallery/protection-netting/" },
+  { label: "Decorative Elements", to: "/gallery/we-decorate/" },
 ];
 
 function DropdownMenu({ label, links }: { label: string; links: { label: string; to: string }[] }) {
@@ -145,7 +145,7 @@ export default function Header() {
             <DropdownMenu label="Galleries" links={galleryLinks} />
           </div>
           <Link
-            to="/contact"
+            to="/contact/"
             className="ml-2 text-sm font-medium bg-primary text-primary-foreground px-5 py-2 rounded-[2px] relative overflow-hidden group"
           >
             <span className="relative">
@@ -173,9 +173,9 @@ export default function Header() {
           <div className="px-6 py-4 space-y-1">
             {[
               { label: "Home", to: "/" },
-              { label: "Services", to: "/services" },
-              { label: "About", to: "/about" },
-              { label: "Contact", to: "/contact" },
+              { label: "Services", to: "/services/" },
+              { label: "About", to: "/about/" },
+              { label: "Contact", to: "/contact/" },
             ].map((l) => (
               <Link
                 key={l.to}

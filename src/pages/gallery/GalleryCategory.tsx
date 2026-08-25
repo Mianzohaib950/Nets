@@ -58,7 +58,7 @@ export default function GalleryCategory() {
         <div className="max-w-[1280px] mx-auto px-6">
           <AnimateIn>
             <Link
-              to={`/gallery?category=${category ?? ""}`}
+              to={`/gallery/?category=${category ?? ""}`}
               className="inline-flex items-center gap-2 text-primary-foreground/60 hover:text-primary-foreground text-sm mb-6 transition-colors"
             >
               <ArrowLeft size={14} /> View All Gallery Images
@@ -77,7 +77,7 @@ export default function GalleryCategory() {
           <div className="flex items-center gap-3 mb-10 flex-wrap">
             <span className="text-sm text-muted-foreground">{items.length} photos</span>
             <Link
-              to={`/gallery?category=${category ?? ""}`}
+              to={`/gallery/?category=${category ?? ""}`}
               className="ml-auto px-4 py-2 text-sm rounded-[2px] border transition-colors bg-primary text-primary-foreground border-primary hover:bg-primary/90"
             >
               View All Gallery Images

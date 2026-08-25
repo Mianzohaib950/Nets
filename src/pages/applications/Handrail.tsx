@@ -34,11 +34,11 @@ export default function Handrail() {
         },
       ]}
       ctaText="See our Handrail Gallery"
-      ctaTo="/gallery/handrails"
+      ctaTo="/gallery/handrails/"
       relatedApps={[
-        { title: "We Bridge", to: "/applications/bridge", image: "https://images.unsplash.com/photo-1554992985-8ab04fbe59b8?w=600&h=400&fit=crop&auto=format" },
-        { title: "We Protect", to: "/applications/protect", image: "https://images.unsplash.com/photo-1778941120800-6ecd662bbc36?w=600&h=400&fit=crop&auto=format" },
-        { title: "We Decorate", to: "/applications/decorate", image: "https://images.unsplash.com/photo-1779612547670-6b9eb9cf61ca?w=600&h=400&fit=crop&auto=format" },
+        { title: "We Bridge", to: "/applications/bridge/", image: "https://images.unsplash.com/photo-1554992985-8ab04fbe59b8?w=600&h=400&fit=crop&auto=format" },
+        { title: "We Protect", to: "/applications/protect/", image: "https://images.unsplash.com/photo-1778941120800-6ecd662bbc36?w=600&h=400&fit=crop&auto=format" },
+        { title: "We Decorate", to: "/applications/decorate/", image: "https://images.unsplash.com/photo-1779612547670-6b9eb9cf61ca?w=600&h=400&fit=crop&auto=format" },
       ]}
     />
   );

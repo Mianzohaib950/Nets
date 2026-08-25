@@ -58,7 +58,7 @@ export default function Decorate() {
               Ready to transform your space?
             </h2>
             <Link
-              to="/contact"
+              to="/contact/"
               className="relative group inline-flex items-center gap-2 bg-clay text-primary-foreground px-8 py-3.5 rounded-[2px] text-sm font-medium"
             >
               <span className="relative">

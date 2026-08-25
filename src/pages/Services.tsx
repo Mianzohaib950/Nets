@@ -97,7 +97,7 @@ export default function Services() {
               Whether you're in the planning phase or ready to build, our team is here to help.
             </p>
             <Link
-              to="/contact"
+              to="/contact/"
               className="relative group inline-flex items-center gap-2 bg-clay text-primary-foreground px-8 py-3.5 rounded-[2px] text-sm font-medium overflow-hidden"
             >
                 <motion.span

@@ -28,11 +28,11 @@ export default function Bridge() {
         },
       ]}
       ctaText="See our Bridges Gallery"
-      ctaTo="/gallery/bridges"
+      ctaTo="/gallery/bridges/"
       relatedApps={[
-        { title: "We Zoo", to: "/applications/zoo", image: "https://images.unsplash.com/photo-1714466614031-b128463b8767?w=600&h=400&fit=crop&auto=format" },
-        { title: "We Handrail", to: "/applications/handrail", image: "https://images.unsplash.com/photo-1563300467-5a9220d63233?w=600&h=400&fit=crop&auto=format" },
-        { title: "We Waterpark", to: "/applications/waterpark", image: "https://images.unsplash.com/photo-1642717841683-c0323214617c?w=600&h=400&fit=crop&auto=format" },
+        { title: "We Zoo", to: "/applications/zoo/", image: "https://images.unsplash.com/photo-1714466614031-b128463b8767?w=600&h=400&fit=crop&auto=format" },
+        { title: "We Handrail", to: "/applications/handrail/", image: "https://images.unsplash.com/photo-1563300467-5a9220d63233?w=600&h=400&fit=crop&auto=format" },
+        { title: "We Waterpark", to: "/applications/waterpark/", image: "https://images.unsplash.com/photo-1642717841683-c0323214617c?w=600&h=400&fit=crop&auto=format" },
       ]}
     />
   );

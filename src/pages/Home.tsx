@@ -91,56 +91,56 @@ const whatWeDo = [
     sub: "Animal Exhibits & Enrichment",
     desc: "Custom netting solutions for immersive animal exhibits that are visually unobtrusive, safe, and secure. From new construction to refurbishment and enrichment elements.",
     image: "/images/home-cards/zoos.webp",
-    to: "/applications/zoo",
+    to: "/applications/zoo/",
   },
   {
     title: "Waterparks & Themeparks",
     sub: "New Construction & Dry Play",
     desc: "Barriers, queue lines, handrails, slide covers, wave pool barriers, and dry play attractions that keep guests safe and engaged.",
     image: "/images/home-cards/waterparks.webp",
-    to: "/applications/waterpark",
+    to: "/applications/waterpark/",
   },
   {
     title: "Children's Play",
     sub: "Tunnels, Climbs & Spiderweb Nets",
     desc: "Interactive play elements that develop motor skills, coordination, and promote lifelong learning — all while increasing guest satisfaction and time on site.",
     image: "/images/home-cards/play.webp",
-    to: "/applications/play",
+    to: "/applications/play/",
   },
   {
     title: "Handrails",
     sub: "Synthetic & Stainless Steel",
     desc: "Beautiful, decorative handrails that meet OSHA requirements — hand-woven stainless steel, machine knotted netting, or rope handrails in any configuration.",
     image: "/images/home-cards/handrails.webp",
-    to: "/applications/handrail",
+    to: "/applications/handrail/",
   },
   {
     title: "Secondary Protection",
     sub: "Fall, Debris & Blast Protection",
     desc: "Safety netting systems for construction, public areas, and high-threat settings. Customized to lower insurance costs and protect guests and workers.",
     image: "/images/home-cards/protection.webp",
-    to: "/applications/protect",
+    to: "/applications/protect/",
   },
   {
     title: "Bridges & Tunnels",
     sub: "Stationary, Suspension & V Bridges",
     desc: "Hundreds of bridges built for zoos, theme parks, golf courses, and more. Beautiful, fun, and functional in any configuration.",
     image: "/images/home-cards/bridges.webp",
-    to: "/applications/bridge",
+    to: "/applications/bridge/",
   },
   {
     title: "Rope, Cable & Hardware",
     sub: "Supporting Materials",
     desc: "Our signature NU-Line rope, stainless steel cable, and supporting hardware — available in any material the customer requires, all fabricated to the highest standards.",
     image: "/images/home-cards/hardware.webp",
-    to: "/applications/zoo",
+    to: "/applications/zoo/",
   },
   {
     title: "Theming & Decor",
     sub: "Design Elements",
     desc: "Rope and netting as an architectural element. Stainless steel for modern aesthetics; rope for jungle, desert, or nautical themes.",
     image: "/images/home-cards/decor.webp",
-    to: "/applications/decorate",
+    to: "/applications/decorate/",
   },
 ];
 
@@ -224,7 +224,7 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                to="/contact"
+                to="/contact/"
                 className="relative group inline-flex items-center gap-2 bg-clay text-primary-foreground px-8 py-3.5 rounded-[2px] text-sm font-medium overflow-hidden"
               >
                 <span className="absolute inset-0 -translate-x-full bg-white/10 transition-transform duration-500 group-hover:translate-x-full" />
@@ -233,7 +233,7 @@ export default function Home() {
                 </span>
               </Link>
               <Link
-                to="/gallery"
+                to="/gallery/"
                 className="inline-flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground text-sm font-medium py-3.5 transition-colors"
               >
                 View Our Work <ArrowRight size={14} />
@@ -314,7 +314,7 @@ export default function Home() {
                 us help you Imagine the Alter'NET'ives.
               </p>
               <Link
-                to="/about"
+                to="/about/"
                 className="relative group inline-flex items-center gap-2 mt-8 text-primary text-sm font-medium"
               >
                 <span className="relative">
@@ -474,7 +474,7 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                to="/contact"
+                to="/contact/"
                 className="relative group inline-flex items-center gap-2 bg-clay text-primary-foreground px-9 py-4 rounded-[2px] text-sm font-medium overflow-hidden"
               >
                 <span className="absolute inset-0 -translate-x-full bg-white/10 transition-transform duration-500 group-hover:translate-x-full" />

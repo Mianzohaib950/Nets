@@ -28,11 +28,11 @@ export default function Waterpark() {
         },
       ]}
       ctaText="Waterpark Gallery"
-      ctaTo="/gallery/waterparks"
+      ctaTo="/gallery/waterparks/"
       relatedApps={[
-        { title: "We Zoo", to: "/applications/zoo", image: "https://images.unsplash.com/photo-1714466614031-b128463b8767?w=600&h=400&fit=crop&auto=format" },
-        { title: "We Play", to: "/applications/play", image: "https://images.unsplash.com/photo-1777626760240-08320afdad30?w=600&h=400&fit=crop&auto=format" },
-        { title: "We Bridge", to: "/applications/bridge", image: "https://images.unsplash.com/photo-1554992985-8ab04fbe59b8?w=600&h=400&fit=crop&auto=format" },
+        { title: "We Zoo", to: "/applications/zoo/", image: "https://images.unsplash.com/photo-1714466614031-b128463b8767?w=600&h=400&fit=crop&auto=format" },
+        { title: "We Play", to: "/applications/play/", image: "https://images.unsplash.com/photo-1777626760240-08320afdad30?w=600&h=400&fit=crop&auto=format" },
+        { title: "We Bridge", to: "/applications/bridge/", image: "https://images.unsplash.com/photo-1554992985-8ab04fbe59b8?w=600&h=400&fit=crop&auto=format" },
       ]}
     />
   );

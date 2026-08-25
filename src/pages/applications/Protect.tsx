@@ -34,11 +34,11 @@ export default function Protect() {
         },
       ]}
       ctaText="Safety Netting Gallery"
-      ctaTo="/gallery/protection-netting"
+      ctaTo="/gallery/protection-netting/"
       relatedApps={[
-        { title: "We Zoo", to: "/applications/zoo", image: "https://images.unsplash.com/photo-1714466614031-b128463b8767?w=600&h=400&fit=crop&auto=format" },
-        { title: "We Sport", to: "/applications/sport", image: "https://images.unsplash.com/photo-1632946269126-0f8edbe8b068?w=600&h=400&fit=crop&auto=format" },
-        { title: "We Handrail", to: "/applications/handrail", image: "https://images.unsplash.com/photo-1563300467-5a9220d63233?w=600&h=400&fit=crop&auto=format" },
+        { title: "We Zoo", to: "/applications/zoo/", image: "https://images.unsplash.com/photo-1714466614031-b128463b8767?w=600&h=400&fit=crop&auto=format" },
+        { title: "We Sport", to: "/applications/sport/", image: "https://images.unsplash.com/photo-1632946269126-0f8edbe8b068?w=600&h=400&fit=crop&auto=format" },
+        { title: "We Handrail", to: "/applications/handrail/", image: "https://images.unsplash.com/photo-1563300467-5a9220d63233?w=600&h=400&fit=crop&auto=format" },
       ]}
     />
   );

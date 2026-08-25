@@ -29,12 +29,12 @@ export default function Sport() {
         },
       ]}
       ctaText="View Golf and Sport Netting Gallery"
-      ctaTo="/gallery/golf-and-sport"
+      ctaTo="/gallery/golf-and-sport/"
       afterHero={<GolfNetsPromo className="py-20 md:py-24" />}
       relatedApps={[
-        { title: "We Protect", to: "/applications/protect", image: "https://images.unsplash.com/photo-1778941120800-6ecd662bbc36?w=600&h=400&fit=crop&auto=format" },
-        { title: "We Handrail", to: "/applications/handrail", image: "https://images.unsplash.com/photo-1563300467-5a9220d63233?w=600&h=400&fit=crop&auto=format" },
-        { title: "We Bridge", to: "/applications/bridge", image: "https://images.unsplash.com/photo-1554992985-8ab04fbe59b8?w=600&h=400&fit=crop&auto=format" },
+        { title: "We Protect", to: "/applications/protect/", image: "https://images.unsplash.com/photo-1778941120800-6ecd662bbc36?w=600&h=400&fit=crop&auto=format" },
+        { title: "We Handrail", to: "/applications/handrail/", image: "https://images.unsplash.com/photo-1563300467-5a9220d63233?w=600&h=400&fit=crop&auto=format" },
+        { title: "We Bridge", to: "/applications/bridge/", image: "https://images.unsplash.com/photo-1554992985-8ab04fbe59b8?w=600&h=400&fit=crop&auto=format" },
       ]}
     />
   );
