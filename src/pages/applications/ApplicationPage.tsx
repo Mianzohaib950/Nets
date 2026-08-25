@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import { AnimateIn } from "../../components/shared/AnimateIn";
 import { applicationCardImages } from "./applicationCardImages";
+import type { ReactNode } from "react";
 
 export interface Subsection {
   title: string;
@@ -23,8 +24,7 @@ interface Props {
   subsections: Subsection[];
   ctaText: string;
   ctaTo: string;
-  secondaryCtaText?: string;
-  secondaryCtaHref?: string;
+  afterHero?: ReactNode;
   relatedApps: RelatedApp[];
 }
 
@@ -35,8 +35,7 @@ export default function ApplicationPage({
   subsections,
   ctaText,
   ctaTo,
-  secondaryCtaText,
-  secondaryCtaHref,
+  afterHero,
   relatedApps,
 }: Props) {
   return (
@@ -72,6 +71,8 @@ export default function ApplicationPage({
           </motion.div>
         </div>
       </section>
+
+      {afterHero}
 
       {/* Alternating subsections */}
       {subsections.map((sub, i) => (
@@ -118,20 +119,6 @@ export default function ApplicationPage({
                 </span>
                 <ArrowRight size={14} />
               </Link>
-              {secondaryCtaText && secondaryCtaHref && (
-                <a
-                  href={secondaryCtaHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative group inline-flex items-center gap-2 border border-primary-foreground/50 text-primary-foreground px-8 py-3.5 rounded-[2px] text-sm font-medium hover:border-primary-foreground transition-colors"
-                >
-                  <span className="relative">
-                    {secondaryCtaText}
-                    <span className="absolute left-0 bottom-0 w-0 h-px bg-primary-foreground group-hover:w-full transition-all duration-300" />
-                  </span>
-                  <ArrowRight size={14} />
-                </a>
-              )}
             </div>
           </AnimateIn>
         </div>

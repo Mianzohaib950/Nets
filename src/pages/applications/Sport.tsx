@@ -3,6 +3,7 @@ import sportBaseballBarrierNetting from "../../imports/sport-baseball-barrier-ne
 import sportCourtContainmentBarrier from "../../imports/sport-court-containment-barrier.webp";
 import sportGolfCourseBarrierNetting from "../../imports/sport-golf-course-barrier-netting.webp";
 import sportHeroGolfContainmentNetting from "../../imports/sport-hero-golf-containment-netting.seo.webp";
+import { GolfNetsPromo } from "../../components/shared/GolfNetsPromo";
 
 export default function Sport() {
   return (
@@ -29,8 +30,7 @@ export default function Sport() {
       ]}
       ctaText="View Golf and Sport Netting Gallery"
       ctaTo="/gallery/golf-and-sport"
-      secondaryCtaText="Explore Golf Nets Unlimited Website"
-      secondaryCtaHref="https://golfnetsunlimited.com/"
+      afterHero={<GolfNetsPromo className="py-20 md:py-24" />}
       relatedApps={[
         { title: "We Protect", to: "/applications/protect", image: "https://images.unsplash.com/photo-1778941120800-6ecd662bbc36?w=600&h=400&fit=crop&auto=format" },
         { title: "We Handrail", to: "/applications/handrail", image: "https://images.unsplash.com/photo-1563300467-5a9220d63233?w=600&h=400&fit=crop&auto=format" },
