@@ -24,6 +24,11 @@
   ],
   "routes": [
     {
+      "src": "/(?:bridges|protection-netting|waterparks|zoos|we-waterpark|we-decorate|we-handrail|golf-and-sport|we-bridge-1|we-play|we-zoo|about-(?:%26|&)-contact|applications/(?:play|sport|decorate|protect)|gallery/(?:golf-and-sport|play-elements)|services)/?(?:%E2%80%A2|•)?/?",
+      "dest": "/410.html",
+      "status": 410
+    },
+    {
       "src": "/assets/(.*)",
       "headers": { "Cache-Control": "public, max-age=31536000, immutable" },
       "continue": true

@@ -2,6 +2,13 @@
 # deployments remain compatible when an optional module is unavailable.
 DirectoryIndex index.html
 
+# Permanently retired legacy URLs. Return 410 so search engines remove them
+# from their indexes faster than ordinary 404 responses.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^(?:bridges|protection-netting|waterparks|zoos|we-waterpark|we-decorate|we-handrail|golf-and-sport|we-bridge-1|we-play|we-zoo|about-(?:%26|&)-contact|applications/(?:play|sport|decorate|protect)|gallery/(?:golf-and-sport|play-elements)|services)/?(?:%E2%80%A2|•)?/?$ - [G,L,NC]
+</IfModule>
+
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json application/xml image/svg+xml
 </IfModule>
