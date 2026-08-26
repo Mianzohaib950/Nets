@@ -6,7 +6,7 @@ DirectoryIndex index.html
 # from their indexes faster than ordinary 404 responses.
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteRule ^(?:bridges|protection-netting|waterparks|zoos|we-waterpark|we-decorate|we-handrail|golf-and-sport|we-bridge-1|we-play|we-zoo|about-(?:%26|&)-contact|applications/(?:zoo|waterpark|bridge|handrail|play|sport|decorate|protect)|gallery(?:/(?:zoos|waterparks|bridges|handrails|play-elements|golf-and-sport|protection-netting|we-decorate))?|services)$ - [G,L,NC]
+  RewriteRule ^(?:bridges|protection-netting|waterparks|zoos|we-waterpark|we-decorate|we-handrail|golf-and-sport|we-bridge-1|we-play|we-zoo|about|about-(?:%26|&)-contact|applications/(?:zoo|waterpark|bridge|handrail|play|sport|decorate|protect)|gallery(?:/(?:zoos|waterparks|bridges|handrails|play-elements|golf-and-sport|protection-netting|we-decorate))?|services)$ - [G,L,NC]
 </IfModule>
 
 <IfModule mod_deflate.c>
