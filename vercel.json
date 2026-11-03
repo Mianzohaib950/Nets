@@ -23,9 +23,9 @@
   ],
   "routes": [
     {
-      "src": "/(?:gallery/golf-and-sport|services|applications/(?:protect|decorate))",
-      "dest": "/410.html",
-      "status": 410
+      "src": "/(about|services|contact|privacy|gallery|applications/(?:zoo|waterpark|bridge|handrail|play|sport|protect|decorate)|gallery/(?:zoos|waterparks|bridges|handrails|play-elements|golf-and-sport|protection-netting|we-decorate))",
+      "status": 301,
+      "headers": { "Location": "/$1/" }
     },
     {
       "src": "/(?:bridges|handrails|waterparks|protection-netting|zoos|we-bridge-1|we-protect|play-elements|about-(?:%26|&)-contact)/?",

@@ -1,12 +1,33 @@
 # Apache production performance configuration. All directives are guarded so
 # deployments remain compatible when an optional module is unavailable.
 DirectoryIndex index.html
+ErrorDocument 404 /404.html
+ErrorDocument 410 /410.html
 
-# Permanently retired legacy URLs. Return 410 so search engines remove them
-# from their indexes faster than ordinary 404 responses.
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteRule ^(?:bridges|protection-netting|waterparks|zoos|we-waterpark|we-decorate|we-handrail|golf-and-sport|we-bridge-1|we-play|we-zoo|about|about-(?:%26|&)-contact|applications/(?:zoo|waterpark|bridge|handrail|play|sport|decorate|protect)|gallery(?:/(?:zoos|waterparks|bridges|handrails|play-elements|golf-and-sport|protection-netting|we-decorate))?|services)$ - [G,L,NC]
+
+  # One canonical host: https://netsunlimited.com (no www, no plain HTTP).
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://netsunlimited.com%{REQUEST_URI} [R=301,L,NE]
+  RewriteCond %{HTTP_HOST} ^www\. [NC]
+  RewriteRule ^ https://netsunlimited.com%{REQUEST_URI} [R=301,L,NE]
+
+  # /index.html duplicates the homepage.
+  RewriteCond %{THE_REQUEST} \s/index\.html[\s?]
+  RewriteRule ^index\.html$ / [R=301,L]
+
+  # /applications/ has no page of its own; the services page is its hub.
+  RewriteRule ^applications/?$ /services/ [R=301,L]
+
+  # Live pages are served with a trailing slash. Redirect the slash-less form
+  # instead of returning 410, so old internal links and backlinks keep working.
+  RewriteRule ^(about|services|contact|privacy|gallery|applications/(?:zoo|waterpark|bridge|handrail|play|sport|protect|decorate)|gallery/(?:zoos|waterparks|bridges|handrails|play-elements|golf-and-sport|protection-netting|we-decorate))$ /$1/ [R=301,L]
+
+  # Permanently retired legacy URLs. Return 410 so search engines remove them
+  # from their indexes faster than ordinary 404 responses.
+  RewriteRule ^(?:bridges|protection-netting|waterparks|zoos|we-waterpark|we-decorate|we-handrail|golf-and-sport|we-bridge-1|we-play|we-zoo|about-(?:%26|&)-contact)/?$ - [G,L,NC]
 </IfModule>
 
 <IfModule mod_deflate.c>
@@ -36,11 +57,18 @@ DirectoryIndex index.html
   <FilesMatch "\.html$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
-  Header set X-Content-Type-Options "nosniff"
-  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  <FilesMatch "^(?:404|410)\.html$">
+    Header always set X-Robots-Tag "noindex"
+  </FilesMatch>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set Strict-Transport-Security "max-age=31536000"
 </IfModule>
 
 <IfModule mod_mime.c>
   AddType image/webp .webp
   AddType font/woff2 .woff2
+  AddType text/plain .txt
 </IfModule>

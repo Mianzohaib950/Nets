@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
 import { AnimateIn } from "../components/shared/AnimateIn";
 import bridgeTunnelNetting from "../imports/bridge-tunnel-netting.webp";
+import { homeFaqs } from "../data/homeFaqs";
 
 const HERO_IMAGES = [
   {
@@ -41,11 +42,7 @@ const stats = [
 
 const statText = { value: "AZ ROC", label: "#236070 — Licensed & Bonded" };
 
-const faqs = [
-  { question: "What types of custom netting does Nets Unlimited provide?", answer: "We fabricate and install zoo enclosures, waterpark barriers, rope bridges, play elements, handrails, sports containment systems and fall or debris protection netting." },
-  { question: "Does Nets Unlimited work outside Arizona?", answer: "Yes. Our Phoenix-based team supports commercial, recreational and zoological projects throughout the United States." },
-  { question: "Can you help before a project has final drawings?", answer: "Yes. We provide planning and consultation from early concepts through custom fabrication, installation, inspection and maintenance." },
-];
+const faqs = homeFaqs;
 
 function CountUp({ target, suffix }: { target: number; suffix: string }) {
   const [count, setCount] = useState(0);
@@ -251,7 +248,7 @@ export default function Home() {
                 <img
                   src={HERO_IMAGES[heroIndex].src}
                   alt={HERO_IMAGES[heroIndex].alt}
-                  fetchPriority={heroIndex === 0 ? "high" : "auto"}
+                  {...{ fetchpriority: heroIndex === 0 ? "high" : "auto" }}
                   loading={heroIndex === 0 ? "eager" : "lazy"}
                   width="960"
                   height="1080"
@@ -365,7 +362,7 @@ export default function Home() {
                   src={item.image}
                   alt={item.title}
                   loading="lazy"
-                  fetchPriority="low"
+                  {...{ fetchpriority: "low" }}
                   decoding="async"
                   width="720"
                   height="540"

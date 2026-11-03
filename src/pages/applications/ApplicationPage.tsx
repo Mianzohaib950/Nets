@@ -61,7 +61,7 @@ export default function ApplicationPage({
             <motion.img
               src={heroImage}
               alt={pageTitle}
-              fetchPriority="high"
+              {...{ fetchpriority: "high" }}
               decoding="async"
               className="absolute inset-0 w-full h-full object-cover"
               initial={{ scale: 1.07 }}

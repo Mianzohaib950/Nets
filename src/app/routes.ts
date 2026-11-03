@@ -1,58 +1,36 @@
-import { createElement, lazy, Suspense } from "react";
-import { createBrowserRouter } from "react-router";
+import type { ComponentType } from "react";
+import type { RouteObject } from "react-router";
 import Root from "../components/layout/Root";
 import Home from "../pages/Home";
 
-const Services = lazy(() => import("../pages/Services"));
-const About = lazy(() => import("../pages/About"));
-const Contact = lazy(() => import("../pages/Contact"));
-const Privacy = lazy(() => import("../pages/Privacy"));
-const NotFound = lazy(() => import("../pages/NotFound"));
-const Zoo = lazy(() => import("../pages/applications/Zoo"));
-const Waterpark = lazy(() => import("../pages/applications/Waterpark"));
-const Bridge = lazy(() => import("../pages/applications/Bridge"));
-const Handrail = lazy(() => import("../pages/applications/Handrail"));
-const Play = lazy(() => import("../pages/applications/Play"));
-const Sport = lazy(() => import("../pages/applications/Sport"));
-const Protect = lazy(() => import("../pages/applications/Protect"));
-const Decorate = lazy(() => import("../pages/applications/Decorate"));
-const GalleryIndex = lazy(() => import("../pages/gallery/GalleryIndex"));
-const GalleryCategory = lazy(() => import("../pages/gallery/GalleryCategory"));
-
-function deferred(Component: React.LazyExoticComponent<React.ComponentType>) {
-  return createElement(
-    Suspense,
-    {
-      fallback: createElement("div", {
-        className: "min-h-screen bg-background",
-        "aria-hidden": true,
-      }),
-    },
-    createElement(Component),
-  );
+// Route-level `lazy` lets the router finish loading the matched page before the
+// first render, so a prerendered page is replaced by identical markup instead of
+// flashing a Suspense fallback.
+function page(load: () => Promise<{ default: ComponentType }>) {
+  return async () => ({ Component: (await load()).default });
 }
 
-export const router = createBrowserRouter([
+export const routes: RouteObject[] = [
   {
     path: "/",
     Component: Root,
     children: [
       { index: true, Component: Home },
-      { path: "services", element: deferred(Services) },
-      { path: "about", element: deferred(About) },
-      { path: "contact", element: deferred(Contact) },
-      { path: "privacy", element: deferred(Privacy) },
-      { path: "applications/zoo", element: deferred(Zoo) },
-      { path: "applications/waterpark", element: deferred(Waterpark) },
-      { path: "applications/bridge", element: deferred(Bridge) },
-      { path: "applications/handrail", element: deferred(Handrail) },
-      { path: "applications/play", element: deferred(Play) },
-      { path: "applications/sport", element: deferred(Sport) },
-      { path: "applications/protect", element: deferred(Protect) },
-      { path: "applications/decorate", element: deferred(Decorate) },
-      { path: "gallery", element: deferred(GalleryIndex) },
-      { path: "gallery/:category", element: deferred(GalleryCategory) },
-      { path: "*", element: deferred(NotFound) },
+      { path: "services", lazy: page(() => import("../pages/Services")) },
+      { path: "about", lazy: page(() => import("../pages/About")) },
+      { path: "contact", lazy: page(() => import("../pages/Contact")) },
+      { path: "privacy", lazy: page(() => import("../pages/Privacy")) },
+      { path: "applications/zoo", lazy: page(() => import("../pages/applications/Zoo")) },
+      { path: "applications/waterpark", lazy: page(() => import("../pages/applications/Waterpark")) },
+      { path: "applications/bridge", lazy: page(() => import("../pages/applications/Bridge")) },
+      { path: "applications/handrail", lazy: page(() => import("../pages/applications/Handrail")) },
+      { path: "applications/play", lazy: page(() => import("../pages/applications/Play")) },
+      { path: "applications/sport", lazy: page(() => import("../pages/applications/Sport")) },
+      { path: "applications/protect", lazy: page(() => import("../pages/applications/Protect")) },
+      { path: "applications/decorate", lazy: page(() => import("../pages/applications/Decorate")) },
+      { path: "gallery", lazy: page(() => import("../pages/gallery/GalleryIndex")) },
+      { path: "gallery/:category", lazy: page(() => import("../pages/gallery/GalleryCategory")) },
+      { path: "*", lazy: page(() => import("../pages/NotFound")) },
     ],
   },
-]);
+];
