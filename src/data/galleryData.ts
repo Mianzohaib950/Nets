@@ -170,7 +170,6 @@ export const galleryCategories: GalleryCategoryInfo[] = [
       { id: 31, src: "/images/handrails/rs=w_2560 (31).webp", alt: "rs=w_2560 (31)" },
       { id: 32, src: "/images/handrails/rs=w_2560 (32).webp", alt: "rs=w_2560 (32)" },
       { id: 33, src: "/images/handrails/rs=w_2560 (33).webp", alt: "rs=w_2560 (33)" },
-      { id: 34, src: "/images/handrails/rs=w_2560,h_708.webp", alt: "rs=w_2560,h_708" },
       { id: 35, src: "/images/handrails/rs=w_2560.webp", alt: "rs=w_2560" },
     ],
   },

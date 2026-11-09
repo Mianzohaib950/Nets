@@ -23,7 +23,7 @@ export default function Bridge() {
         },
         {
           title: "One-Way / V Bridge",
-          body: "One-Way and V Bridges are generally made rope/netting over a cable framework. Sometimes they will have a wood walking surface as well. These bridges are usually one-directional as they are not wide enough for two-way traffic.",
+          body: "One-Way and V-Bridges are generally made by attaching rope/netting to a cable framework. Sometimes they will have a wood walking surface as well. These bridges are usually one-directional as they are not wide enough for two-way traffic.",
           image: bridgeOneWayVBridge,
         },
       ]}

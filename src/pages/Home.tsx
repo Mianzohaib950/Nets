@@ -86,7 +86,7 @@ const whatWeDo = [
   {
     title: "Zoos & Aquariums",
     sub: "Animal Exhibits & Enrichment",
-    desc: "Custom netting solutions for immersive animal exhibits that are visually unobtrusive, safe, and secure. From new construction to refurbishment and enrichment elements.",
+    desc: "From new construction to refurbishment and enrichment elements, we provide custom netting solutions for immersive animal exhibits that are visually unobtrusive, safe, and secure.",
     image: "/images/home-cards/zoos.webp",
     to: "/applications/zoo/",
   },
@@ -299,9 +299,9 @@ export default function Home() {
             </AnimateIn>
             <AnimateIn variant="fadeRight" delay={0.1}>
               <p className="text-foreground/80 text-lg leading-[1.7]">
-                Since our beginning in 2003, Nets Unlimited has endeavored to become the world's
+                Since our beginning in 2003, Nets Unlimited Inc. has endeavored to become the world's
                 leading provider of the highest quality rope and netting products. We invite you to
-                explore our site to discover how Nets Unlimited, Inc. serves a wide range of
+                explore our site to discover how Nets Unlimited serves a wide range of
                 industries by combining expert craftsmanship and customized service to deliver
                 outstanding functional solutions that never sacrifice beauty, efficiency, or quality.
               </p>

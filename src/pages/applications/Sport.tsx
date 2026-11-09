@@ -10,7 +10,7 @@ export default function Sport() {
     <ApplicationPage
       pageTitle="We Golf & Sport"
       heroImage={sportHeroGolfContainmentNetting}
-      heroIntro="Nets Unlimited, Inc. has built a variety of driving ranges and sport court containment systems. We provide a wide array of options to meet the challenge of creating aesthetically pleasing solutions that protect against property damage and injury from stray balls."
+      heroIntro="Nets Unlimited has built a variety of driving ranges and sport court containment systems. We provide a wide array of options to meet the challenge of creating aesthetically pleasing solutions that protect against property damage and injury from stray balls."
       subsections={[
         {
           title: "Golf",
@@ -19,7 +19,7 @@ export default function Sport() {
         },
         {
           title: "Baseball Netting",
-          body: "Whether you need a single batting cage for an indoor experience or multiple cages for an entertainment center we can help you build what you need or replace existing damaged or worn out nets. Nets Unlimited also provides barrier netting for ballparks and park departments around sport complexes.",
+          body: "Whether you need a single batting cage for an indoor experience or multiple cages for an entertainment center, we can help you build what you need or replace existing damaged or worn out nets. Nets Unlimited also provides barrier netting for ballparks and other sport complexes.",
           image: sportBaseballBarrierNetting,
         },
         {

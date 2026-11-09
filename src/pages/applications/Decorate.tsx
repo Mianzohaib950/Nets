@@ -21,7 +21,7 @@ export default function Decorate() {
         <div className="max-w-[1280px] mx-auto px-6">
           <AnimateIn>
             <p className="text-lg text-foreground/80 leading-[1.7] max-w-2xl mb-16">
-              Rope and netting can be an excellent design element to many applications. Stainless Steel
+              Rope and netting can be an excellent design element to many applications. Stainless steel
               and coil mesh products lend a more modern aesthetic, where rope can add an air of jungle,
               desert, or nautical theme to any space. Look through some of our work to envision your
               space.

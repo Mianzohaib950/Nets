@@ -9,7 +9,7 @@ export default function Play() {
     <ApplicationPage
       pageTitle="We Play"
       heroImage={playHeroIndoorRopeCourse}
-      heroIntro="Nets Unlimited, Inc. creates and builds many types of interactive children's play and obstacle course elements. Children's play elements are critical to youth development — through play, children learn and develop lifelong skills that support growth far past childhood."
+      heroIntro="Nets Unlimited creates and builds many types of interactive children's play and obstacle course elements that ignite the imagination. Children's play elements are critical to youth development — through play, children learn and develop lifelong skills that support growth far past childhood."
       subsections={[
         {
           title: "Tunnels",
@@ -18,12 +18,12 @@ export default function Play() {
         },
         {
           title: "Climbs",
-          body: "Children's climbs add an interactive element for your guests to enjoy for many reasons. Climbing increases muscle tone and strength, sharpens visual perception, promotes motor skills, balance, and also helps children gain agility, flexibility, and coordination. Additionally, having a variety of interactive options within a zoo, park, water park, or family fun center improves guest perception of their overall value for the price of admission.",
+          body: "Children's climbs add an interactive element for your guests to enjoy. Climbing increases muscle tone and strength, sharpens visual perception, promotes motor skills, balance, and also helps children gain agility, flexibility, and coordination. Having a variety of interactive options within a zoo, park, water park, or family fun center improves guest perception of their overall value for the price of admission.",
           image: playClimbsIndoorNetTower,
         },
         {
           title: "Spiderweb Nets",
-          body: "Spiderweb nets offer all of the sensory and cognitive development benefits of our climbs and tunnels and they provide a great learning opportunity about the world around us as well. However, they're also a great addition when space is limited to a single play element.",
+          body: "Spiderweb nets offer all of the sensory and cognitive development benefits of our climbs and tunnels while providing an additional learning opportunity regarding the world around us. Where space may be limited, a spiderweb net checks many boxes for an added play/learning element.",
           image: playSpiderwebKids,
         },
       ]}

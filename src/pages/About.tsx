@@ -6,8 +6,9 @@ import aboutOurApproachSafetyNetting from "../imports/about-our-approach-safety-
 const industries = [
   "Zoos & Aquariums",
   "Waterparks & Themeparks",
-  "FEC's / Restaurants / Resorts",
-  "Golf Courses & HOA's",
+  "Restaurants / Resorts",
+  "Family Entertainment Centers",
+  "Golf Courses & other sport court venues",
   "Government — International, Federal, State & Local",
   "Residential Home Owners & Builders",
 ];
@@ -19,7 +20,7 @@ export default function About() {
       <div className="bg-forest-900 pt-32 pb-20">
         <div className="max-w-[1280px] mx-auto px-6">
           <AnimateIn>
-            <p className="text-xs font-medium tracking-widest uppercase text-clay mb-4">Est. January 2004</p>
+            <p className="text-xs font-medium tracking-widest uppercase text-clay mb-4">Est. 2023</p>
             <h1 className="font-serif text-5xl md:text-6xl font-light text-primary-foreground tracking-[-0.02em] leading-[1.05]">
               About Us
             </h1>
@@ -39,14 +40,14 @@ export default function About() {
             </AnimateIn>
             <AnimateIn delay={0.1}>
               <p className="text-foreground/80 text-lg leading-[1.7]">
-                NETS Unlimited, Inc. opened its doors for business in January 2004, providing rope and
+                Upon opening its doors for business NETS Unlimited Inc began providing rope and
                 netting products to a multitude of different industries and for a variety of applications.
                 Our mission was to become the industry leader by consistently providing superior products
                 and services that exceed our clients' expectations.
               </p>
               <p className="text-foreground/80 text-lg leading-[1.7] mt-5">
                 Through our unwavering commitment to combine quality, excellence, value, integrity, and
-                global awareness we hope that we can help you with your rope and netting needs, while
+                global awareness, we hope that we can help you with your rope and netting needs, while
                 also fostering a sense of conservation and community connection.
               </p>
             </AnimateIn>

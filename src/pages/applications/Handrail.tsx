@@ -18,14 +18,14 @@ export default function Handrail() {
           image: handrailHandWovenStainlessSteel,
         },
         {
-          title: "Machine Knotted Netting / Themed Handrails",
-          body: "Machine knotted netting is a perfect solution for long runs of handrails. These options help to carry or continue the aesthetic of areas in a jungle, tropical, or nautical theme past where handwoven rope handrails are employed for high visual impact. The machine knotted netting is a more budget-friendly choice than a hand-woven net.",
-          image: handrailMachineKnottedThemed,
-        },
-        {
           title: "Handwoven Rope Handrails",
           body: "When an individualized high-impact design is needed for a project such as a gateway, restaurant, lobby, or guest entrance area, handwoven rope handrails are an excellent choice. These handrails are custom made to order in any configuration required, and ultimately lead to a beautiful and memorable design element for your property.",
           image: handrailHandwovenRopeStairway,
+        },
+        {
+          title: "Machine Knotted Netting / Themed Handrails",
+          body: "Machine knotted netting is a perfect solution for long runs of handrails. These options help to carry, or continue, the aesthetic of areas in a jungle, tropical, or nautical theme past where handwoven rope handrails are employed for high visual impact. The machine knotted netting is a more budget-friendly choice than a hand-woven net.",
+          image: handrailMachineKnottedThemed,
         },
         {
           title: "Cable and Rope Rails",

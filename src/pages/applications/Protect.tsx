@@ -8,13 +8,13 @@ import protectBlastForceResidentialNetting from "../../imports/protect-blast-for
 export default function Protect() {
   return (
     <ApplicationPage
-      pageTitle="We Mitigate Risk"
+      pageTitle="We Protect"
       heroImage={protectJumpPreventionBarrier}
       heroIntro="There are a multitude of applications that safety netting can be utilized for including construction, animal containment, people barriers, safety netting for entertainment and sporting venues, and much more. Customized safety systems can lower insurance costs, positively impact public image, and create better worker morale."
       subsections={[
         {
           title: "Fall & Debris Protection",
-          body: "Fall Protection safety netting systems offer passive protection from people or debris falling, without requiring anyone's active involvement. Our safety netting provides strength, impact resistance, durability, and confidence. These safety systems can be designed to catch people, debris or both, and are available for indoor or outdoor use. Our netting systems are custom made to meet your specific requirements.",
+          body: "Fall Protection safety netting systems offer passive protection from people or debris falling without the need for constant monitoring, without requiring anyone's active involvement. Our safety netting provides strength, impact resistance, durability, and confidence. These safety systems can be designed to catch people, debris or both, and are available for indoor or outdoor use. Our netting systems are custom made to meet your specific requirements.",
           image: protectFallDebrisNetting,
         },
         {
@@ -29,7 +29,7 @@ export default function Protect() {
         },
         {
           title: "Jump Prevention Nets",
-          body: "Suicide affects over 1,000,000 people a year. Research shows that suicide prevention nets not only can save jumpers lives but also act as a deterrent to suicide attempts. If your building, or bridge, can benefit from a suicide prevention net, we are available to go through the specifications and best options for your situation.",
+          body: "Suicide affects over 1,000,000 people a year. Research shows that suicide prevention nets not only can save jumpers lives, but also act as a deterrent to suicide attempts. If your building or bridge can benefit from a suicide prevention net, we are available to discuss the specifications and best options for your situation.",
           image: protectHeroRiskMitigationNetting,
         },
       ]}
