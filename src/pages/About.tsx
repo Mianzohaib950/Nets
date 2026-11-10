@@ -20,7 +20,7 @@ export default function About() {
       <div className="bg-forest-900 pt-32 pb-20">
         <div className="max-w-[1280px] mx-auto px-6">
           <AnimateIn>
-            <p className="text-xs font-medium tracking-widest uppercase text-clay mb-4">Est. 2023</p>
+            <p className="text-xs font-medium tracking-widest uppercase text-clay mb-4">Est. 2003</p>
             <h1 className="font-serif text-5xl md:text-6xl font-light text-primary-foreground tracking-[-0.02em] leading-[1.05]">
               About Us
             </h1>
