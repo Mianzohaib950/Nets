@@ -1320,5 +1320,10 @@
     "height": 1200,
     "w480": "/images/_responsive/17e196efb68c-480.webp",
     "w960": "/images/_responsive/17e196efb68c-960.webp"
+  },
+  "/images/bridges/bridge-17.webp": {
+    "width": 768,
+    "height": 512,
+    "w480": "/images/_responsive/a03e8adee76e-480.webp"
   }
 }

@@ -890,5 +890,9 @@
   "/images/zoos/zoo9.webp": {
     "width": 1600,
     "height": 1200
+  },
+  "/images/bridges/bridge-17.webp": {
+    "width": 768,
+    "height": 512
   }
 }
