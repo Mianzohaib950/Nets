@@ -9,6 +9,10 @@ const labels: Record<string, string> = {
   "play-elements": "Play Elements", "golf-and-sport": "Golf & Sports",
   "protection-netting": "Protection Netting",
   "we-decorate": "We Decorate",
+  "netting-design-consultation": "Netting Design & Consultation",
+  "custom-net-fabrication": "Custom Net & Rope Fabrication",
+  "netting-installation": "Netting Installation",
+  "net-inspection-maintenance": "Net Inspection & Maintenance",
 };
 
 export function Breadcrumbs() {
@@ -17,7 +21,7 @@ export function Breadcrumbs() {
   if (!segments.length) return null;
 
   const crumbs = [{ label: "Home", to: "/" }];
-  if (segments[0] === "applications") crumbs.push({ label: "Services", to: "/services/" });
+  if (segments[0] === "applications" || (segments[0] === "services" && segments.length > 1)) crumbs.push({ label: "Services", to: "/services/" });
   else if (segments[0] === "gallery" && segments.length > 1) crumbs.push({ label: "Project Gallery", to: "/gallery/" });
   const leaf = segments.at(-1)!;
   crumbs.push({ label: labels[leaf] ?? leaf.replaceAll("-", " "), to: pathname });

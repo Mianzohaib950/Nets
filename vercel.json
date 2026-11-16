@@ -23,7 +23,7 @@
   ],
   "routes": [
     {
-      "src": "/(about|services|contact|privacy|gallery|applications/(?:zoo|waterpark|bridge|handrail|play|sport|protect|decorate)|gallery/(?:zoos|waterparks|bridges|handrails|play-elements|golf-and-sport|protection-netting|we-decorate))",
+      "src": "/(about|services|services/netting-design-consultation|services/custom-net-fabrication|services/netting-installation|services/net-inspection-maintenance|contact|privacy|gallery|applications/(?:zoo|waterpark|bridge|handrail|play|sport|protect|decorate)|gallery/(?:zoos|waterparks|bridges|handrails|play-elements|golf-and-sport|protection-netting|we-decorate))",
       "status": 301,
       "headers": { "Location": "/$1/" }
     },

@@ -7,30 +7,34 @@ import inspectionMaintenanceSiteCheck from "../imports/inspection-maintenance-si
 import fabricationLargeNet from "../imports/fabrication-large-net.webp";
 import installationNettingSite from "../imports/installation-netting-site.webp";
 
-const services = [
+const services: { title: string; body: string; image: string; badge: string; link?: { label: string; to: string } }[] = [
   {
     title: "Planning & Consultation",
     body: "Nets Unlimited knows that comprehensive consulting is the key to any successful project. During the design phase, changing directions while the plan is still just lines on paper can make a huge difference in the overall reach of your budget. Pre-construction consulting with a netting expert will save you from time delays and costly change orders during building. Also, if you are thinking about re-purposing what you already have, talking with an expert on the possible limitations of your vision should be a top priority. So, whether you need support in the conceptualization phase, or already have drawings but have hit a snag, or just want to make that old exhibit new again, our design team is here to help you through all phases of your project.",
     image: planningConsultationBlueprint,
     badge: "Phase 01",
+    link: { label: "Explore Netting Design & Consultation", to: "/services/netting-design-consultation/" },
   },
   {
     title: "Fabrication",
     body: "Fabrication is the cornerstone of Nets Unlimited's business. Our crew of highly skilled craftsmen fabricates everything from simple rope lanyards to handrail nets to full-scale animal exhibits. Whether you need a net made from twine, rope, or stainless steel cable, rest assured Nets Unlimited will produce the highest quality products in the industry. We make rope nets out of any material the customer requires, but we pride ourselves on nets made from our signature NU-Line rope. Additionally, all of the hand-woven stainless steel nets are made to order, in whatever custom size works for your project.",
     image: fabricationLargeNet,
     badge: "Phase 02",
+    link: { label: "Explore Custom Net & Rope Fabrication", to: "/services/custom-net-fabrication/" },
   },
   {
     title: "Installation",
     body: "Since our inception, Nets Unlimited has set the benchmark for quality netting and rope installations. Our team of professional installers are licensed, bonded, and insured. Supervisors are OSHA 30 trained and all installers are OSHA 10 certified at a minimum. In addition to safety conscientiousness, we aim to deliver the best customer service, regardless of how simple or complicated a project may be. Our experience ensures a professional installation with unparalleled workmanship that will keep your project looking beautiful for years to come. Having Nets Unlimited perform your installations means you know that things were done right and to the highest standards in the industry — ours.",
     image: installationNettingSite,
     badge: "Phase 03",
+    link: { label: "Explore Netting Installation", to: "/services/netting-installation/" },
   },
   {
     title: "Inspections & Maintenance",
     body: "We offer inspection and quality control services for existing net structures. A competent and thorough inspection is one of the most important elements in achieving the longevity of your nets and structures. Proper inspections require not only technical expertise and knowledge of the materials and procedures, but also sound judgment. Our team comes with over 75 combined years of experience. With our onsite inspections, we are able to verify that your structure was built using industry standards, that the net is intact and not showing signs of wear, and provide a written report to be submitted to your insurance company. If any netting requires repairs, we can repair it during the inspection or through one of our maintenance plans.",
     image: inspectionMaintenanceSiteCheck,
     badge: "Phase 04",
+    link: { label: "Explore Net Inspection & Maintenance", to: "/services/net-inspection-maintenance/" },
   },
 ];
 
@@ -81,6 +85,18 @@ export default function Services() {
                 {svc.title}
               </h2>
               <p className="text-foreground/75 leading-[1.8] max-w-lg">{svc.body}</p>
+              {svc.link && (
+                <Link
+                  to={svc.link.to}
+                  className="group inline-flex items-center gap-2 mt-8 text-sm font-medium text-clay"
+                >
+                  <span className="relative">
+                    {svc.link.label}
+                    <span className="absolute left-0 bottom-0 w-0 h-px bg-clay group-hover:w-full transition-all duration-300" />
+                  </span>
+                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+              )}
             </AnimateIn>
           </div>
         </div>

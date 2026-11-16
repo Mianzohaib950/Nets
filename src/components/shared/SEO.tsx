@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router";
 import { homeFaqs } from "../../data/homeFaqs";
+import { customNetFabricationFaqs, netInspectionFaqs, nettingDesignFaqs, nettingInstallationFaqs } from "../../data/serviceFaqs";
 
 const SITE_URL = "https://netsunlimited.com";
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.webp`;
@@ -21,6 +22,10 @@ function completeDescription(description: string) {
 const pages: Record<string, PageSEO> = {
   "/": { title: "Custom Rope & Safety Netting | Nets Unlimited", description: "Custom rope, safety netting, animal enclosures, handrails, bridges and play systems for zoos, waterparks and commercial projects since 2004." },
   "/services": { title: "Custom Netting Services | Nets Unlimited", description: "Planning, custom fabrication, installation, inspection and maintenance services for commercial rope and netting systems." },
+  "/services/netting-design-consultation": { title: "Netting Design & Consultation Services | Nets Unlimited", description: "Plan your netting project with an expert before you build. Design consultation for zoos, waterparks, play areas and commercial sites across the US." },
+  "/services/custom-net-fabrication": { title: "Custom Net & Rope Fabrication | Nets Unlimited", description: "Custom rope, knotted netting and hand-woven stainless steel mesh, made to order for zoos, waterparks, play areas and commercial projects across the US." },
+  "/services/netting-installation": { title: "Professional Netting Installation Services | Nets Unlimited", description: "Licensed, bonded and insured netting installers with OSHA-trained crews. Safety, zoo, play and sports netting installed across the US." },
+  "/services/net-inspection-maintenance": { title: "Net Inspection, Repair & Maintenance | Nets Unlimited", description: "Onsite net inspections with a written report for your insurer, plus repairs and maintenance plans for rope, netting and cable structures across the US." },
   "/about": { title: "About Our Netting Experts | Nets Unlimited", description: "Meet the licensed, bonded and insured Phoenix team delivering custom rope and netting solutions nationwide since 2004." },
   "/contact": { title: "Contact Nets Unlimited | Request a Quote", description: "Request a quote for a custom rope, safety netting, enclosure, handrail, bridge or play-system project." },
   "/privacy": { title: "Privacy Policy | Nets Unlimited", description: "Read how Nets Unlimited handles contact-form information, third-party website services and privacy requests when you use our website." },
@@ -47,6 +52,10 @@ const notFound: PageSEO = { title: "Page Not Found | Nets Unlimited", descriptio
 
 const serviceNames: Record<string, string> = {
   "/services": "Custom netting design, fabrication, installation and maintenance",
+  "/services/netting-design-consultation": "Netting design consultation",
+  "/services/custom-net-fabrication": "Custom net fabrication",
+  "/services/netting-installation": "Netting installation",
+  "/services/net-inspection-maintenance": "Net inspection, repair and maintenance",
   "/applications/zoo": "Zoo and aquarium netting",
   "/applications/waterpark": "Waterpark and theme park netting",
   "/applications/bridge": "Custom rope bridges and tunnels",
@@ -55,6 +64,15 @@ const serviceNames: Record<string, string> = {
   "/applications/sport": "Golf and sports barrier netting",
   "/applications/protect": "Safety and fall protection netting",
   "/applications/decorate": "Architectural rope and net decor",
+};
+
+// Pages that render a visible FAQ section get matching FAQPage schema.
+const faqsByPath: Record<string, { question: string; answer: string }[]> = {
+  "/": homeFaqs,
+  "/services/netting-design-consultation": nettingDesignFaqs,
+  "/services/custom-net-fabrication": customNetFabricationFaqs,
+  "/services/netting-installation": nettingInstallationFaqs,
+  "/services/net-inspection-maintenance": netInspectionFaqs,
 };
 
 function normalize(pathname: string) {
@@ -126,9 +144,10 @@ export function schemaGraph(pathname: string) {
     description, url: canonical, provider: { "@id": `${SITE_URL}/#organization` },
     areaServed: { "@type": "Country", name: "United States" }, serviceType: serviceNames[path],
   });
-  if (path === "/") graph.push({
+  const faqs = faqsByPath[path];
+  if (faqs) graph.push({
     "@type": "FAQPage", "@id": `${canonical}#faq`,
-    mainEntity: homeFaqs.map((faq) => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } })),
+    mainEntity: faqs.map((faq) => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } })),
   });
   return { "@context": "https://schema.org", "@graph": graph };
 }

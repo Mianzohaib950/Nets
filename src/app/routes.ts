@@ -17,6 +17,10 @@ export const routes: RouteObject[] = [
     children: [
       { index: true, Component: Home },
       { path: "services", lazy: page(() => import("../pages/Services")) },
+      { path: "services/netting-design-consultation", lazy: page(() => import("../pages/services/NettingDesignConsultation")) },
+      { path: "services/custom-net-fabrication", lazy: page(() => import("../pages/services/CustomNetFabrication")) },
+      { path: "services/netting-installation", lazy: page(() => import("../pages/services/NettingInstallation")) },
+      { path: "services/net-inspection-maintenance", lazy: page(() => import("../pages/services/NetInspectionMaintenance")) },
       { path: "about", lazy: page(() => import("../pages/About")) },
       { path: "contact", lazy: page(() => import("../pages/Contact")) },
       { path: "privacy", lazy: page(() => import("../pages/Privacy")) },
