@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router";
 import { homeFaqs } from "../../data/homeFaqs";
+import { isGonePath } from "../../data/goneUrls";
 import { customNetFabricationFaqs, netInspectionFaqs, nettingDesignFaqs, nettingInstallationFaqs } from "../../data/serviceFaqs";
 
 const SITE_URL = "https://netsunlimited.com";
@@ -49,6 +50,7 @@ const pages: Record<string, PageSEO> = {
 };
 
 const notFound: PageSEO = { title: "Page Not Found | Nets Unlimited", description: "The requested page could not be found.", noindex: true };
+const gonePage: PageSEO = { title: "Page Removed | Nets Unlimited", description: "This page from our old website has been permanently removed.", noindex: true };
 
 const serviceNames: Record<string, string> = {
   "/services": "Custom netting design, fabrication, installation and maintenance",
@@ -83,7 +85,7 @@ export const indexablePaths = Object.keys(pages);
 
 export function pageSeo(pathname: string) {
   const path = normalize(pathname);
-  const page = pages[path] ?? notFound;
+  const page = pages[path] ?? (isGonePath(path) ? gonePage : notFound);
   const canonical = path === "/" ? `${SITE_URL}/` : `${SITE_URL}${path}/`;
   return {
     path,
@@ -184,12 +186,16 @@ export function SEO() {
     setMeta('meta[name="twitter:image:alt"]', "name", "twitter:image:alt", IMAGE_ALT);
 
     let canonicalLink = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-    if (!canonicalLink) {
+    if (page.noindex) {
+      // 404 / 410 pages have no canonical URL.
+      canonicalLink?.remove();
+      canonicalLink = null;
+    } else if (!canonicalLink) {
       canonicalLink = document.createElement("link");
       canonicalLink.rel = "canonical";
       document.head.appendChild(canonicalLink);
     }
-    canonicalLink.href = page.canonical;
+    if (canonicalLink) canonicalLink.href = page.canonical;
 
     document.querySelectorAll('script[data-seo-schema="true"], script[data-static-schema="true"]').forEach((node) => node.remove());
     const script = document.createElement("script");

@@ -36,6 +36,29 @@ for (const path of indexablePaths) {
   await writeFile(output, html);
 }
 
+// Error pages served by the server (ErrorDocument 404 / 410). They are rendered
+// from the app's NotFound page so they carry the real header, footer and styles,
+// and are never indexed. Any unknown path renders the 404 variant; a retired
+// legacy path renders the 410 variant.
+const errorPages = [
+  { file: "404.html", path: "/__not-found__/" },
+  { file: "410.html", path: "/hoa/" },
+];
+for (const { file, path } of errorPages) {
+  const { title, description } = pageSeo(path);
+  const markup = await render(path);
+  const html = shell
+    .replace(/<title>.*?<\/title>/, `<title>${escape(title)}</title>`)
+    .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${escape(description)}" />`)
+    .replace(/<meta name="robots" content="[^"]*" \/>/, `<meta name="robots" content="noindex, follow" />`)
+    .replace(/\s*<link rel="canonical" href="[^"]*" \/>/, "")
+    .replace(/\s*<meta property="og:url" content="[^"]*" \/>/, "")
+    .replace(/<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${escape(title)}" />`)
+    .replace(/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${escape(title)}" />`)
+    .replace('<div id="root"></div>', () => `<div id="root">${markup}</div>`);
+  await writeFile(join(dist, file), html);
+}
+
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${indexablePaths.map((path) => `  <url><loc>${baseUrl}${path === "/" ? "/" : `${path}/`}</loc></url>`).join("\n")}

@@ -27,7 +27,8 @@ ErrorDocument 410 /410.html
 
   # Permanently retired legacy URLs. Return 410 so search engines remove them
   # from their indexes faster than ordinary 404 responses.
-  RewriteRule ^(?:bridges|protection-netting|waterparks|zoos|we-waterpark|we-decorate|we-handrail|golf-and-sport|we-bridge-1|we-play|we-zoo|about-(?:%26|&)-contact)/?$ - [G,L,NC]
+  # Keep in sync with src/data/goneUrls.ts and vercel.json.
+  RewriteRule ^(?:about-(?:%26|&)-contact|bridges|golf-and-sport|handrails|hoa|other-nets|play-elements|protection-netting|waterparks|we-bridge-1|we-decorate|we-handrail|we-play|we-protect|we-sport-1|we-waterpark|we-zoo|zoos)/?$ - [G,L,NC]
 </IfModule>
 
 <IfModule mod_deflate.c>

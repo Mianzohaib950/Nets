@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router";
+import { pageSeo } from "./SEO";
 
 const labels: Record<string, string> = {
   services: "Services", about: "About", contact: "Contact", privacy: "Privacy Policy", gallery: "Galleries",
@@ -18,7 +19,8 @@ const labels: Record<string, string> = {
 export function Breadcrumbs() {
   const { pathname } = useLocation();
   const segments = pathname.split("/").filter(Boolean);
-  if (!segments.length) return null;
+  // No trail on the home page or on 404/410 pages.
+  if (!segments.length || pageSeo(pathname).noindex) return null;
 
   const crumbs = [{ label: "Home", to: "/" }];
   if (segments[0] === "applications" || (segments[0] === "services" && segments.length > 1)) crumbs.push({ label: "Services", to: "/services/" });
