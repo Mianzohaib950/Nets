@@ -7,6 +7,7 @@ import {
   IntroSection,
   LinksSection,
   ProcessSection,
+  ProjectGallerySection,
   ReasonsSection,
   ServiceHero,
 } from "./ServiceDetailPage";
@@ -81,7 +82,21 @@ export default function NettingInstallation() {
         ]}
       />
 
-      <FaqSection tone="light" heading="Netting Installation FAQs" items={nettingInstallationFaqs} />
+      <ProjectGallerySection
+        tone="light"
+        heading="Installations Across the Country"
+        intro="From aviary canopies hung by lift to netting on hillsides and stairwells, our crews install safely around the public, animals and other trades."
+        photos={[
+          { src: "/images/zoos/zoo49.webp", alt: "Crew on a lift installing an aviary mesh canopy", label: "Aviary canopy install", to: "/gallery/zoos/" },
+          { src: "/images/zoos/zoo50.webp", alt: "Lift raising stainless mesh over a large zoo enclosure", label: "Zoo enclosure install", to: "/gallery/zoos/" },
+          { src: "/images/protection-netting/protection26.webp", alt: "Fall protection netting installed below a hillside building", label: "Fall protection", to: "/gallery/protection-netting/" },
+          { src: "/images/protection-netting/protection11.webp", alt: "Safety netting installed in a multi-story exterior stairwell", label: "Stairwell netting", to: "/gallery/protection-netting/" },
+          { src: "/images/handrails/rs=w_2560 (5).webp", alt: "Rope netting handrail installed on a waterpark walkway", label: "Waterpark handrail", to: "/gallery/handrails/" },
+          { src: "/images/play-elements/play27.webp", alt: "Outdoor rope play structure installed among trees", label: "Rope play structure", to: "/gallery/play-elements/" },
+        ]}
+      />
+
+      <FaqSection tone="muted" heading="Netting Installation FAQs" items={nettingInstallationFaqs} />
 
       <FinalCta heading="Ready to Install?" body="Tell us about your site and timeline and we will prepare an installation quote." />
     </>

@@ -65,6 +65,18 @@ export default function NettingDesignConsultation() {
           { title: "Nationwide", body: "Based in Phoenix, Arizona, working on projects across the United States." },
         ],
       }}
+      gallery={{
+        heading: "Projects Planned With Our Design Team",
+        intro: "From large aviary canopies to indoor play structures, these projects started as drawings and were shaped by our team before fabrication began.",
+        photos: [
+          { src: "/images/zoos/zoo17.webp", alt: "Large walk-through aviary with stainless steel mesh canopy", label: "Zoo aviary", to: "/gallery/zoos/" },
+          { src: "/images/zoos/zoo29.webp", alt: "Netted canopy enclosure built around mature trees", label: "Zoo enclosure", to: "/gallery/zoos/" },
+          { src: "/images/zoos/zoo32.webp", alt: "Arched mesh animal habitat with rockwork", label: "Animal habitat", to: "/gallery/zoos/" },
+          { src: "/images/zoos/zoo47.webp", alt: "Multi-level viewing tower with netting infill", label: "Viewing tower", to: "/gallery/zoos/" },
+          { src: "/images/play-elements/play41.webp", alt: "Indoor climbing net structure with colorful steel frames", label: "Indoor play", to: "/gallery/play-elements/" },
+          { src: "/images/play-elements/play42.webp", alt: "Outdoor net tunnel bridge with curved steel hoops", label: "Net tunnel bridge", to: "/gallery/play-elements/" },
+        ],
+      }}
       faqs={{ heading: "Netting Design FAQs", items: nettingDesignFaqs }}
       cta={{
         heading: "Planning a Netting Project?",

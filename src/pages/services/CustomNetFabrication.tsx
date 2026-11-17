@@ -93,6 +93,18 @@ export default function CustomNetFabrication() {
           { title: "Licensed contractor", body: "Licensed, bonded and insured (AZ ROC #236070)." },
         ],
       }}
+      gallery={{
+        heading: "Nets We Have Fabricated",
+        intro: "Hand-tied rope, knotted netting and stainless steel mesh, each one made to order in our Phoenix workshop for the project it went into.",
+        photos: [
+          { src: "/images/play-elements/play13.webp", alt: "Custom knotted rope net with a round porthole opening", label: "Rope netting", to: "/gallery/play-elements/" },
+          { src: "/images/play-elements/play22.webp", alt: "Hand-knotted rope climbing tube", label: "Rope climbing tube", to: "/gallery/play-elements/" },
+          { src: "/images/play-elements/play15.webp", alt: "White rope spiderweb net fabricated for a play area", label: "Rope spiderweb", to: "/gallery/play-elements/" },
+          { src: "/images/zoos/zoo28.webp", alt: "Stainless steel cable mesh animal tunnel", label: "Stainless mesh tunnel", to: "/gallery/zoos/" },
+          { src: "/images/play-elements/play37.webp", alt: "Close-up of a knotted rope net tunnel", label: "Knotted net tunnel", to: "/gallery/play-elements/" },
+          { src: "/images/protection-netting/protection24.webp", alt: "Close-up of a dense hand-knotted rope net panel", label: "Rope net panel", to: "/gallery/protection-netting/" },
+        ],
+      }}
       faqs={{ heading: "Net Fabrication FAQs", items: customNetFabricationFaqs }}
       cta={{
         heading: "Need a Custom Net Made?",

@@ -7,6 +7,7 @@ import {
   IntroSection,
   LinksSection,
   ProcessSection,
+  ProjectGallerySection,
   ServiceHero,
   TextSection,
 } from "./ServiceDetailPage";
@@ -80,7 +81,20 @@ export default function NetInspectionMaintenance() {
         ]}
       />
 
-      <FaqSection heading="Net Inspection FAQs" items={netInspectionFaqs} />
+      <ProjectGallerySection
+        heading="Structures We Keep in Service"
+        intro="Zoo habitats, waterslide barriers, play nets and handrails all see daily wear. These are the kinds of structures our inspections and maintenance plans keep safe."
+        photos={[
+          { src: "/images/zoos/zoo25.webp", alt: "Large netted zoo habitat with walkways and mature trees", label: "Zoo habitat", to: "/gallery/zoos/" },
+          { src: "/images/protection-netting/protection15.webp", alt: "Secondary barrier netting along a waterslide", label: "Waterslide barrier", to: "/gallery/protection-netting/" },
+          { src: "/images/play-elements/play18.webp", alt: "Children playing on a rope spiderweb net", label: "Play net", to: "/gallery/play-elements/" },
+          { src: "/images/handrails/rs=w_2560 (31).webp", alt: "Rope handrail along a waterpark pool deck", label: "Waterpark handrail", to: "/gallery/handrails/" },
+          { src: "/images/protection-netting/protection14.webp", alt: "Protective netting around an animal yard and keeper building", label: "Animal yard barrier", to: "/gallery/protection-netting/" },
+          { src: "/images/zoos/zoo41.webp", alt: "Curved mesh walkway enclosure at a zoo", label: "Mesh walkway", to: "/gallery/zoos/" },
+        ]}
+      />
+
+      <FaqSection tone="light" heading="Net Inspection FAQs" items={netInspectionFaqs} />
 
       <FinalCta heading="Is It Time for an Inspection?" body="Book an inspection and get a clear, written picture of the condition of your nets." />
     </>

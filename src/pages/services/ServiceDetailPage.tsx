@@ -3,6 +3,8 @@ import { ArrowRight, Phone } from "lucide-react";
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
 import { AnimateIn } from "../../components/shared/AnimateIn";
+import { galleryImageSources } from "../../components/shared/GalleryImage";
+import galleryImageDimensions from "../../data/gallery-image-dimensions.json";
 
 // Building blocks for the individual /services/... pages. Each page composes
 // these in the order its brief calls for, so every service page shares the
@@ -298,6 +300,69 @@ export function ReasonsSection({ heading, intro, items, tone = "light" }: { head
   );
 }
 
+export interface ProjectPhoto {
+  /** Path of an existing gallery image, e.g. "/images/zoos/zoo17.webp". */
+  src: string;
+  alt: string;
+  /** Short caption shown on the tile. */
+  label: string;
+  /** Gallery category page the tile links to. */
+  to: string;
+}
+
+/** Photos of completed projects, reusing the gallery's responsive images and tile style. */
+export function ProjectGallerySection({ heading, intro, photos, tone = "muted" }: { heading: string; intro?: string; photos: ProjectPhoto[]; tone?: "light" | "muted" }) {
+  return (
+    <section className={`${tone === "light" ? "bg-background" : "bg-secondary"} py-20 md:py-28`}>
+      <div className="max-w-[1280px] mx-auto px-6">
+        <AnimateIn>
+          <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
+            <div>
+              <p className={eyebrowClass}>Our work</p>
+              <h2 className={headingClass}>{heading}</h2>
+              {intro && <p className="text-foreground/75 leading-[1.8] max-w-2xl mt-5">{intro}</p>}
+            </div>
+            <Link to="/gallery/" className="group inline-flex items-center gap-2 text-sm font-medium text-clay">
+              <span className="relative">
+                View the full project gallery
+                <span className="absolute left-0 bottom-0 w-0 h-px bg-clay group-hover:w-full transition-all duration-300" />
+              </span>
+              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </AnimateIn>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {photos.map((photo, i) => {
+            const dimensions = galleryImageDimensions[photo.src as keyof typeof galleryImageDimensions];
+            return (
+              <AnimateIn key={photo.src} delay={i * 0.05}>
+                <Link
+                  to={photo.to}
+                  className="relative block aspect-[4/3] w-full overflow-hidden rounded-[4px] border border-border group"
+                >
+                  <img
+                    {...galleryImageSources(photo.src)}
+                    sizes="(min-width: 1024px) 405px, (min-width: 640px) 50vw, 100vw"
+                    alt={photo.alt}
+                    width={dimensions?.width}
+                    height={dimensions?.height}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
+                  />
+                  <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-[2px] bg-forest-900/70 px-3 py-1.5 text-xs font-medium tracking-wide text-primary-foreground backdrop-blur-sm">
+                    {photo.label} <ArrowRight size={12} className="text-clay" />
+                  </span>
+                </Link>
+              </AnimateIn>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function FaqAnswer({ faq }: { faq: Faq }) {
   const at = faq.link ? faq.answer.indexOf(faq.link.text) : -1;
   if (!faq.link || at < 0) return <>{faq.answer}</>;
@@ -370,11 +435,12 @@ interface Props {
   process: { heading: string; steps: Card[] };
   projects: { heading: string; items: LinkItem[] };
   reasons: { heading: string; items: Card[] };
+  gallery: { heading: string; intro?: string; photos: ProjectPhoto[] };
   faqs: { heading: string; items: Faq[] };
   cta: { heading: string; body: string };
 }
 
-/** Default section order: hero, intro, cards, dark band, process, applications, why us, FAQs, CTA. */
+/** Default section order: hero, intro, cards, dark band, process, applications, why us, project photos, FAQs, CTA. */
 export default function ServiceDetailPage(p: Props) {
   return (
     <>
@@ -385,7 +451,8 @@ export default function ServiceDetailPage(p: Props) {
       <ProcessSection {...p.process} />
       <LinksSection {...p.projects} />
       <ReasonsSection {...p.reasons} />
-      <FaqSection {...p.faqs} />
+      <ProjectGallerySection {...p.gallery} tone="muted" />
+      <FaqSection {...p.faqs} tone="light" />
       <FinalCta {...p.cta} />
     </>
   );
