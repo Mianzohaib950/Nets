@@ -7,7 +7,20 @@ import galleryImageDimensions from "../../data/gallery-image-dimensions.json";
 import { galleryCategories, galleryCategoryMap } from "../../data/galleryData";
 import { galleryImageSources } from "../../components/shared/GalleryImage";
 
-const getLightboxWidth = (src: string) => {
+// Keyword-led H1, a short intro and a link to the matching application page for
+// each gallery, so these photo pages are not thin and pass authority to the money page.
+const galleryCategorySeo: Record<string, { heading: string; intro: string; app: { label: string; to: string } }> = {
+  zoos: { heading: "Zoo & Aquarium Netting Projects", intro: "Photos of zoo and aquarium enclosures, aviaries and animal enrichment netting designed, fabricated and installed by Nets Unlimited.", app: { label: "Explore our zoo and aquarium netting", to: "/applications/zoo/" } },
+  waterparks: { heading: "Waterpark & Theme Park Netting Projects", intro: "Barriers, handrails, rope features and dry play nets we have built for waterparks and theme parks across the country.", app: { label: "Explore our waterpark and theme park netting", to: "/applications/waterpark/" } },
+  bridges: { heading: "Rope Bridge & Tunnel Projects", intro: "Stationary, suspension, moving and V-bridges, plus net tunnels, built for zoos, parks, golf courses and children's museums.", app: { label: "Explore our custom rope bridges and tunnels", to: "/applications/bridge/" } },
+  handrails: { heading: "Rope & Cable Handrail Projects", intro: "Hand-woven stainless steel, handwoven rope, machine-knotted and cable handrail netting installed on walkways, decks and overlooks.", app: { label: "Explore our rope and cable handrail systems", to: "/applications/handrail/" } },
+  "play-elements": { heading: "Rope Play & Climbing Net Projects", intro: "Climbing nets, rope tunnels, spiderweb nets and obstacle courses built for play areas, museums, zoos and family fun centers.", app: { label: "Explore our custom rope play systems", to: "/applications/play/" } },
+  "golf-and-sport": { heading: "Golf & Sports Netting Projects", intro: "Golf course and driving range barriers, batting cages and sport court containment netting.", app: { label: "Explore our golf and sports barrier netting", to: "/applications/sport/" } },
+  "protection-netting": { heading: "Safety & Protection Netting Projects", intro: "Fall and debris protection, secondary barriers and protective netting for public venues, buildings and attractions.", app: { label: "Explore our safety and fall protection netting", to: "/applications/protect/" } },
+  "we-decorate": { heading: "Architectural Rope & Net Decor Projects", intro: "Rope, cable, stainless mesh and netting installations that add theming and architectural detail to a space.", app: { label: "Explore our architectural rope and net decor", to: "/applications/decorate/" } },
+};
+
+const getLightboxWidth =(src: string) => {
   const dimensions = galleryImageDimensions[src as keyof typeof galleryImageDimensions];
   return dimensions
     ? `min(100%, ${dimensions.width}px, calc(80vh * ${dimensions.width} / ${dimensions.height}))`
@@ -17,6 +30,7 @@ const getLightboxWidth = (src: string) => {
 export default function GalleryCategory() {
   const { category } = useParams<{ category: string }>();
   const data = galleryCategoryMap[category ?? ""] ?? { title: "Gallery", items: [] };
+  const seo = galleryCategorySeo[category ?? ""];
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
@@ -63,10 +77,19 @@ export default function GalleryCategory() {
             >
               <ArrowLeft size={14} /> View All Gallery Images
             </Link>
-            <p className="text-xs font-medium tracking-widest uppercase text-clay mb-4">Gallery</p>
-            <h1 className="font-serif text-5xl md:text-6xl font-light text-primary-foreground tracking-[-0.02em] leading-[1.05]">
-              {data.title}
+            <p className="text-xs font-medium tracking-widest uppercase text-clay mb-4">Gallery · {data.title}</p>
+            <h1 className="font-serif text-5xl md:text-6xl font-light text-primary-foreground tracking-[-0.02em] leading-[1.05] mb-6">
+              {seo?.heading ?? data.title}
             </h1>
+            {seo && (
+              <p className="text-primary-foreground/70 text-lg leading-[1.7] max-w-2xl">
+                {seo.intro}{" "}
+                <Link to={seo.app.to} className="text-clay underline underline-offset-4 decoration-clay/50 hover:decoration-clay">
+                  {seo.app.label}
+                </Link>
+                .
+              </p>
+            )}
           </AnimateIn>
         </div>
       </div>

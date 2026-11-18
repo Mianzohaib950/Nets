@@ -135,6 +135,7 @@ export default function Footer() {
                 { label: "About Us", to: "/about/" },
                 { label: "Contact", to: "/contact/" },
                 { label: "Gallery Index", to: "/gallery/" },
+                { label: "Blogs", to: "/blogs/" },
               ].map((l) => (
                 <li key={l.to}>
                   <Link

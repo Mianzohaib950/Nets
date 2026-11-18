@@ -149,7 +149,7 @@ const overlay = Buffer.from(`<svg width="1200" height="630" xmlns="http://www.w3
   <rect width="1200" height="630" fill="url(#g)"/>
   <text x="72" y="245" fill="#ffffff" font-family="Georgia,serif" font-size="64">Nets Unlimited</text>
   <text x="72" y="315" fill="#d39a70" font-family="Arial,sans-serif" font-size="31">CUSTOM ROPE &amp; NETTING SOLUTIONS</text>
-  <text x="72" y="375" fill="#ffffff" fill-opacity="0.82" font-family="Arial,sans-serif" font-size="25">Designed • Fabricated • Installed since 2004</text>
+  <text x="72" y="375" fill="#ffffff" fill-opacity="0.82" font-family="Arial,sans-serif" font-size="25">Designed • Fabricated • Installed since 2003</text>
 </svg>`);
 await sharp(socialSource).rotate().resize(1200, 630, { fit: "cover" }).composite([{ input: overlay }]).webp({ quality: 84, effort: 5 }).toFile(socialOutput);
 console.log("Generated public/og-image.webp (1200x630).");

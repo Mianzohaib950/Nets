@@ -2,6 +2,10 @@ import { AnimateIn } from "../../components/shared/AnimateIn";
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
 import { decorateGalleryImages } from "../../data/decorateGalleryData";
+import { applicationContent } from "../../data/applicationContent";
+import { FaqSection } from "../services/ServiceDetailPage";
+
+const content = applicationContent["/applications/decorate"];
 
 export default function Decorate() {
   return (
@@ -9,9 +13,9 @@ export default function Decorate() {
       <div className="bg-forest-900 pt-32 pb-20">
         <div className="max-w-[1280px] mx-auto px-6">
           <AnimateIn>
-            <p className="text-xs font-medium tracking-widest uppercase text-clay mb-4">Applications</p>
+            <p className="text-xs font-medium tracking-widest uppercase text-clay mb-4">We Decorate</p>
             <h1 className="font-serif text-5xl md:text-6xl font-light text-primary-foreground tracking-[-0.02em] leading-[1.05]">
-              We Decorate
+              {content.heading}
             </h1>
           </AnimateIn>
         </div>
@@ -50,6 +54,8 @@ export default function Decorate() {
           </div>
         </div>
       </section>
+
+      <FaqSection heading={`${content.heading} FAQs`} items={content.faqs} />
 
       <section className="bg-forest-900 py-20">
         <div className="max-w-[1280px] mx-auto px-6 text-center">

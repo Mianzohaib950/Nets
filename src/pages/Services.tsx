@@ -6,6 +6,8 @@ import planningConsultationBlueprint from "../imports/planning-consultation-blue
 import inspectionMaintenanceSiteCheck from "../imports/inspection-maintenance-site-check.webp";
 import fabricationLargeNet from "../imports/fabrication-large-net.webp";
 import installationNettingSite from "../imports/installation-netting-site.webp";
+import { FaqSection } from "./services/ServiceDetailPage";
+import { servicesFaqs } from "../data/serviceFaqs";
 
 // The service detail pages are live but not launched yet (src/data/unlistedPages.json),
 // so the "Explore" links stay hidden. Set to true when the pages go public.
@@ -50,9 +52,14 @@ export default function Services() {
         <div className="max-w-[1280px] mx-auto px-6">
           <AnimateIn>
             <p className="text-xs font-medium tracking-widest uppercase text-clay mb-4">What we offer</p>
-            <h1 className="font-serif text-5xl md:text-6xl font-light text-primary-foreground tracking-[-0.02em] leading-[1.05]">
-              Services
+            <h1 className="font-serif text-5xl md:text-6xl font-light text-primary-foreground tracking-[-0.02em] leading-[1.05] mb-6">
+              Custom Netting Services
             </h1>
+            <p className="text-primary-foreground/70 text-lg leading-[1.7] max-w-2xl">
+              Nets Unlimited plans, fabricates, installs and inspects custom rope, netting and cable systems for zoos,
+              waterparks, play areas and commercial sites across the United States. One licensed, bonded and insured team
+              (AZ ROC #236070) handles your project from the first sketch to long-term maintenance.
+            </p>
           </AnimateIn>
         </div>
       </div>
@@ -67,7 +74,7 @@ export default function Services() {
           <div className="w-full md:w-1/2 relative overflow-hidden bg-secondary min-h-[300px] md:min-h-0">
             <img
               src={svc.image}
-              alt={svc.title}
+              alt={`${svc.title} by Nets Unlimited`}
               loading="lazy"
               decoding="async"
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-[600ms] ease-out hover:scale-[1.03]"
@@ -105,6 +112,8 @@ export default function Services() {
           </div>
         </div>
       ))}
+
+      <FaqSection tone="light" heading="Netting Services FAQs" items={servicesFaqs} />
 
       {/* CTA */}
       <section className="bg-forest-900 py-20">

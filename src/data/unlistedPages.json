@@ -1,9 +1,14 @@
 {
-  "_comment": "Pages that are live (prerendered and reachable by direct URL) but not yet launched: they are left out of sitemap.xml, llms.txt and every front-end link. To launch a page, remove it from this list, set SHOW_SERVICE_DETAIL_LINKS in src/pages/Services.tsx and re-add its llms.txt line.",
+  "_comment": "Pages that are built and reachable by URL but kept out of sitemap.xml for now. The four service detail pages are also kept out of llms.txt and every front-end link (to launch them, remove them here, set SHOW_SERVICE_DETAIL_LINKS in src/pages/Services.tsx and re-add their llms.txt lines). The blog pages stay linked on the site and only wait for the sitemap: remove them here once the posts are approved.",
   "paths": [
     "/services/netting-design-consultation",
     "/services/custom-net-fabrication",
     "/services/netting-installation",
-    "/services/net-inspection-maintenance"
+    "/services/net-inspection-maintenance",
+    "/blogs",
+    "/blogs/how-often-inspect-commercial-play-nets",
+    "/blogs/rope-netting-vs-stainless-steel-mesh-handrails",
+    "/blogs/zoo-aviary-mesh-size-guide",
+    "/blogs/golf-barrier-netting-planning-guide"
   ]
 }

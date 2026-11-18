@@ -3,7 +3,9 @@ import { useLocation } from "react-router";
 import { homeFaqs } from "../../data/homeFaqs";
 import { isGonePath } from "../../data/goneUrls";
 import unlistedPages from "../../data/unlistedPages.json";
-import { customNetFabricationFaqs, netInspectionFaqs, nettingDesignFaqs, nettingInstallationFaqs } from "../../data/serviceFaqs";
+import { applicationContent } from "../../data/applicationContent";
+import { blogPostMap, blogPosts } from "../../data/blogPosts";
+import { customNetFabricationFaqs, netInspectionFaqs, nettingDesignFaqs, nettingInstallationFaqs, servicesFaqs } from "../../data/serviceFaqs";
 
 const SITE_URL = "https://netsunlimited.com";
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.webp`;
@@ -22,13 +24,13 @@ function completeDescription(description: string) {
 // Single source for page metadata. The build script reads it through the
 // server bundle, so the static HTML and the client-side updates always match.
 const pages: Record<string, PageSEO> = {
-  "/": { title: "Custom Rope & Safety Netting | Nets Unlimited", description: "Custom rope, safety netting, animal enclosures, handrails, bridges and play systems for zoos, waterparks and commercial projects since 2004." },
+  "/": { title: "Custom Rope & Safety Netting | Nets Unlimited", description: "Custom rope, safety netting, animal enclosures, handrails, bridges and play systems for zoos, waterparks and commercial projects since 2003." },
   "/services": { title: "Custom Netting Services | Nets Unlimited", description: "Planning, custom fabrication, installation, inspection and maintenance services for commercial rope and netting systems." },
   "/services/netting-design-consultation": { title: "Netting Design & Consultation Services | Nets Unlimited", description: "Plan your netting project with an expert before you build. Design consultation for zoos, waterparks, play areas and commercial sites across the US." },
   "/services/custom-net-fabrication": { title: "Custom Net & Rope Fabrication | Nets Unlimited", description: "Custom rope, knotted netting and hand-woven stainless steel mesh, made to order for zoos, waterparks, play areas and commercial projects across the US." },
   "/services/netting-installation": { title: "Professional Netting Installation Services | Nets Unlimited", description: "Licensed, bonded and insured netting installers with OSHA-trained crews. Safety, zoo, play and sports netting installed across the US." },
   "/services/net-inspection-maintenance": { title: "Net Inspection, Repair & Maintenance | Nets Unlimited", description: "Onsite net inspections with a written report for your insurer, plus repairs and maintenance plans for rope, netting and cable structures across the US." },
-  "/about": { title: "About Our Netting Experts | Nets Unlimited", description: "Meet the licensed, bonded and insured Phoenix team delivering custom rope and netting solutions nationwide since 2004." },
+  "/about": { title: "About Our Netting Experts | Nets Unlimited", description: "Meet the licensed, bonded and insured Phoenix team delivering custom rope and netting solutions nationwide since 2003." },
   "/contact": { title: "Contact Nets Unlimited | Request a Quote", description: "Request a quote for a custom rope, safety netting, enclosure, handrail, bridge or play-system project." },
   "/privacy": { title: "Privacy Policy | Nets Unlimited", description: "Read how Nets Unlimited handles contact-form information, third-party website services and privacy requests when you use our website." },
   "/applications/zoo": { title: "Zoo & Aquarium Netting Solutions | Nets Unlimited", description: "Custom zoo and aquarium net enclosures, exhibit refurbishment and animal enrichment systems designed for safety and visibility." },
@@ -49,6 +51,9 @@ const pages: Record<string, PageSEO> = {
   "/gallery/protection-netting": { title: "Protection Netting Gallery | Nets Unlimited", description: "View fall, debris and secondary protection netting projects by Nets Unlimited." },
   "/gallery/we-decorate": { title: "Architectural Rope & Net Decor Gallery | Nets Unlimited", description: "View custom rope, cable, mesh and netting installations created for architectural theming and decor." },
 };
+
+pages["/blogs"] = { title: "Netting Guides & Blog | Nets Unlimited", description: "Practical guides on planning, choosing and maintaining rope, netting and cable systems for zoos, waterparks, play areas, handrails and sports facilities." };
+for (const post of blogPosts) pages[`/blogs/${post.slug}`] = { title: post.metaTitle, description: post.description };
 
 const notFound: PageSEO = { title: "Page Not Found | Nets Unlimited", description: "The requested page could not be found.", noindex: true };
 const gonePage: PageSEO = { title: "Page Removed | Nets Unlimited", description: "This page from our old website has been permanently removed.", noindex: true };
@@ -72,10 +77,13 @@ const serviceNames: Record<string, string> = {
 // Pages that render a visible FAQ section get matching FAQPage schema.
 const faqsByPath: Record<string, { question: string; answer: string }[]> = {
   "/": homeFaqs,
+  "/services": servicesFaqs,
   "/services/netting-design-consultation": nettingDesignFaqs,
   "/services/custom-net-fabrication": customNetFabricationFaqs,
   "/services/netting-installation": nettingInstallationFaqs,
   "/services/net-inspection-maintenance": netInspectionFaqs,
+  ...Object.fromEntries(Object.entries(applicationContent).map(([path, content]) => [path, content.faqs])),
+  ...Object.fromEntries(blogPosts.map((post) => [`/blogs/${post.slug}`, post.faqs])),
 };
 
 function normalize(pathname: string) {
@@ -108,7 +116,7 @@ export function schemaGraph(pathname: string) {
       "@id": `${SITE_URL}/#organization`, name: "Nets Unlimited, Inc.", url: `${SITE_URL}/`,
       logo: { "@type": "ImageObject", url: `${SITE_URL}/apple-touch-icon.png`, width: 180, height: 180 },
       image: DEFAULT_IMAGE, telephone: "+1-480-515-1300",
-      email: "info@netsunlimited.com", foundingDate: "2004",
+      email: "info@netsunlimited.com", foundingDate: "2003",
       contactPoint: { "@type": "ContactPoint", telephone: "+1-480-515-1300", email: "info@netsunlimited.com", contactType: "customer service", availableLanguage: "English" },
       address: { "@type": "PostalAddress", streetAddress: "20625 North 29th Place", addressLocality: "Phoenix", addressRegion: "AZ", postalCode: "85050", addressCountry: "US" },
       openingHoursSpecification: [{ "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "07:00", closes: "16:00" }],
@@ -127,7 +135,7 @@ export function schemaGraph(pathname: string) {
     },
     { "@type": "WebSite", "@id": `${SITE_URL}/#website`, url: `${SITE_URL}/`, name: "Nets Unlimited", publisher: { "@id": `${SITE_URL}/#organization` }, inLanguage: "en-US" },
     {
-      "@type": path === "/contact" ? "ContactPage" : path === "/about" ? "AboutPage" : path.startsWith("/gallery") ? "CollectionPage" : "WebPage",
+      "@type": path === "/contact" ? "ContactPage" : path === "/about" ? "AboutPage" : path.startsWith("/gallery") || path === "/blogs" ? "CollectionPage" : "WebPage",
       "@id": `${canonical}#webpage`, url: canonical, name: title, description,
       isPartOf: { "@id": `${SITE_URL}/#website` }, about: { "@id": `${SITE_URL}/#organization` },
       primaryImageOfPage: { "@type": "ImageObject", url: DEFAULT_IMAGE }, inLanguage: "en-US",
@@ -140,7 +148,9 @@ export function schemaGraph(pathname: string) {
     const items = [{ "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` }];
     if (segments.length > 1) items.push(segments[0] === "gallery"
       ? { "@type": "ListItem", position: 2, name: "Project Gallery", item: `${SITE_URL}/gallery/` }
-      : { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services/` });
+      : segments[0] === "blogs"
+        ? { "@type": "ListItem", position: 2, name: "Blogs", item: `${SITE_URL}/blogs/` }
+        : { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services/` });
     items.push({ "@type": "ListItem", position: items.length + 1, name: title.split(" | ")[0], item: canonical });
     graph.push({ "@type": "BreadcrumbList", "@id": `${canonical}#breadcrumb`, itemListElement: items });
   }
@@ -148,6 +158,16 @@ export function schemaGraph(pathname: string) {
     "@type": "Service", "@id": `${canonical}#service`, name: serviceNames[path],
     description, url: canonical, provider: { "@id": `${SITE_URL}/#organization` },
     areaServed: { "@type": "Country", name: "United States" }, serviceType: serviceNames[path],
+  });
+  const post = path.startsWith("/blogs/") ? blogPostMap[path.slice("/blogs/".length)] : undefined;
+  if (post) graph.push({
+    "@type": "BlogPosting", "@id": `${canonical}#article`, headline: post.title, description,
+    url: canonical, mainEntityOfPage: { "@id": `${canonical}#webpage` },
+    image: post.image.gallery ? `${SITE_URL}${post.image.src}` : DEFAULT_IMAGE,
+    datePublished: post.published, dateModified: post.updated ?? post.published,
+    // Authored by the organization until a named expert reviews and signs each post.
+    author: { "@id": `${SITE_URL}/#organization` }, publisher: { "@id": `${SITE_URL}/#organization` },
+    articleSection: post.category, inLanguage: "en-US",
   });
   const faqs = faqsByPath[path];
   if (faqs) graph.push({

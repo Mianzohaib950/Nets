@@ -1,5 +1,13 @@
 import type { Faq } from "../pages/services/ServiceDetailPage";
 
+// FAQs for the /services/ hub. Facts restate what the site already says.
+export const servicesFaqs: Faq[] = [
+  { question: "What netting services does Nets Unlimited offer?", answer: "We offer planning and consultation, custom fabrication, professional installation, and inspection and maintenance for rope, netting and cable systems." },
+  { question: "Do you install the nets you fabricate?", answer: "Yes. The same team designs, fabricates and installs. Our installers are licensed, bonded and insured, supervisors are OSHA 30 trained and every installer is OSHA 10 certified at a minimum." },
+  { question: "Do you provide inspection reports for insurance?", answer: "Yes. After every onsite inspection you receive a written report that you can submit to your insurance company, and we can repair netting during the inspection or through a maintenance plan." },
+  { question: "Do you only work in Arizona?", answer: "No. We are based in Phoenix, Arizona and work on projects across the United States." },
+];
+
 // FAQs rendered on the individual /services/... pages and reused for their FAQPage schema.
 export const nettingInstallationFaqs: Faq[] = [
   { question: "Do you install outside Arizona?", answer: "Yes. We are based in Phoenix and install across the United States." },

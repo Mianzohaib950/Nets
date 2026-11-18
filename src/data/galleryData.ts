@@ -13,7 +13,7 @@ export interface GalleryCategoryInfo {
   items: GalleryItem[];
 }
 
-export const galleryCategories: GalleryCategoryInfo[] = [
+const rawGalleryCategories: GalleryCategoryInfo[] = [
   {
     slug: "zoos",
     title: "Zoos & Aquariums",
@@ -289,6 +289,27 @@ export const galleryCategories: GalleryCategoryInfo[] = [
     items: decorateGalleryImages.map((image, index) => ({ id: index + 1, ...image })),
   },
 ];
+
+// Many legacy alt texts are just file names ("zoo12", "rs=w_2560 (5)"). Replace those with a
+// descriptive alt for the category so every gallery photo has meaningful alt text.
+const categoryAltPrefix: Record<string, string> = {
+  zoos: "Zoo and aquarium netting project",
+  waterparks: "Waterpark and theme park rope netting project",
+  bridges: "Custom rope bridge and tunnel project",
+  handrails: "Rope and cable handrail netting project",
+  "play-elements": "Rope play structure and climbing net project",
+  "golf-and-sport": "Golf and sports barrier netting project",
+  "protection-netting": "Safety and protection netting project",
+  "we-decorate": "Architectural rope and net decor project",
+};
+const fileNameAlt = /^(?:[a-z-]*\d+|rs=w_\d+.*|)$/i;
+
+export const galleryCategories: GalleryCategoryInfo[] = rawGalleryCategories.map((category) => ({
+  ...category,
+  items: category.items.map((item, index) => (fileNameAlt.test(item.alt.trim())
+    ? { ...item, alt: `${categoryAltPrefix[category.slug] ?? category.title} by Nets Unlimited, photo ${index + 1}` }
+    : item)),
+}));
 
 export const galleryCategoryMap: Record<string, GalleryCategoryInfo> = Object.fromEntries(
   galleryCategories.map((c) => [c.slug, c])

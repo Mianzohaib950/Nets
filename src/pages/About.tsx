@@ -21,9 +21,14 @@ export default function About() {
         <div className="max-w-[1280px] mx-auto px-6">
           <AnimateIn>
             <p className="text-xs font-medium tracking-widest uppercase text-clay mb-4">Est. 2003</p>
-            <h1 className="font-serif text-5xl md:text-6xl font-light text-primary-foreground tracking-[-0.02em] leading-[1.05]">
-              About Us
+            <h1 className="font-serif text-5xl md:text-6xl font-light text-primary-foreground tracking-[-0.02em] leading-[1.05] mb-6">
+              About Nets Unlimited
             </h1>
+            <p className="text-primary-foreground/70 text-lg leading-[1.7] max-w-2xl">
+              Nets Unlimited is a Phoenix, Arizona company that designs, fabricates, installs and inspects custom rope,
+              netting and cable systems for zoos, waterparks, play areas and commercial projects across the United States.
+              We are licensed, bonded and insured (AZ ROC #236070), and our team brings over 75 years of combined experience.
+            </p>
           </AnimateIn>
         </div>
       </div>
@@ -63,7 +68,7 @@ export default function About() {
               <div className="relative overflow-hidden rounded-[4px] bg-secondary min-h-[400px]">
                 <img
                   src={aboutOurApproachSafetyNetting}
-                  alt="Rope bridge — craftsmanship in action"
+                  alt="Custom rope bridge built by Nets Unlimited"
                   loading="lazy"
                   decoding="async"
                   className="w-full h-full object-cover min-h-[400px]"

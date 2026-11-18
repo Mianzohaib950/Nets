@@ -124,8 +124,8 @@ export default function Header() {
 
         {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-6">
-          {["Home", "Services", "About"].map((item) => {
-            const to = item === "Home" ? "/" : `/${item.toLowerCase()}/`;
+          {["Home", "Services", "About", "Blogs"].map((item) => {
+            const to = item === "Home" ? "/" : item === "Blogs" ? "/blogs/" : `/${item.toLowerCase()}/`;
             return (
               <Link
                 key={item}
@@ -175,6 +175,7 @@ export default function Header() {
               { label: "Home", to: "/" },
               { label: "Services", to: "/services/" },
               { label: "About", to: "/about/" },
+              { label: "Blogs", to: "/blogs/" },
               { label: "Contact", to: "/contact/" },
             ].map((l) => (
               <Link

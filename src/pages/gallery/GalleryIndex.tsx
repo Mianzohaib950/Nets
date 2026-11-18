@@ -102,11 +102,11 @@ export default function GalleryIndex() {
         <div className="max-w-[1280px] mx-auto px-6">
           <AnimateIn>
             <h1 className="font-serif text-5xl md:text-6xl font-light text-primary-foreground tracking-[-0.02em] leading-[1.05] mb-5">
-              All Galleries
+              Custom Netting Project Gallery
             </h1>
             <p className="text-primary-foreground/70 text-lg leading-[1.7] max-w-2xl">
-              Explore our complete collection of custom netting solutions across zoos, waterparks, bridges, play
-              areas, and more.
+              Explore our complete collection of custom netting projects across zoos, waterparks, bridges, handrails, play
+              areas, sports facilities and safety installations, all designed, fabricated and installed by Nets Unlimited.
             </p>
           </AnimateIn>
         </div>

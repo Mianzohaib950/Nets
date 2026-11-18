@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router";
 import { pageSeo } from "./SEO";
+import { blogPostMap } from "../../data/blogPosts";
 
 const labels: Record<string, string> = {
   services: "Services", about: "About", contact: "Contact", privacy: "Privacy Policy", gallery: "Galleries",
@@ -10,6 +11,7 @@ const labels: Record<string, string> = {
   "play-elements": "Play Elements", "golf-and-sport": "Golf & Sports",
   "protection-netting": "Protection Netting",
   "we-decorate": "We Decorate",
+  blogs: "Blogs",
   "netting-design-consultation": "Netting Design & Consultation",
   "custom-net-fabrication": "Custom Net & Rope Fabrication",
   "netting-installation": "Netting Installation",
@@ -25,8 +27,10 @@ export function Breadcrumbs() {
   const crumbs = [{ label: "Home", to: "/" }];
   if (segments[0] === "applications" || (segments[0] === "services" && segments.length > 1)) crumbs.push({ label: "Services", to: "/services/" });
   else if (segments[0] === "gallery" && segments.length > 1) crumbs.push({ label: "Project Gallery", to: "/gallery/" });
+  else if (segments[0] === "blogs" && segments.length > 1) crumbs.push({ label: "Blogs", to: "/blogs/" });
   const leaf = segments.at(-1)!;
-  crumbs.push({ label: labels[leaf] ?? leaf.replaceAll("-", " "), to: pathname });
+  const leafLabel = segments[0] === "blogs" && segments.length > 1 ? blogPostMap[leaf]?.title : labels[leaf];
+  crumbs.push({ label: leafLabel ?? leaf.replaceAll("-", " "), to: pathname });
 
   return (
     <nav aria-label="Breadcrumb" className="border-b border-forest-900/10 bg-white px-6 py-3 text-sm text-forest-700">

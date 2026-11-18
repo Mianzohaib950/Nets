@@ -1,4 +1,6 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
+import { applicationContent } from "../../data/applicationContent";
+import { FaqSection, InlineLink } from "../services/ServiceDetailPage";
 import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import { AnimateIn } from "../../components/shared/AnimateIn";
@@ -38,15 +40,19 @@ export default function ApplicationPage({
   afterHero,
   relatedApps,
 }: Props) {
+  const { pathname } = useLocation();
+  const content = applicationContent[pathname.replace(/\/+$/, "")];
+  const heading = content?.heading ?? pageTitle;
   return (
     <>
       {/* Asymmetric hero */}
       <section className="min-h-[520px] flex flex-col lg:flex-row">
         <div className="w-full lg:w-[55%] bg-forest-900 flex items-center px-10 md:px-16 lg:px-20 py-32 lg:py-24 pt-36 lg:pt-32">
           <AnimateIn variant="fadeLeft">
-            <p className="text-xs font-medium tracking-widest uppercase text-clay mb-5">Applications</p>
+            {/* Brand line as the eyebrow, keyword-led H1 (see src/data/applicationContent.ts) */}
+            <p className="text-xs font-medium tracking-widest uppercase text-clay mb-5">{pageTitle}</p>
             <h1 className="font-serif text-5xl md:text-6xl font-light text-primary-foreground tracking-[-0.02em] leading-[1.05] mb-7">
-              {pageTitle}
+              {heading}
             </h1>
             <p className="text-primary-foreground/70 text-lg leading-[1.7] max-w-lg">{heroIntro}</p>
           </AnimateIn>
@@ -60,7 +66,7 @@ export default function ApplicationPage({
           >
             <motion.img
               src={heroImage}
-              alt={pageTitle}
+              alt={`${heading} by Nets Unlimited`}
               {...{ fetchpriority: "high" }}
               decoding="async"
               className="absolute inset-0 w-full h-full object-cover"
@@ -123,6 +129,20 @@ export default function ApplicationPage({
           </AnimateIn>
         </div>
       </section>
+
+      {/* FAQs (also used for the page's FAQPage schema) */}
+      {content && (
+        <>
+          <FaqSection heading={`${heading} FAQs`} items={content.faqs} />
+          {content.guide && (
+            <div className="bg-secondary pb-16 -mt-8 md:-mt-12">
+              <p className="max-w-[960px] mx-auto px-6 text-foreground/75">
+                Further reading: <InlineLink to={content.guide.to}>{content.guide.title}</InlineLink>
+              </p>
+            </div>
+          )}
+        </>
+      )}
 
       {/* Related Applications */}
       {relatedApps.length > 0 && (

@@ -192,11 +192,12 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-[55fr_45fr] h-full">
           {/* Text side */}
           <div className="relative z-10 flex flex-col justify-center px-10 md:px-16 lg:px-20 bg-forest-900 py-24 lg:py-0">
-            <p className="text-xs font-medium tracking-widest uppercase text-clay mb-6">
-              Phoenix, Arizona · Est. 2003
-            </p>
+            {/* The H1 carries the main keyword; the brand slogan below stays the large visual line. */}
+            <h1 className="text-xs font-medium tracking-widest uppercase text-clay mb-6">
+              Custom Rope &amp; Safety Netting · Phoenix, Arizona · Est. 2003
+            </h1>
 
-            <h1 className="font-serif text-5xl md:text-6xl xl:text-7xl font-light text-primary-foreground leading-[1.05] tracking-[-0.02em] mb-8 flex flex-wrap gap-x-4 gap-y-1">
+            <p className="font-serif text-5xl md:text-6xl xl:text-7xl font-light text-primary-foreground leading-[1.05] tracking-[-0.02em] mb-8 flex flex-wrap gap-x-4 gap-y-1">
               {heroWords.map((word) => (
                 <span
                   key={word}
@@ -212,7 +213,7 @@ export default function Home() {
                   )}
                 </span>
               ))}
-            </h1>
+            </p>
 
             <p className="text-primary-foreground/70 text-xl md:text-2xl leading-relaxed mb-10 max-w-lg font-normal">
               Custom rope and netting solutions for zoos, waterparks, play areas, handrails,

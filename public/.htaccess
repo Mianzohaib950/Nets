@@ -23,7 +23,7 @@ ErrorDocument 410 /410.html
 
   # Live pages are served with a trailing slash. Redirect the slash-less form
   # instead of returning 410, so old internal links and backlinks keep working.
-  RewriteRule ^(about|services|services/netting-design-consultation|services/custom-net-fabrication|services/netting-installation|services/net-inspection-maintenance|contact|privacy|gallery|applications/(?:zoo|waterpark|bridge|handrail|play|sport|protect|decorate)|gallery/(?:zoos|waterparks|bridges|handrails|play-elements|golf-and-sport|protection-netting|we-decorate))$ /$1/ [R=301,L]
+  RewriteRule ^(about|services|services/netting-design-consultation|services/custom-net-fabrication|services/netting-installation|services/net-inspection-maintenance|blogs|blogs/[a-z0-9-]+|contact|privacy|gallery|applications/(?:zoo|waterpark|bridge|handrail|play|sport|protect|decorate)|gallery/(?:zoos|waterparks|bridges|handrails|play-elements|golf-and-sport|protection-netting|we-decorate))$ /$1/ [R=301,L]
 
   # Permanently retired legacy URLs. Return 410 so search engines remove them
   # from their indexes faster than ordinary 404 responses.
