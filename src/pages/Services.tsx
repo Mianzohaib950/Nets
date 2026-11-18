@@ -7,6 +7,10 @@ import inspectionMaintenanceSiteCheck from "../imports/inspection-maintenance-si
 import fabricationLargeNet from "../imports/fabrication-large-net.webp";
 import installationNettingSite from "../imports/installation-netting-site.webp";
 
+// The service detail pages are live but not launched yet (src/data/unlistedPages.json),
+// so the "Explore" links stay hidden. Set to true when the pages go public.
+const SHOW_SERVICE_DETAIL_LINKS = false;
+
 const services: { title: string; body: string; image: string; badge: string; link?: { label: string; to: string } }[] = [
   {
     title: "Planning & Consultation",
@@ -85,7 +89,7 @@ export default function Services() {
                 {svc.title}
               </h2>
               <p className="text-foreground/75 leading-[1.8] max-w-lg">{svc.body}</p>
-              {svc.link && (
+              {SHOW_SERVICE_DETAIL_LINKS && svc.link && (
                 <Link
                   to={svc.link.to}
                   className="group inline-flex items-center gap-2 mt-8 text-sm font-medium text-clay"

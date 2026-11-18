@@ -10,7 +10,7 @@ const baseUrl = "https://netsunlimited.com";
 
 // Metadata, schema and markup all come from the app itself (see
 // src/entry-server.tsx), so the static HTML matches what the browser renders.
-const { render, pageSeo, schemaGraph, indexablePaths } = await import(pathToFileURL(join(serverDist, "entry-server.js")).href);
+const { render, pageSeo, schemaGraph, indexablePaths, sitemapPaths } = await import(pathToFileURL(join(serverDist, "entry-server.js")).href);
 
 function escape(value) {
   return value.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
@@ -61,10 +61,10 @@ for (const { file, path } of errorPages) {
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${indexablePaths.map((path) => `  <url><loc>${baseUrl}${path === "/" ? "/" : `${path}/`}</loc></url>`).join("\n")}
+${sitemapPaths.map((path) => `  <url><loc>${baseUrl}${path === "/" ? "/" : `${path}/`}</loc></url>`).join("\n")}
 </urlset>
 `;
 await writeFile(join(dist, "sitemap.xml"), sitemap);
 await rm(serverDist, { recursive: true, force: true });
 
-console.log(`Prerendered ${indexablePaths.length} routes with full HTML, metadata and JSON-LD; wrote sitemap.xml.`);
+console.log(`Prerendered ${indexablePaths.length} routes with full HTML, metadata and JSON-LD; wrote sitemap.xml with ${sitemapPaths.length} URLs.`);

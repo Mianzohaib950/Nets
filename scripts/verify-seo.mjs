@@ -86,7 +86,9 @@ const sitemapRoutes = [...sitemap.matchAll(/<loc>https:\/\/netsunlimited\.com([^
   })
   .sort();
 
-const builtRoutes = pageResults.map((page) => page.route).sort();
+// Unlisted pages are built but intentionally kept out of the sitemap.
+const unlisted = JSON.parse(await readFile(join(root, "src", "data", "unlistedPages.json"), "utf8")).paths.map((path) => `${path}/`);
+const builtRoutes = pageResults.map((page) => page.route).filter((route) => !unlisted.includes(route)).sort();
 const sitemapMissing = builtRoutes.filter((route) => !sitemapRoutes.includes(route));
 const sitemapExtra = sitemapRoutes.filter((route) => !builtRoutes.includes(route));
 

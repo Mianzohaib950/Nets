@@ -1,0 +1,9 @@
+{
+  "_comment": "Pages that are live (prerendered and reachable by direct URL) but not yet launched: they are left out of sitemap.xml, llms.txt and every front-end link. To launch a page, remove it from this list, set SHOW_SERVICE_DETAIL_LINKS in src/pages/Services.tsx and re-add its llms.txt line.",
+  "paths": [
+    "/services/netting-design-consultation",
+    "/services/custom-net-fabrication",
+    "/services/netting-installation",
+    "/services/net-inspection-maintenance"
+  ]
+}

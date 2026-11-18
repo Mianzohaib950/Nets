@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router";
 import { homeFaqs } from "../../data/homeFaqs";
 import { isGonePath } from "../../data/goneUrls";
+import unlistedPages from "../../data/unlistedPages.json";
 import { customNetFabricationFaqs, netInspectionFaqs, nettingDesignFaqs, nettingInstallationFaqs } from "../../data/serviceFaqs";
 
 const SITE_URL = "https://netsunlimited.com";
@@ -82,6 +83,8 @@ function normalize(pathname: string) {
 }
 
 export const indexablePaths = Object.keys(pages);
+// Live but not yet launched pages stay out of the sitemap (see src/data/unlistedPages.json).
+export const sitemapPaths = indexablePaths.filter((path) => !unlistedPages.paths.includes(path));
 
 export function pageSeo(pathname: string) {
   const path = normalize(pathname);
